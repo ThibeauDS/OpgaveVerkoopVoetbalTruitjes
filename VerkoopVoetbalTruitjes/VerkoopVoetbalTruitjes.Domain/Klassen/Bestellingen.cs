@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VerkoopVoetbalTruitjes.Domain.Enums;
 
 namespace VerkoopVoetbalTruitjes.Domain.Klassen
 {
@@ -20,9 +21,15 @@ namespace VerkoopVoetbalTruitjes.Domain.Klassen
         #endregion
 
         #region Methods
-        public void VoegTruitjeToe() { }
+        public void VoegTruitjeToe(VoetbalTruiMaten maat, string competitie, string ploegnaam, string uitThuis, string seizoen)
+        {
+            
+        }
         public void VerwijderTruitje() { }
-        public void ZetBetaald() { }
+        public void ZetBetaald(bool isBetaald)
+        {
+            _betaald = isBetaald;
+        }
         #endregion
     }
 }

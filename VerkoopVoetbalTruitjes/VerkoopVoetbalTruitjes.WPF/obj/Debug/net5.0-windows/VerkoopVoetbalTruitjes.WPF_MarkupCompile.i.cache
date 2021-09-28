@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\thibe\source\repos\VerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes.WPF\obj\Debug\net5.0-windows\
+C:\Users\thibe\Documents\GitHub\OpgaveVerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes.WPF\obj\Debug\net5.0-windows\
 VerkoopVoetbalTruitjes.WPF
 none
 false
 TRACE;DEBUG;NET;NET5_0;NETCOREAPP
-C:\Users\thibe\source\repos\VerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes.WPF\App.xaml
+C:\Users\thibe\Documents\GitHub\OpgaveVerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes.WPF\App.xaml
 3-371240413
 
 7-224383162
-195-1752347093
+196-919168961
 MainWindow.xaml;Pages\BestellingenPage.xaml;Pages\KlantenPage.xaml;
 
-True
+False
 

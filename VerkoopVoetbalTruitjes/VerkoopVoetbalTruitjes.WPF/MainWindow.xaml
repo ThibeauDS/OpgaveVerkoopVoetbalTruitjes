@@ -19,6 +19,6 @@
                 <Button Content="?"/>
             </StackPanel>
         </Border>
-        <Frame Name="MainView" Grid.Row="1"/>
+        <Frame Name="MainView" Grid.Row="1" NavigationUIVisibility="Hidden" Loaded="MainView_Loaded"/>
     </Grid>
 </Window>

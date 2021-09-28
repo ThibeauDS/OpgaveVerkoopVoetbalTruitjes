@@ -42,5 +42,10 @@ namespace VerkoopVoetbalTruitjes.WPF
         {
             MainView.Content = _bestellingenPage;
         }
+
+        private void MainView_Loaded(object sender, RoutedEventArgs e)
+        {
+            KlantenBtn_Click(sender, e);
+        }
     }
 }

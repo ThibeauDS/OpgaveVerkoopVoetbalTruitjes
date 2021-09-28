@@ -53,7 +53,7 @@ namespace VerkoopVoetbalTruitjes.WPF.Pages {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/VerkoopVoetbalTruitjes.WPF;component/pages/klantenpage.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/VerkoopVoetbalTruitjes.WPF;V1.0.0.0;component/pages/klantenpage.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Pages\KlantenPage.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

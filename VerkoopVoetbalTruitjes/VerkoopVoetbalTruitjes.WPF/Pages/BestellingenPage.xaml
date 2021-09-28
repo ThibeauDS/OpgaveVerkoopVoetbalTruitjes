@@ -14,6 +14,6 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <TextBlock Text="Klanten"/>
+        <TextBlock Text="Bestellingen"/>
     </Grid>
 </Page>

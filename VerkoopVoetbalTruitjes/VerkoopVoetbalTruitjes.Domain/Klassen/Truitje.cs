@@ -14,6 +14,8 @@ namespace VerkoopVoetbalTruitjes.Domain.Klassen
         private string _seizoen;
         private decimal _prijs;
         private int _id;
+        private Club _club;
+        private Clubset _clubset;
         #endregion
     }
 }
