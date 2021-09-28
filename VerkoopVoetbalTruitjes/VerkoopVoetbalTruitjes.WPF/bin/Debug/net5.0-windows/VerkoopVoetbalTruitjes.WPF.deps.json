@@ -1,0 +1,49 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v5.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v5.0": {
+      "VerkoopVoetbalTruitjes.WPF/1.0.0": {
+        "dependencies": {
+          "VerkoopVoetbalTruitjes.Domain": "1.0.0"
+        },
+        "runtime": {
+          "VerkoopVoetbalTruitjes.WPF.dll": {}
+        }
+      },
+      "VerkoopVoetbalTruitjes.Data/1.0.0": {
+        "runtime": {
+          "VerkoopVoetbalTruitjes.Data.dll": {}
+        }
+      },
+      "VerkoopVoetbalTruitjes.Domain/1.0.0": {
+        "dependencies": {
+          "VerkoopVoetbalTruitjes.Data": "1.0.0"
+        },
+        "runtime": {
+          "VerkoopVoetbalTruitjes.Domain.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "VerkoopVoetbalTruitjes.WPF/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "VerkoopVoetbalTruitjes.Data/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "VerkoopVoetbalTruitjes.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

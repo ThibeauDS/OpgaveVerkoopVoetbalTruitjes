@@ -1,0 +1,12 @@
+C:\Users\thibe\source\repos\VerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes.Data\bin\Debug\net5.0-windows\VerkoopVoetbalTruitjes.Data.deps.json
+C:\Users\thibe\source\repos\VerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes.Data\bin\Debug\net5.0-windows\VerkoopVoetbalTruitjes.Data.dll
+C:\Users\thibe\source\repos\VerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes.Data\bin\Debug\net5.0-windows\ref\VerkoopVoetbalTruitjes.Data.dll
+C:\Users\thibe\source\repos\VerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes.Data\bin\Debug\net5.0-windows\VerkoopVoetbalTruitjes.Data.pdb
+C:\Users\thibe\source\repos\VerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes.Data\obj\Debug\net5.0-windows\VerkoopVoetbalTruitjes.Data.csproj.AssemblyReference.cache
+C:\Users\thibe\source\repos\VerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes.Data\obj\Debug\net5.0-windows\VerkoopVoetbalTruitjes.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\thibe\source\repos\VerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes.Data\obj\Debug\net5.0-windows\VerkoopVoetbalTruitjes.Data.AssemblyInfoInputs.cache
+C:\Users\thibe\source\repos\VerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes.Data\obj\Debug\net5.0-windows\VerkoopVoetbalTruitjes.Data.AssemblyInfo.cs
+C:\Users\thibe\source\repos\VerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes.Data\obj\Debug\net5.0-windows\VerkoopVoetbalTruitjes.Data.csproj.CoreCompileInputs.cache
+C:\Users\thibe\source\repos\VerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes.Data\obj\Debug\net5.0-windows\VerkoopVoetbalTruitjes.Data.dll
+C:\Users\thibe\source\repos\VerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes.Data\obj\Debug\net5.0-windows\ref\VerkoopVoetbalTruitjes.Data.dll
+C:\Users\thibe\source\repos\VerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes.Data\obj\Debug\net5.0-windows\VerkoopVoetbalTruitjes.Data.pdb

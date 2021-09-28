@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "Rrz8PRmJyE6RaNzRLaSkZ7l/qeMAmCtk47AIk1I7t7WaD85zc4Jg0iibjcoq7v/ztEAeeCokE2KmLF9TMT3gGQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\thibe\\source\\repos\\VerkoopVoetbalTruitjes\\VerkoopVoetbalTruitjes.WPF\\VerkoopVoetbalTruitjes.WPF.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\thibe\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\5.0.9\\microsoft.netcore.app.host.win-x64.5.0.9.nupkg.sha512"
+  ],
+  "logs": []
+}

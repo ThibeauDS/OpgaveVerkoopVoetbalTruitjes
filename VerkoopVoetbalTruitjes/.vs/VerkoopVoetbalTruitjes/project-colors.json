@@ -1,0 +1,21 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "01d91261-b3ed-463f-9005-8649bf3ae84b": {
+      "ProjectGuid": "01d91261-b3ed-463f-9005-8649bf3ae84b",
+      "DisplayName": "VerkoopVoetbalTruitjes.Domain",
+      "ColorIndex": 0
+    },
+    "4361c8d3-5ba7-4816-bd85-a034f4be167c": {
+      "ProjectGuid": "4361c8d3-5ba7-4816-bd85-a034f4be167c",
+      "DisplayName": "VerkoopVoetbalTruitjes.WPF",
+      "ColorIndex": 1
+    },
+    "7324577f-2035-42a6-ba27-9aa2dc5c19b9": {
+      "ProjectGuid": "7324577f-2035-42a6-ba27-9aa2dc5c19b9",
+      "DisplayName": "VerkoopVoetbalTruitjes.Data",
+      "ColorIndex": 2
+    }
+  },
+  "NextColorIndex": 3
+}

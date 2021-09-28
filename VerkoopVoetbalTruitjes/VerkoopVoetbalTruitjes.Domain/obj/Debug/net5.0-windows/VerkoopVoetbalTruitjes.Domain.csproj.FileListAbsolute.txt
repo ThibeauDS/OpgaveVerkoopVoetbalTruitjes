@@ -1,0 +1,15 @@
+C:\Users\thibe\source\repos\VerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes.Domain\bin\Debug\net5.0-windows\VerkoopVoetbalTruitjes.Domain.deps.json
+C:\Users\thibe\source\repos\VerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes.Domain\bin\Debug\net5.0-windows\VerkoopVoetbalTruitjes.Domain.dll
+C:\Users\thibe\source\repos\VerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes.Domain\bin\Debug\net5.0-windows\ref\VerkoopVoetbalTruitjes.Domain.dll
+C:\Users\thibe\source\repos\VerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes.Domain\bin\Debug\net5.0-windows\VerkoopVoetbalTruitjes.Domain.pdb
+C:\Users\thibe\source\repos\VerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes.Domain\bin\Debug\net5.0-windows\VerkoopVoetbalTruitjes.Data.dll
+C:\Users\thibe\source\repos\VerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes.Domain\bin\Debug\net5.0-windows\VerkoopVoetbalTruitjes.Data.pdb
+C:\Users\thibe\source\repos\VerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes.Domain\obj\Debug\net5.0-windows\VerkoopVoetbalTruitjes.Domain.csproj.AssemblyReference.cache
+C:\Users\thibe\source\repos\VerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes.Domain\obj\Debug\net5.0-windows\VerkoopVoetbalTruitjes.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\thibe\source\repos\VerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes.Domain\obj\Debug\net5.0-windows\VerkoopVoetbalTruitjes.Domain.AssemblyInfoInputs.cache
+C:\Users\thibe\source\repos\VerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes.Domain\obj\Debug\net5.0-windows\VerkoopVoetbalTruitjes.Domain.AssemblyInfo.cs
+C:\Users\thibe\source\repos\VerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes.Domain\obj\Debug\net5.0-windows\VerkoopVoetbalTruitjes.Domain.csproj.CoreCompileInputs.cache
+C:\Users\thibe\source\repos\VerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes.Domain\obj\Debug\net5.0-windows\VerkoopVoetbalTruitjes.Domain.csproj.CopyComplete
+C:\Users\thibe\source\repos\VerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes.Domain\obj\Debug\net5.0-windows\VerkoopVoetbalTruitjes.Domain.dll
+C:\Users\thibe\source\repos\VerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes.Domain\obj\Debug\net5.0-windows\ref\VerkoopVoetbalTruitjes.Domain.dll
+C:\Users\thibe\source\repos\VerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes.Domain\obj\Debug\net5.0-windows\VerkoopVoetbalTruitjes.Domain.pdb
