@@ -10,25 +10,49 @@ namespace VerkoopVoetbalTruitjes.Domain.Klassen
     public class Bestellingen
     {
         #region Properties
-        private DateTime _dateTime;
-        private int _bestellingsNummer;
-        private decimal _verkoopprijs;
-        private bool _betaald;
+        public DateTime DateTime { get; private set; }
+        public int BestellingsNummer { get; private set; }
+        public decimal Verkoopprijs { get; private set; }
+        public bool Betaald { get; private set; }
         #endregion
 
         #region Constructors
-        public Bestellingen() { }
+        public Bestellingen(bool isBetaald, decimal verkoopprijs)
+        {
+            ZetBetaald(isBetaald);
+            ZetDatum();
+            ZetVerkoopprijs(verkoopprijs);
+        }
         #endregion
 
         #region Methods
         public void VoegTruitjeToe(VoetbalTruiMaten maat, string competitie, string ploegnaam, string uitThuis, string seizoen)
         {
-            
+
         }
         public void VerwijderTruitje() { }
         public void ZetBetaald(bool isBetaald)
         {
-            _betaald = isBetaald;
+            Betaald = isBetaald;
+        }
+        public void ZetDatum()
+        {
+            DateTime = DateTime.Now;
+        }
+        public void ZetVerkoopprijs(decimal verkoopprijs)
+        {
+            Verkoopprijs = verkoopprijs;
+        }
+
+        public override bool Equals(object? obj)
+        {
+            return obj is Bestellingen bestellingen &&
+                   BestellingsNummer == bestellingen.BestellingsNummer;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(BestellingsNummer);
         }
         #endregion
     }

@@ -10,12 +10,12 @@ namespace VerkoopVoetbalTruitjes.Domain.Klassen
     public class Truitje
     {
         #region Properties
-        private VoetbalTruiMaten _maat;
-        private string _seizoen;
-        private decimal _prijs;
-        private int _id;
-        private Club _club;
-        private Clubset _clubset;
+        public VoetbalTruiMaten Maat { get; set; }
+        public string Seizoen { get; set; }
+        public decimal Prijs { get; set; }
+        public int Id { get; set; }
+        public Club Club { get; set; }
+        public Clubset Clubset { get; set; }
         #endregion
     }
 }

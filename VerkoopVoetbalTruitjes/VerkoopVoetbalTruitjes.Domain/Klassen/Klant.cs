@@ -12,21 +12,25 @@ namespace VerkoopVoetbalTruitjes.Domain.Klassen
         #region Properties
         public string Naam { get; private set; }
         public string Adres { get; private set; }
-        private int _klantNummer;
+        public int KlantNummer { get; private set; }
+        private List<Bestellingen> BestellingenList;
         #endregion
 
         #region Constructors
         public Klant(string naam, string adres, int klantNummer)
         {
+            ZetNaam(naam);
+            ZetAdres(adres);
+            ZetKlantenNummer(klantNummer);
         }
         #endregion
 
         #region Methods
         public void VoegBestellingToe() { }
         public void VerwijderBestelling() { }
-        public Bestellingen GeefBestellingen()
+        public List<Bestellingen> GeefBestellingen()
         {
-            return new Bestellingen();
+            return BestellingenList;
         }
         public void ZetNaam(string naam)
         {
@@ -43,7 +47,39 @@ namespace VerkoopVoetbalTruitjes.Domain.Klassen
         {
             if (string.IsNullOrEmpty(adres) || adres.Length > 5)
             {
-                throw new KlantException("");
+                throw new KlantException("Adres moet minstens 5 karakters hebben.");
+            }
+            else
+            {
+                Adres = adres;
+            }
+        }
+        public void ZetKlantenNummer(int klantNummer)
+        {
+            if (klantNummer <= 0)
+            {
+                throw new KlantException("Klantennummer mag niet 0 of kleiner zijn dan 0.");
+            }
+            else
+            {
+                KlantNummer = klantNummer;
+            }
+        }
+        public void Korting()
+        {
+            if (BestellingenList.Count < 5)
+            {
+                // 0%
+            }
+
+            if (BestellingenList.Count >= 5)
+            {
+                //10%
+            }
+
+            if (BestellingenList.Count >= 10)
+            {
+                //20%
             }
         }
         #endregion
