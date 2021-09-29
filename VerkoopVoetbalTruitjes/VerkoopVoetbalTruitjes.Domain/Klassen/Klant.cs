@@ -26,8 +26,14 @@ namespace VerkoopVoetbalTruitjes.Domain.Klassen
         #endregion
 
         #region Methods
-        public void VoegBestellingToe() { }
-        public void VerwijderBestelling() { }
+        public void VoegBestellingToe(bool isBetaald, decimal verkoopprijs, Truitje truitje)
+        {
+            BestellingenList.Add(new Bestellingen(isBetaald, verkoopprijs, truitje));
+        }
+        public void VerwijderBestelling(Bestellingen bestelling)
+        {
+            
+        }
         public List<Bestellingen> GeefBestellingen()
         {
             return BestellingenList;
@@ -45,7 +51,7 @@ namespace VerkoopVoetbalTruitjes.Domain.Klassen
         }
         public void ZetAdres(string adres)
         {
-            if (string.IsNullOrEmpty(adres) || adres.Length > 5)
+            if (string.IsNullOrEmpty(adres) || adres.Length < 5)
             {
                 throw new KlantException("Adres moet minstens 5 karakters hebben.");
             }

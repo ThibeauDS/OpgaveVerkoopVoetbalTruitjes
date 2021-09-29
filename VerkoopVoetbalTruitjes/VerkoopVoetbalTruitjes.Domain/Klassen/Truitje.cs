@@ -17,5 +17,12 @@ namespace VerkoopVoetbalTruitjes.Domain.Klassen
         public Club Club { get; set; }
         public Clubset Clubset { get; set; }
         #endregion
+
+        #region Constructors
+        public Truitje()
+        {
+
+        }
+        #endregion
     }
 }
