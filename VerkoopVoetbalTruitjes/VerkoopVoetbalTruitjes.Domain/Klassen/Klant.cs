@@ -32,7 +32,7 @@ namespace VerkoopVoetbalTruitjes.Domain.Klassen
         }
         public void VerwijderBestelling(Bestellingen bestelling)
         {
-            
+            //TODO: Bestelling verwijderen uit de lijst
         }
         public List<Bestellingen> GeefBestellingen()
         {
@@ -71,21 +71,21 @@ namespace VerkoopVoetbalTruitjes.Domain.Klassen
                 KlantNummer = klantNummer;
             }
         }
-        public void Korting()
+        public void Korting(decimal verkoopprijs)
         {
             if (BestellingenList.Count < 5)
             {
-                // 0%
+                //TODO: 0% korting op de totaalprijs
             }
 
             if (BestellingenList.Count >= 5)
             {
-                //10%
+                //TODO: 10% korting op de totaalprijs
             }
 
             if (BestellingenList.Count >= 10)
             {
-                //20%
+                //TODO: 20% korting op de totaalprijs
             }
         }
         #endregion

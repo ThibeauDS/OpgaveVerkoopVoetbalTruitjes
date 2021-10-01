@@ -23,25 +23,26 @@ namespace VerkoopVoetbalTruitjes.Domain.Klassen
             ZetBetaald(isBetaald);
             ZetDatum();
             ZetVerkoopprijs(verkoopprijs);
-            VoegTruitjeToe(truitje.Maat, truitje.Club.Competitie, truitje.Club.PloegNaam, truitje.Clubset.UitThuis, truitje.Seizoen, truitje.Prijs);
+            VoegTruitjeToe(truitje.Maat, truitje.Club.Competitie, truitje.Club.PloegNaam, truitje.Clubset.UitThuis, truitje.Seizoen, truitje.Prijs, truitje.Id);
         }
         #endregion
 
         #region Methods
-        public void VoegTruitjeToe(VoetbalTruiMaten maat, string competitie, string ploegnaam, string uitThuis, string seizoen, decimal prijs)
+        public void VoegTruitjeToe(VoetbalTruiMaten maat, string competitie, string ploegnaam, string uitThuis, string seizoen, decimal prijs, int id)
         {
-            if (!_aantalTruitjes.ContainsKey(new Truitje()))
+            if (!_aantalTruitjes.ContainsKey(new Truitje(maat, seizoen, prijs, id)))
             {
-                _aantalTruitjes.Add(new Truitje(), 1);
+                _aantalTruitjes.Add(new Truitje(maat, seizoen, prijs, id), 1);
             }
             else
             {
-                _aantalTruitjes.Where(c => c.Key == new Truitje(), c.Value++);
+                _aantalTruitjes.Where(c => c.Key == new Truitje(maat, seizoen, prijs, id));
+                // TODO: Value van key +1
             }
         }
-        public void VerwijderTruitje(VoetbalTruiMaten maat, string competitie, string ploegnaam, string uitThuis, string seizoen, decimal prijs)
+        public void VerwijderTruitje(VoetbalTruiMaten maat, string competitie, string ploegnaam, string uitThuis, string seizoen, decimal prijs, int id)
         {
-            _aantalTruitjes.Remove(new Truitje());
+            _aantalTruitjes.Remove(new Truitje(maat, seizoen, prijs, id));
         }
         public void ZetBetaald(bool isBetaald)
         {
@@ -55,7 +56,7 @@ namespace VerkoopVoetbalTruitjes.Domain.Klassen
         {
             Verkoopprijs = verkoopprijs;
         }
-
+        //TODO: Equals en GetHashCode implementeren
         public override bool Equals(object? obj)
         {
             return obj is Bestellingen bestellingen &&
