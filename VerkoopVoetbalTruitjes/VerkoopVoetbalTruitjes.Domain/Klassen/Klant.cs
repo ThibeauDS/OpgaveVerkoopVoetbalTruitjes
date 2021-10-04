@@ -32,7 +32,10 @@ namespace VerkoopVoetbalTruitjes.Domain.Klassen
         }
         public void VerwijderBestelling(Bestellingen bestelling)
         {
-            //TODO: Bestelling verwijderen uit de lijst
+            if (BestellingenList.Contains(bestelling))
+            {
+                BestellingenList.Remove(bestelling);
+            }
         }
         public List<Bestellingen> GeefBestellingen()
         {

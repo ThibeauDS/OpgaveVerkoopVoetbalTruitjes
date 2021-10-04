@@ -12,6 +12,24 @@ namespace VerkoopVoetbalTruitjes.Domain.Klassen
         public string Competitie { get; private set; }
         public string PloegNaam { get; private set; }
         #endregion
-        //TODO: Constructor en Methods voor Club.cs
+
+        #region Constructors
+        public Club(string competitie, string ploegNaam)
+        {
+            ZetCompetitie(competitie);
+            ZetPloegNaam(ploegNaam);
+        }
+        #endregion
+
+        #region Methods
+        public void ZetCompetitie(string competitie)
+        {
+            Competitie = competitie;
+        }
+        public void ZetPloegNaam(string ploegNaam)
+        {
+            PloegNaam = ploegNaam;
+        }
+        #endregion
     }
 }
