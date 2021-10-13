@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using VerkoopVoetbalTruitjes.Domain.Enums;
+using VerkoopVoetbalTruitjes.Domain.Exceptions;
 
 namespace VerkoopVoetbalTruitjes.Domain.Klassen
 {

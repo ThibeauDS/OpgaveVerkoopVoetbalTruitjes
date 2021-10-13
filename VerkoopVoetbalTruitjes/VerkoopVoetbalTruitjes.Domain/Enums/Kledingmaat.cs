@@ -1,4 +1,4 @@
-﻿namespace VerkoopVoetbalTruitjes.Domain.Klassen
+﻿namespace VerkoopVoetbalTruitjes.Domain.Enums
 {
     public enum Kledingmaat
     {

@@ -1,4 +1,5 @@
 ﻿using System;
+using VerkoopVoetbalTruitjes.Domain.Exceptions;
 
 namespace VerkoopVoetbalTruitjes.Domain.Klassen
 {

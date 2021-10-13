@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace VerkoopVoetbalTruitjes.Domain.Klassen
+namespace VerkoopVoetbalTruitjes.Domain.Exceptions
 {
     [Serializable]
     internal class BestellingException : Exception
