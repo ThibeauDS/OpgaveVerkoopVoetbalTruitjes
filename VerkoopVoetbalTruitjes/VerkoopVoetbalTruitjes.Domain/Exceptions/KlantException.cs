@@ -1,14 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Runtime.Serialization;
 
-namespace VerkoopVoetbalTruitjes.Domain.Exceptions
+namespace VerkoopVoetbalTruitjes.Domain.Klassen
 {
-    public class KlantException : Exception
+    [Serializable]
+    internal class KlantException : Exception
     {
+        public KlantException()
+        {
+        }
+
         public KlantException(string? message) : base(message)
+        {
+        }
+
+        public KlantException(string? message, Exception? innerException) : base(message, innerException)
+        {
+        }
+
+        protected KlantException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
         }
     }

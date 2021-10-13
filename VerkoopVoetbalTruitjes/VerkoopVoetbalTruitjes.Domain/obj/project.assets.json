@@ -130,19 +130,6 @@
             "rid": "win"
           }
         }
-      },
-      "VerkoopVoetbalTruitjes.Data/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v5.0",
-        "compile": {
-          "bin/placeholder/VerkoopVoetbalTruitjes.Data.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/VerkoopVoetbalTruitjes.Data.dll": {}
-        },
-        "frameworkReferences": [
-          "Microsoft.WindowsDesktop.App.WPF"
-        ]
       }
     }
   },
@@ -459,17 +446,11 @@
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
-    },
-    "VerkoopVoetbalTruitjes.Data/1.0.0": {
-      "type": "project",
-      "path": "../VerkoopVoetbalTruitjes.Data/VerkoopVoetbalTruitjes.Data.csproj",
-      "msbuildProject": "../VerkoopVoetbalTruitjes.Data/VerkoopVoetbalTruitjes.Data.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net5.0-windows7.0": [
-      "System.Data.SqlClient >= 4.8.3",
-      "VerkoopVoetbalTruitjes.Data >= 1.0.0"
+      "System.Data.SqlClient >= 4.8.3"
     ]
   },
   "packageFolders": {
@@ -503,11 +484,7 @@
       "frameworks": {
         "net5.0-windows7.0": {
           "targetAlias": "net5.0-windows",
-          "projectReferences": {
-            "C:\\Users\\thibe\\Documents\\GitHub\\OpgaveVerkoopVoetbalTruitjes\\VerkoopVoetbalTruitjes\\VerkoopVoetbalTruitjes.Data\\VerkoopVoetbalTruitjes.Data.csproj": {
-              "projectPath": "C:\\Users\\thibe\\Documents\\GitHub\\OpgaveVerkoopVoetbalTruitjes\\VerkoopVoetbalTruitjes\\VerkoopVoetbalTruitjes.Data\\VerkoopVoetbalTruitjes.Data.csproj"
-            }
-          }
+          "projectReferences": {}
         }
       },
       "warningProperties": {
@@ -543,7 +520,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100-rc.1.21463.6\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100-rc.2.21505.57\\RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "hJXtokpri7CtkgVfJgBEnWel3jDOG5PSBGLygXccmYilXVYaxfEBLRN6OATfCeCAapWTWzdsVdyI4Uv9DsxARw==",
+  "dgSpecHash": "oTZ7pVAQpuJ928Qtvobtz1pXhuGpsO1NBpGvEvCV4RIfsUCMpTdcG2oKsD9abFlmpLd75hlUciWnypLcUpD4/Q==",
   "success": true,
   "projectFilePath": "C:\\Users\\thibe\\Documents\\GitHub\\OpgaveVerkoopVoetbalTruitjes\\VerkoopVoetbalTruitjes\\VerkoopVoetbalTruitjes.WPF\\VerkoopVoetbalTruitjes.WPF.csproj",
   "expectedPackageFiles": [
@@ -12,8 +12,7 @@
     "C:\\Users\\thibe\\.nuget\\packages\\runtime.win-x86.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-x86.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
     "C:\\Users\\thibe\\.nuget\\packages\\system.data.sqlclient\\4.8.3\\system.data.sqlclient.4.8.3.nupkg.sha512",
     "C:\\Users\\thibe\\.nuget\\packages\\system.security.accesscontrol\\4.7.0\\system.security.accesscontrol.4.7.0.nupkg.sha512",
-    "C:\\Users\\thibe\\.nuget\\packages\\system.security.principal.windows\\4.7.0\\system.security.principal.windows.4.7.0.nupkg.sha512",
-    "C:\\Users\\thibe\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\5.0.9\\microsoft.netcore.app.host.win-x64.5.0.9.nupkg.sha512"
+    "C:\\Users\\thibe\\.nuget\\packages\\system.security.principal.windows\\4.7.0\\system.security.principal.windows.4.7.0.nupkg.sha512"
   ],
   "logs": []
 }

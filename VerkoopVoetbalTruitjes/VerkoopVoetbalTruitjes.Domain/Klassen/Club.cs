@@ -1,35 +1,30 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace VerkoopVoetbalTruitjes.Domain.Klassen
 {
     public class Club
     {
-        #region Properties
-        public string Competitie { get; private set; }
-        public string PloegNaam { get; private set; }
-        #endregion
-
-        #region Constructors
-        public Club(string competitie, string ploegNaam)
+        internal Club(string competitie, string ploeg)
         {
-            ZetCompetitie(competitie);
-            ZetPloegNaam(ploegNaam);
-        }
-        #endregion
-
-        #region Methods
-        public void ZetCompetitie(string competitie)
-        {
+            if ((string.IsNullOrWhiteSpace(competitie)) || (string.IsNullOrWhiteSpace(ploeg))) 
+                throw new ClubException("Club - null or empty");
             Competitie = competitie;
+            Ploeg = ploeg;
         }
-        public void ZetPloegNaam(string ploegNaam)
+
+        public string Competitie { get; private set; }
+        public string Ploeg { get; private set; }
+
+        public override bool Equals(object obj)
         {
-            PloegNaam = ploegNaam;
+            return obj is Club club &&
+                   Competitie == club.Competitie &&
+                   Ploeg == club.Ploeg;
         }
-        #endregion
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Competitie, Ploeg);
+        }
     }
 }

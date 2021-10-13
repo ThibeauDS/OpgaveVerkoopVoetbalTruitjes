@@ -1,35 +1,35 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace VerkoopVoetbalTruitjes.Domain.Klassen
 {
-    public class Clubset
+    public class ClubSet
     {
-        #region Properties
-        public string UitThuis { get; private set; }
-        public int Versie { get; private set; }
-        #endregion
-
-        #region Constructors
-        public Clubset(string uitThuis, int versie)
+        public ClubSet(bool thuis, int versie)
         {
-            ZetUitThuis(uitThuis);
-            ZetVersie(versie);
-        }
-        #endregion
-
-        #region Methods
-        public void ZetUitThuis(string uitThuis)
-        {
-            UitThuis = uitThuis;
-        }
-        public void ZetVersie(int versie)
-        {
+            Thuis = thuis;
+            if (versie < 0) throw new ClubSetException("Clubset - versie < 1");
             Versie = versie;
         }
-        #endregion
+
+        public bool Thuis { get; private set; }//vs uit
+        public int Versie { get; private set; }
+
+        public override bool Equals(object obj)
+        {
+            return obj is ClubSet set &&
+                   Thuis == set.Thuis &&
+                   Versie == set.Versie;
+        }
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Thuis, Versie);
+        }
+        public override string ToString()
+        {
+            if (Thuis)
+                return $"Thuis - {Versie}";
+            else
+                return $"Uit - {Versie}";
+        }
     }
 }

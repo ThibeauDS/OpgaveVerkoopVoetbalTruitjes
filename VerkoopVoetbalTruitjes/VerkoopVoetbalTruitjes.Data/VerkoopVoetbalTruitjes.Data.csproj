@@ -7,7 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="ADO.NET\" />
     <Folder Include="SQL\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\VerkoopVoetbalTruitjes.Domain\VerkoopVoetbalTruitjes.Domain.csproj" />
   </ItemGroup>
 
 </Project>
