@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using VerkoopVoetbalTruitjes.Domain.Exceptions;
 using VerkoopVoetbalTruitjes.Domain.Interfaces;
 using VerkoopVoetbalTruitjes.Domain.Klassen;
@@ -86,6 +82,9 @@ namespace VerkoopVoetbalTruitjes.Domain.Beheerders
                 throw new ClubBeheerderException(ex.Message);
             }
         }
+        //TODO: GeefCompetities _repo.GeefCompetities
+        //TODO: GeefPloeg ... check eerst of het bestaat en of het leeg is dan GeefPloeg(string competitie)
+        //TODO: Maak gebruik van IReadOnlyList van strings
         #endregion
     }
 }
