@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using VerkoopVoetbalTruitjes.Domain.Interfaces;
 using VerkoopVoetbalTruitjes.Domain.Klassen;
 
@@ -7,27 +8,17 @@ namespace VerkoopVoetbalTruitjes.Data.ADO.NET
     //TODO: Moet nog geïmplementeerd worden
     public class ClubRepositoryADO : IClubRepository
     {
-        public bool BestaatClub(Club club)
+        public bool BestaatCompetitie(string competitie)
         {
             throw new NotImplementedException();
         }
 
-        public void ClubToevoegen(Club club)
+        public IReadOnlyList<string> GeefCompetities()
         {
             throw new NotImplementedException();
         }
 
-        public void ClubUpdaten(Club club)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void ClubVerwijderen(Club club)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void ClubWeergeven(Club club)
+        public IReadOnlyList<string> GeefPloegen(string competitie)
         {
             throw new NotImplementedException();
         }

@@ -1,7 +1,6 @@
 ﻿using System;
 using VerkoopVoetbalTruitjes.Domain.Exceptions;
 using VerkoopVoetbalTruitjes.Domain.Interfaces;
-using VerkoopVoetbalTruitjes.Domain.Klassen;
 using System.Collections.Generic;
 
 namespace VerkoopVoetbalTruitjes.Domain.Beheerders
@@ -36,16 +35,22 @@ namespace VerkoopVoetbalTruitjes.Domain.Beheerders
         {
             try
             {
+                if (string.IsNullOrWhiteSpace(competitie))
+                {
+                    throw new ClubBeheerderException("Competitie mag niet leeg zijn.");
+                }
 
+                if (!_repo.BestaatCompetitie(competitie))
+                {
+                    throw new ClubBeheerderException("Competitie bestaat niet.");
+                }
+                return _repo.GeefPloegen(competitie);
             }
             catch (Exception ex)
             {
                 throw new ClubBeheerderException(ex.Message);
             }
         }
-        //TODO: GeefCompetities _repo.GeefCompetities
-        //TODO: GeefPloeg ... check eerst of het bestaat en of het leeg is dan GeefPloeg(string competitie)
-        //TODO: Maak gebruik van IReadOnlyList van strings
         #endregion
     }
 }
