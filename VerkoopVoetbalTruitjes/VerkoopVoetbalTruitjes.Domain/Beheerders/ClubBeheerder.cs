@@ -2,6 +2,7 @@
 using VerkoopVoetbalTruitjes.Domain.Exceptions;
 using VerkoopVoetbalTruitjes.Domain.Interfaces;
 using VerkoopVoetbalTruitjes.Domain.Klassen;
+using System.Collections.Generic;
 
 namespace VerkoopVoetbalTruitjes.Domain.Beheerders
 {
@@ -19,15 +20,11 @@ namespace VerkoopVoetbalTruitjes.Domain.Beheerders
         #endregion
 
         #region Methods
-        public void ClubToevoegen(Club club)
+        public IReadOnlyList<string> GeefCompetities()
         {
             try
             {
-                if (_repo.BestaatClub(club))
-                {
-                    throw new ClubBeheerderException("Club bestaat al.");
-                }
-                _repo.ClubToevoegen(club);
+                return _repo.GeefCompetities();
             }
             catch (Exception ex)
             {
@@ -35,47 +32,11 @@ namespace VerkoopVoetbalTruitjes.Domain.Beheerders
             }
         }
 
-        public void ClubVerwijderen(Club club)
+        public IReadOnlyList<string> GeefPloegen(string competitie)
         {
             try
             {
-                if (!_repo.BestaatClub(club))
-                {
-                    throw new ClubBeheerderException("Club bestaat niet.");
-                }
-                _repo.ClubVerwijderen(club);
-            }
-            catch (Exception ex)
-            {
-                throw new ClubBeheerderException(ex.Message);
-            }
-        }
 
-        public void ClubUpdaten(Club club)
-        {
-            try
-            {
-                if (!_repo.BestaatClub(club))
-                {
-                    throw new ClubBeheerderException("Club bestaat niet.");
-                }
-                _repo.ClubUpdaten(club);
-            }
-            catch (Exception ex)
-            {
-                throw new ClubBeheerderException(ex.Message);
-            }
-        }
-
-        public void ClubWeergeven(Club club)
-        {
-            try
-            {
-                if (!_repo.BestaatClub(club))
-                {
-                    throw new ClubBeheerderException("Club bestaat niet.");
-                }
-                _repo.ClubWeergeven(club);
             }
             catch (Exception ex)
             {
