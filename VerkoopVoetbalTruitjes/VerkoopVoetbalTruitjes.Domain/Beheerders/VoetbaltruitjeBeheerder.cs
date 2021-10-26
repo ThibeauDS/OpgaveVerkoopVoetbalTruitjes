@@ -59,8 +59,9 @@ namespace VerkoopVoetbalTruitjes.Domain.Beheerders
         {
             try
             {
-                if (!_repo.BestaatVoetbaltruitje(voetbaltruitje))
+                if (_repo.BestaatVoetbaltruitje(voetbaltruitje.Id))
                 {
+                    //voetbaltruitje dbVoetbaltruitje = 
                     throw new VoetbaltruitjeBeheerderException("Voetbaltruitje bestaat niet.");
                 }
                 _repo.VoetbaltruitjeUpdaten(voetbaltruitje);
@@ -84,6 +85,29 @@ namespace VerkoopVoetbalTruitjes.Domain.Beheerders
             catch (Exception ex)
             {
                 throw new VoetbaltruitjeBeheerderException(ex.Message);
+            }
+        }
+        public IReadOnlyList<Voetbaltruitje> ZoekTruitje(int? voetbaltruitjeId, string competitie, string club, string seizoen, string kledingmaat, int? versie, bool? thuis, double? prijs)
+        {
+            List<Voetbaltruitje> truitjes = new();
+            try
+            {
+                if ()
+                {
+
+                }
+                else
+                {
+                    if (!string.IsNullOrWhiteSpace(competitie) || !string.IsNullOrWhiteSpace(club) || !string.IsNullOrWhiteSpace(seizoen) || !string.IsNullOrWhiteSpace(kledingmaat) || versie.HasValue || thuis.HasValue || prijs.HasValue)
+                    {
+                        truitjes.AddRange(_repo.GeefTruitjes(competitie, club, seizoen, kledingmaat, versie, thuis, prijs));
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
             }
         }
         #endregion

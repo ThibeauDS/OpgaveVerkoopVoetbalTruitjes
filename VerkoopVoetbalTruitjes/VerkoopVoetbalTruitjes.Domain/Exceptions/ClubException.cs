@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace VerkoopVoetbalTruitjes.Domain.Exceptions
 {
     [Serializable]
-    internal class ClubException : Exception
+    public class ClubException : Exception
     {
         public ClubException()
         {
