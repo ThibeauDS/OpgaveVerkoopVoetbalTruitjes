@@ -24,5 +24,10 @@ namespace VerkoopVoetbalTruitjes.WPF.Pages
         {
             InitializeComponent();
         }
+
+        private void FindBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

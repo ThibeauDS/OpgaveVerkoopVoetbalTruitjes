@@ -87,29 +87,28 @@ namespace VerkoopVoetbalTruitjes.Domain.Beheerders
                 throw new VoetbaltruitjeBeheerderException(ex.Message);
             }
         }
-        public IReadOnlyList<Voetbaltruitje> ZoekTruitje(int? voetbaltruitjeId, string competitie, string club, string seizoen, string kledingmaat, int? versie, bool? thuis, double? prijs)
-        {
-            List<Voetbaltruitje> truitjes = new();
-            try
-            {
-                if ()
-                {
+        //public IReadOnlyList<Voetbaltruitje> ZoekTruitje(int? voetbaltruitjeId, string competitie, string club, string seizoen, string kledingmaat, int? versie, bool? thuis, double? prijs)
+        //{
+        //    List<Voetbaltruitje> truitjes = new();
+        //    try
+        //    {
+        //        if (false)
+        //        {
+        //        }
+        //        else
+        //        {
+        //            if (!string.IsNullOrWhiteSpace(competitie) || !string.IsNullOrWhiteSpace(club) || !string.IsNullOrWhiteSpace(seizoen) || !string.IsNullOrWhiteSpace(kledingmaat) || versie.HasValue || thuis.HasValue || prijs.HasValue)
+        //            {
+        //                truitjes.AddRange(_repo.GeefTruitjes(competitie, club, seizoen, kledingmaat, versie, thuis, prijs));
+        //            }
+        //        }
+        //    }
+        //    catch (Exception)
+        //    {
 
-                }
-                else
-                {
-                    if (!string.IsNullOrWhiteSpace(competitie) || !string.IsNullOrWhiteSpace(club) || !string.IsNullOrWhiteSpace(seizoen) || !string.IsNullOrWhiteSpace(kledingmaat) || versie.HasValue || thuis.HasValue || prijs.HasValue)
-                    {
-                        truitjes.AddRange(_repo.GeefTruitjes(competitie, club, seizoen, kledingmaat, versie, thuis, prijs));
-                    }
-                }
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
+        //        throw;
+        //    }
+        //}
         #endregion
     }
 }

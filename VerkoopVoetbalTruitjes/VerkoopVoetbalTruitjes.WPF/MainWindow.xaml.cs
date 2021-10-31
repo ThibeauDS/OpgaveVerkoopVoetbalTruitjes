@@ -24,6 +24,7 @@ namespace VerkoopVoetbalTruitjes.WPF
         #region Properties
         private KlantenPage _klantenPage = new();
         private BestellingenPage _bestellingenPage = new();
+        private DashbordPage _dashbordPage = new();
         #endregion
 
         #region Constructors
@@ -45,7 +46,17 @@ namespace VerkoopVoetbalTruitjes.WPF
 
         private void MainView_Loaded(object sender, RoutedEventArgs e)
         {
-            KlantenBtn_Click(sender, e);
+            DashboardBtn_Click(sender, e);
+        }
+
+        private void VoetbaltruitjeBtn_Click(object sender, RoutedEventArgs e)
+        {
+            MainView.Content = _klantenPage;
+        }
+
+        private void DashboardBtn_Click(object sender, RoutedEventArgs e)
+        {
+            MainView.Content = _dashbordPage;
         }
     }
 }

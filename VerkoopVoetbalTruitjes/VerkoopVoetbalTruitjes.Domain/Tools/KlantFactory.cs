@@ -9,15 +9,15 @@ namespace VerkoopVoetbalTruitjes.Domain.Tools
 {
     public static class KlantFactory
     {
-        public static Klant MaakKlant()
-        {
-            try
-            {
-                return new Klant();
-            }catch (Exception ex)
-            {
-                throw new Exception("KlantFactory", ex);
-            }
-        }
+        //public static Klant MaakKlant()
+        //{
+        //    try
+        //    {
+        //        return new Klant();
+        //    }catch (Exception ex)
+        //    {
+        //        throw new Exception("KlantFactory", ex);
+        //    }
+        //}
     }
 }

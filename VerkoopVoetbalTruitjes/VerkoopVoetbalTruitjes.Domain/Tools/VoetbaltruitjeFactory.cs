@@ -8,9 +8,9 @@ namespace VerkoopVoetbalTruitjes.Domain.Tools
 {
     public class VoetbaltruitjeFactory
     {
-        public static VoetbaltruitjeFactory Maaktruitje()
-        {
+        //public static VoetbaltruitjeFactory Maaktruitje()
+        //{
 
-        }
+        //}
     }
 }
