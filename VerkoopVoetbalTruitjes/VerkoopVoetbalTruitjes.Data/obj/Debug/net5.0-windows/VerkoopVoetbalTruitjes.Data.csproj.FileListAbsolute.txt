@@ -22,3 +22,6 @@ C:\Users\thibe\Documents\GitHub\OpgaveVerkoopVoetbalTruitjes\VerkoopVoetbalTruit
 C:\Users\thibe\Documents\GitHub\OpgaveVerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes.Data\obj\Debug\net5.0-windows\VerkoopVoetbalTruitjes.Data.dll
 C:\Users\thibe\Documents\GitHub\OpgaveVerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes.Data\obj\Debug\net5.0-windows\ref\VerkoopVoetbalTruitjes.Data.dll
 C:\Users\thibe\Documents\GitHub\OpgaveVerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes.Data\obj\Debug\net5.0-windows\VerkoopVoetbalTruitjes.Data.pdb
+C:\Users\thibe\Documents\GitHub\OpgaveVerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes.Data\bin\Debug\net5.0-windows\VerkoopVoetbalTruitjes.Domain.dll
+C:\Users\thibe\Documents\GitHub\OpgaveVerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes.Data\bin\Debug\net5.0-windows\VerkoopVoetbalTruitjes.Domain.pdb
+C:\Users\thibe\Documents\GitHub\OpgaveVerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes.Data\obj\Debug\net5.0-windows\VerkoopVoetbalTruitjes.Data.csproj.CopyComplete

@@ -6,10 +6,14 @@ namespace VerkoopVoetbalTruitjes.Domain.Klassen
 {
     public class Klant
     {
+        #region Properties
         public int KlantId { get; private set; }
         public string Naam { get; private set; }
         public string Adres { get; private set; }
         private List<Bestelling> _bestellingen = new List<Bestelling>();
+        #endregion
+
+        #region Constructors
         public Klant(int klantId, string naam, string adres, List<Bestelling> bestellingen) : this(klantId, naam, adres)
         {
             if (bestellingen == null) throw new KlantException("Klant - bestellingen null");
@@ -27,7 +31,9 @@ namespace VerkoopVoetbalTruitjes.Domain.Klassen
             ZetNaam(naam);
             ZetAdres(adres);
         }
+        #endregion
 
+        #region Methods
         public void ZetKlantId(int id)
         {
             if (id <= 0) throw new KlantException("Klant - invalid id");
@@ -35,19 +41,21 @@ namespace VerkoopVoetbalTruitjes.Domain.Klassen
         }
         public void ZetNaam(string naam)
         {
-            if (!string.IsNullOrWhiteSpace(naam))
+            if (string.IsNullOrWhiteSpace(naam))
             {
-                if (naam.Trim().Length < 1) throw new KlantException("Klant naam invalid");
-                Naam = naam;
+                throw new KlantException("Klant naam invalid");
             }
+            if (naam.Trim().Length < 1) throw new KlantException("Klant naam invalid");
+            Naam = naam;
         }
         public void ZetAdres(string adres)
         {
-            if (!string.IsNullOrWhiteSpace(adres))
+            if (string.IsNullOrWhiteSpace(adres))
             {
-                if (adres.Trim().Length < 5) throw new KlantException("Klant adres invalid");
-                Adres = adres;
+                throw new KlantException("Klant adres invalid");
             }
+            if (adres.Trim().Length < 5) throw new KlantException("Klant adres invalid");
+            Adres = adres;
         }
         public IReadOnlyList<Bestelling> GetBestellingen()
         {
@@ -135,5 +143,6 @@ namespace VerkoopVoetbalTruitjes.Domain.Klassen
         {
             return HashCode.Combine(Naam, Adres);
         }
+        #endregion
     }
 }

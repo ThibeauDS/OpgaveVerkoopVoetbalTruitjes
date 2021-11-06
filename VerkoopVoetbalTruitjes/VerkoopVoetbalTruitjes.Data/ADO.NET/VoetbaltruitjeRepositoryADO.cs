@@ -22,7 +22,7 @@ namespace VerkoopVoetbalTruitjes.Data.ADO.NET
             SqlConnection connection = new SqlConnection(_connectionString);
             return connection;
         }
-        public bool BestaatVoetbaltruitje(Voetbaltruitje voetbaltruitje)
+        public bool BestaatVoetbaltruitje(int id)
         {
             throw new NotImplementedException();
         }

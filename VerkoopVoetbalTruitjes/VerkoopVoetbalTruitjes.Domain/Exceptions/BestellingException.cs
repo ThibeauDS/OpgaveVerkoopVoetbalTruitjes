@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace VerkoopVoetbalTruitjes.Domain.Exceptions
 {
     [Serializable]
-    internal class BestellingException : Exception
+    public class BestellingException : Exception
     {
         public BestellingException()
         {

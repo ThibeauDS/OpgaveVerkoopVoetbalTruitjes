@@ -7,7 +7,7 @@ namespace VerkoopVoetbalTruitjes.Data.ADO.NET
     //TODO: Moet nog geïmplementeerd worden
     public class KlantRepositoryADO : IKlantRepository
     {
-        public bool BestaatKlant(Klant klant)
+        public bool BestaatKlant(int id)
         {
             throw new NotImplementedException();
         }

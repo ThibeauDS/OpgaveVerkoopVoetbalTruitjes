@@ -5,16 +5,21 @@ namespace VerkoopVoetbalTruitjes.Domain.Klassen
 {
     public class ClubSet
     {
+        #region Properties
+        public bool Thuis { get; private set; }//vs uit
+        public int Versie { get; private set; }
+        #endregion
+
+        #region Constructors
         public ClubSet(bool thuis, int versie)
         {
             Thuis = thuis;
             if (versie < 0) throw new ClubSetException("Clubset - versie < 1");
             Versie = versie;
         }
+        #endregion
 
-        public bool Thuis { get; private set; }//vs uit
-        public int Versie { get; private set; }
-
+        #region Methods
         public override bool Equals(object obj)
         {
             return obj is ClubSet set &&
@@ -31,6 +36,7 @@ namespace VerkoopVoetbalTruitjes.Domain.Klassen
                 return $"Thuis - {Versie}";
             else
                 return $"Uit - {Versie}";
-        }
+        } 
+        #endregion
     }
 }

@@ -8,7 +8,7 @@ namespace VerkoopVoetbalTruitjes.Domain.Beheerders
     public class KlantBeheerder
     {
         #region Properties
-        private IKlantRepository _repo;
+        private readonly IKlantRepository _repo;
         #endregion
 
         #region Constructors
@@ -23,7 +23,11 @@ namespace VerkoopVoetbalTruitjes.Domain.Beheerders
         {
             try
             {
-                if (_repo.BestaatKlant(klant))
+                if (klant == null)
+                {
+                    throw new KlantBeheerderException("Klant is null.");
+                }
+                if (_repo.BestaatKlant(klant.KlantId))
                 {
                     throw new KlantBeheerderException("Klant bestaat al.");
                 }
@@ -39,7 +43,7 @@ namespace VerkoopVoetbalTruitjes.Domain.Beheerders
         {
             try
             {
-                if (!_repo.BestaatKlant(klant))
+                if (!_repo.BestaatKlant(klant.KlantId))
                 {
                     throw new KlantBeheerderException("Klant bestaat niet.");
                 }
@@ -55,7 +59,7 @@ namespace VerkoopVoetbalTruitjes.Domain.Beheerders
         {
             try
             {
-                if (!_repo.BestaatKlant(klant))
+                if (!_repo.BestaatKlant(klant.KlantId))
                 {
                     throw new KlantBeheerderException("Klant bestaat niet.");
                 }
@@ -71,7 +75,7 @@ namespace VerkoopVoetbalTruitjes.Domain.Beheerders
         {
             try
             {
-                if (!_repo.BestaatKlant(klant))
+                if (!_repo.BestaatKlant(klant.KlantId))
                 {
                     throw new KlantBeheerderException("Klant bestaat niet.");
                 }

@@ -7,19 +7,7 @@ namespace VerkoopVoetbalTruitjes.Domain.Klassen
 {
     public class Voetbaltruitje 
     {
-        internal Voetbaltruitje(int id, Club club, string seizoen, double prijs, Kledingmaat kledingmaat, ClubSet clubSet)
-            : this(club, seizoen, prijs, kledingmaat, clubSet)
-        {
-            ZetId(id);
-        }
-        internal Voetbaltruitje(Club club, string seizoen, double prijs, Kledingmaat kledingmaat, ClubSet clubSet)
-        {
-            ZetClub(club);
-            Seizoen = seizoen;
-            ZetPrijs(prijs);
-            Kledingmaat = kledingmaat;
-            ZetClubSet(clubSet);
-        }
+        #region Properties
         public int Id { get; private set; }
         public Club Club { get; private set; }
         public string Seizoen { get; private set; }
@@ -27,6 +15,25 @@ namespace VerkoopVoetbalTruitjes.Domain.Klassen
         public Kledingmaat Kledingmaat { get; set; }
         public ClubSet ClubSet { get; private set; }
         //public Personalisatie Personalisatie { get; private set; }
+        #endregion
+
+        #region Constructors
+        public Voetbaltruitje(int id, Club club, string seizoen, double prijs, Kledingmaat kledingmaat, ClubSet clubSet)
+            : this(club, seizoen, prijs, kledingmaat, clubSet)
+        {
+            ZetId(id);
+        }
+        public Voetbaltruitje(Club club, string seizoen, double prijs, Kledingmaat kledingmaat, ClubSet clubSet)
+        {
+            ZetClub(club);
+            Seizoen = seizoen;
+            ZetPrijs(prijs);
+            Kledingmaat = kledingmaat;
+            ZetClubSet(clubSet);
+        }
+        #endregion
+
+        #region Methods
         public void ZetId(int id)
         {
             if (id <= 0) throw new VoetbaltruitjeException("Voetbaltruitje - invalid id");
@@ -39,7 +46,10 @@ namespace VerkoopVoetbalTruitjes.Domain.Klassen
         }
         public void ZetSeizoen(string seizoen)
         {
-            //TODO regels
+            if (string.IsNullOrWhiteSpace(seizoen))
+            {
+                throw new VoetbaltruitjeException("ZetSeizoen = null/Empty");
+            }
             this.Seizoen = seizoen;
         }
         public void ZetClub(Club club)
@@ -71,6 +81,7 @@ namespace VerkoopVoetbalTruitjes.Domain.Klassen
         public override int GetHashCode()
         {
             return HashCode.Combine(Id, Club, Seizoen, Prijs, Kledingmaat, ClubSet);
-        }
+        } 
+        #endregion
     }
 }

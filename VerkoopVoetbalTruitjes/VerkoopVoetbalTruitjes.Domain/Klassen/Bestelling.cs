@@ -6,13 +6,16 @@ namespace VerkoopVoetbalTruitjes.Domain.Klassen
 {
     public class Bestelling 
     {
+        #region Properties
         public int BestellingId { get; private set; }
         public bool Betaald { get; private set; }
         public double Prijs { get; private set; }
         public Klant Klant { get; private set; }
         public DateTime Tijdstip { get; private set; }
         private Dictionary<Voetbaltruitje, int> _producten = new Dictionary<Voetbaltruitje, int>();
+        #endregion
 
+        #region Constructors
         public Bestelling(int bestellingId, DateTime tijdstip) : this(tijdstip)
         {
             ZetBestellingId(bestellingId);
@@ -33,17 +36,19 @@ namespace VerkoopVoetbalTruitjes.Domain.Klassen
         {
             //Prijs wordt niet gecontrolleerd
             Prijs = prijs;
-            Betaald = betaald;
+            ZetBetaald(betaald);
         }
         public Bestelling(DateTime tijdstip)
         {
             ZetTijdstip(tijdstip);
             Betaald = false;
         }
+        #endregion
 
+        #region Methods
         public void VoegProductToe(Voetbaltruitje voetbaltruitje, int aantal)
         {
-            //Voetbaltruitje wordt niet gecontroleerd
+            if (voetbaltruitje == null) throw new BestellingException("VoegVoetbaltruitjeToe - voetbaltruitje");
             if (aantal <= 0) throw new BestellingException("VoegVoetbaltruitjeToe - aantal");
             if (_producten.ContainsKey(voetbaltruitje))
             {
@@ -56,6 +61,7 @@ namespace VerkoopVoetbalTruitjes.Domain.Klassen
         }
         public void VerwijderProduct(Voetbaltruitje voetbaltruitje, int aantal)
         {
+            if (voetbaltruitje == null) throw new BestellingException("VoegVoetbaltruitjeToe - voetbaltruitje");
             if (aantal <= 0) throw new BestellingException("VerwijderVoetbaltruitje - aantal");
             if (!_producten.ContainsKey(voetbaltruitje))
             {
@@ -118,7 +124,7 @@ namespace VerkoopVoetbalTruitjes.Domain.Klassen
         }
         public void ZetTijdstip(DateTime tijdstip)
         {
-            if (tijdstip == null) throw new BestellingException("Bestelling - invalid tijdstip");
+            if (tijdstip > DateTime.Now) throw new BestellingException("Bestelling - invalid tijdstip");
             Tijdstip = tijdstip;
         }
         public void ZetBetaald(bool betaald = true)
@@ -170,6 +176,7 @@ namespace VerkoopVoetbalTruitjes.Domain.Klassen
         public override int GetHashCode()
         {
             return HashCode.Combine(BestellingId, Betaald, Prijs, Klant, Tijdstip, _producten);
-        }
+        } 
+        #endregion
     }
 }

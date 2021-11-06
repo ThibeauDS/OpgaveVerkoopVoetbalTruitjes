@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using VerkoopVoetbalTruitjes.Domain.Interfaces;
 using VerkoopVoetbalTruitjes.Domain.Klassen;
-using VerkoopVoetbalTruitjes.Domain.Exceptions;
+using VerkoopVoetbalTruitjes.Data.Exceptions;
 
 namespace VerkoopVoetbalTruitjes.Data.ADO.NET
 {
@@ -28,9 +28,9 @@ namespace VerkoopVoetbalTruitjes.Data.ADO.NET
             throw new NotImplementedException();
         }
 
-        public IReadOnlyList<string> GeefCompetitie()
+        public IReadOnlyList<string> GeefCompetities()
         {
-            List<string> competities = new List<string>();
+            List<string> competities = new();
             SqlConnection connection = getConnection();
             string query = "SELECT DISTINCT competitie FROM dbo.ClubCompetitie ORDER by competitie";
             using (SqlCommand command = connection.CreateCommand())
@@ -53,7 +53,7 @@ namespace VerkoopVoetbalTruitjes.Data.ADO.NET
                 catch (Exception ex)
                 {
 
-                    throw new ClubException("Geefcompetities", ex);
+                    throw new ClubRepositoryADOException("Geefcompetities", ex);
                 }
                 finally
                 {
