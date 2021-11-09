@@ -8,6 +8,6 @@ namespace VerkoopVoetbalTruitjes.Domain.Interfaces
         void KlantToevoegen(Klant klant);
         void KlantVerwijderen(Klant klant);
         void KlantUpdaten(Klant klant);
-        void KlantWeergeven(Klant klant);
+        Klant KlantWeergeven(Klant klant);
     }
 }

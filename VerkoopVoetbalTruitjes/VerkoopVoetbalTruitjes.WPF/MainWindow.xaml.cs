@@ -12,7 +12,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using VerkoopVoetbalTruitjes.WPF.Pages;
+using VerkoopVoetbalTruitjes.WPF.Pages.Bestelling;
+using VerkoopVoetbalTruitjes.WPF.Pages.Dashboard;
+using VerkoopVoetbalTruitjes.WPF.Pages.Klant;
+using VerkoopVoetbalTruitjes.WPF.Pages.Voetbaltruitje;
+using VerkoopVoetbalTruitjes.Domain.Beheerders;
+using VerkoopVoetbalTruitjes.Domain.Interfaces;
+using System.Configuration;
+using VerkoopVoetbalTruitjes.Data.ADO.NET;
 
 namespace VerkoopVoetbalTruitjes.WPF
 {
@@ -24,24 +31,29 @@ namespace VerkoopVoetbalTruitjes.WPF
         #region Properties
         private KlantenPage _klantenPage = new();
         private BestellingenPage _bestellingenPage = new();
-        private DashbordPage _dashbordPage = new();
+        private VoetbaltruitjePage _voetbaltruitjePage = new();
+        private DashboardPage _dashbordPage = new();
+        public string connectionString;
+        public static KlantBeheerder klantBeheerder;
         #endregion
 
         #region Constructors
         public MainWindow()
         {
             InitializeComponent();
+            connectionString = ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString;
+            klantBeheerder = new(new KlantRepositoryADO(connectionString));
         }
         #endregion
 
         private void KlantenBtn_Click(object sender, RoutedEventArgs e)
         {
-            MainView.Content = _klantenPage;
+            MainView.Navigate(_klantenPage);
         }
 
         private void BestellingenBtn_Click(object sender, RoutedEventArgs e)
         {
-            MainView.Content = _bestellingenPage;
+            MainView.Navigate(_bestellingenPage);
         }
 
         private void MainView_Loaded(object sender, RoutedEventArgs e)
@@ -51,12 +63,12 @@ namespace VerkoopVoetbalTruitjes.WPF
 
         private void VoetbaltruitjeBtn_Click(object sender, RoutedEventArgs e)
         {
-            MainView.Content = _klantenPage;
+            MainView.Navigate(_voetbaltruitjePage);
         }
 
         private void DashboardBtn_Click(object sender, RoutedEventArgs e)
         {
-            MainView.Content = _dashbordPage;
+            MainView.Navigate(_dashbordPage);
         }
     }
 }

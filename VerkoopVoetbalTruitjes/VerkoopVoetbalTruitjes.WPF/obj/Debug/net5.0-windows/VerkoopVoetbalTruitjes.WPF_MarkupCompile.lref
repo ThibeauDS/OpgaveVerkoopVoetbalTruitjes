@@ -1,7 +1,10 @@
 ﻿
 FC:\Users\thibe\Documents\GitHub\OpgaveVerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes.WPF\App.xaml;;
 FC:\Users\thibe\Documents\GitHub\OpgaveVerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes.WPF\MainWindow.xaml;;
-FC:\Users\thibe\Documents\GitHub\OpgaveVerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes.WPF\Pages\BestellingenPage.xaml;;
-FC:\Users\thibe\Documents\GitHub\OpgaveVerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes.WPF\Pages\DashboardPage.xaml;;
-FC:\Users\thibe\Documents\GitHub\OpgaveVerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes.WPF\Pages\KlantenPage.xaml;;
+FC:\Users\thibe\Documents\GitHub\OpgaveVerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes.WPF\Pages\Bestelling\BestellingenPage.xaml;;
+FC:\Users\thibe\Documents\GitHub\OpgaveVerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes.WPF\Pages\Dashboard\DashboardPage.xaml;;
+FC:\Users\thibe\Documents\GitHub\OpgaveVerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes.WPF\Pages\Klant\KlantenPage.xaml;;
+FC:\Users\thibe\Documents\GitHub\OpgaveVerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes.WPF\Pages\Klant\KlantToevoegenPage.xaml;;
+FC:\Users\thibe\Documents\GitHub\OpgaveVerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes.WPF\Pages\Klant\KlantZoekenPage.xaml;;
+FC:\Users\thibe\Documents\GitHub\OpgaveVerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes.WPF\Pages\Voetbaltruitje\VoetbaltruitjePage.xaml;;
 

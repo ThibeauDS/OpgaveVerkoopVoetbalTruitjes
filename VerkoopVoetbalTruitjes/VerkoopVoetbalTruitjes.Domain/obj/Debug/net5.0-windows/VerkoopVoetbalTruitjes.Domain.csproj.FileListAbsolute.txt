@@ -24,4 +24,3 @@ C:\Users\thibe\Documents\GitHub\OpgaveVerkoopVoetbalTruitjes\VerkoopVoetbalTruit
 C:\Users\thibe\Documents\GitHub\OpgaveVerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes.Domain\obj\Debug\net5.0-windows\VerkoopVoetbalTruitjes.Domain.dll
 C:\Users\thibe\Documents\GitHub\OpgaveVerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes.Domain\obj\Debug\net5.0-windows\ref\VerkoopVoetbalTruitjes.Domain.dll
 C:\Users\thibe\Documents\GitHub\OpgaveVerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes.Domain\obj\Debug\net5.0-windows\VerkoopVoetbalTruitjes.Domain.pdb
-C:\Users\thibe\Documents\GitHub\OpgaveVerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes.Domain\obj\Debug\net5.0-windows\VerkoopVoetbalTruitjes.Domain.csproj.AssemblyReference.cache

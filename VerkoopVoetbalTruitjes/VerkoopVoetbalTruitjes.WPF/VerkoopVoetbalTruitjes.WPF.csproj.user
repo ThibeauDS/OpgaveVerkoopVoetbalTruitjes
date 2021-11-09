@@ -7,7 +7,22 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="Pages\DashboardPage.xaml.cs">
+    <Compile Update="Pages\Bestelling\BestellingenPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\Dashboard\DashboardPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\Klant\KlantenPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\Klant\KlantToevoegenPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\Klant\KlantZoekenPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\Voetbaltruitje\VoetbaltruitjePage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -15,7 +30,22 @@
     <Page Update="MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Pages\DashboardPage.xaml">
+    <Page Update="Pages\Bestelling\BestellingenPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\Dashboard\DashboardPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\Klant\KlantenPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\Klant\KlantToevoegenPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\Klant\KlantZoekenPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\Voetbaltruitje\VoetbaltruitjePage.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

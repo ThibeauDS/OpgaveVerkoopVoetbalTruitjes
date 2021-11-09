@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VerkoopVoetbalTruitjes.WPF"
         mc:Ignorable="d"
+        FontFamily="Microsoft Sans Serif"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
+    <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
@@ -26,6 +27,6 @@
             <Button Name="BestellingenBtn" Content="Bestellingen" Click="BestellingenBtn_Click"/>
             <Button Name="VoetbaltruitjeBtn" Content="Voetbaltruitjes" Click="VoetbaltruitjeBtn_Click"/>
         </StackPanel>
-        <Frame Name="MainView" Grid.Row="1" Grid.ColumnSpan="2" NavigationUIVisibility="Hidden" Loaded="MainView_Loaded"/>
+        <Frame Name="MainView" Grid.Row="1" Grid.ColumnSpan="2" NavigationUIVisibility="Hidden" Loaded="MainView_Loaded" x:FieldModifier="public" Background="White"/>
     </Grid>
 </Window>

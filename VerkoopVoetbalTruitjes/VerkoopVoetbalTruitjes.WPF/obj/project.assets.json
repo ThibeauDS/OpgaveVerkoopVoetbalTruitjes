@@ -131,6 +131,22 @@
           }
         }
       },
+      "VerkoopVoetbalTruitjes.Data/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "VerkoopVoetbalTruitjes.Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/VerkoopVoetbalTruitjes.Data.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/VerkoopVoetbalTruitjes.Data.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.WindowsDesktop.App.WPF"
+        ]
+      },
       "VerkoopVoetbalTruitjes.Domain/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
@@ -463,6 +479,11 @@
         "version.txt"
       ]
     },
+    "VerkoopVoetbalTruitjes.Data/1.0.0": {
+      "type": "project",
+      "path": "../VerkoopVoetbalTruitjes.Data/VerkoopVoetbalTruitjes.Data.csproj",
+      "msbuildProject": "../VerkoopVoetbalTruitjes.Data/VerkoopVoetbalTruitjes.Data.csproj"
+    },
     "VerkoopVoetbalTruitjes.Domain/1.0.0": {
       "type": "project",
       "path": "../VerkoopVoetbalTruitjes.Domain/VerkoopVoetbalTruitjes.Domain.csproj",
@@ -471,6 +492,7 @@
   },
   "projectFileDependencyGroups": {
     "net5.0-windows7.0": [
+      "VerkoopVoetbalTruitjes.Data >= 1.0.0",
       "VerkoopVoetbalTruitjes.Domain >= 1.0.0"
     ]
   },
@@ -506,6 +528,9 @@
         "net5.0-windows7.0": {
           "targetAlias": "net5.0-windows",
           "projectReferences": {
+            "C:\\Users\\thibe\\Documents\\GitHub\\OpgaveVerkoopVoetbalTruitjes\\VerkoopVoetbalTruitjes\\VerkoopVoetbalTruitjes.Data\\VerkoopVoetbalTruitjes.Data.csproj": {
+              "projectPath": "C:\\Users\\thibe\\Documents\\GitHub\\OpgaveVerkoopVoetbalTruitjes\\VerkoopVoetbalTruitjes\\VerkoopVoetbalTruitjes.Data\\VerkoopVoetbalTruitjes.Data.csproj"
+            },
             "C:\\Users\\thibe\\Documents\\GitHub\\OpgaveVerkoopVoetbalTruitjes\\VerkoopVoetbalTruitjes\\VerkoopVoetbalTruitjes.Domain\\VerkoopVoetbalTruitjes.Domain.csproj": {
               "projectPath": "C:\\Users\\thibe\\Documents\\GitHub\\OpgaveVerkoopVoetbalTruitjes\\VerkoopVoetbalTruitjes\\VerkoopVoetbalTruitjes.Domain\\VerkoopVoetbalTruitjes.Domain.csproj"
             }
@@ -539,7 +564,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100-rc.2.21505.57\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   }

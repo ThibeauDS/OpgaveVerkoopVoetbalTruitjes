@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v5.0": {
       "VerkoopVoetbalTruitjes.WPF/1.0.0": {
         "dependencies": {
+          "VerkoopVoetbalTruitjes.Data": "1.0.0",
           "VerkoopVoetbalTruitjes.Domain": "1.0.0"
         },
         "runtime": {
@@ -89,6 +90,14 @@
         }
       },
       "System.Security.Principal.Windows/4.7.0": {},
+      "VerkoopVoetbalTruitjes.Data/1.0.0": {
+        "dependencies": {
+          "VerkoopVoetbalTruitjes.Domain": "1.0.0"
+        },
+        "runtime": {
+          "VerkoopVoetbalTruitjes.Data.dll": {}
+        }
+      },
       "VerkoopVoetbalTruitjes.Domain/1.0.0": {
         "dependencies": {
           "System.Data.SqlClient": "4.8.3"
@@ -167,6 +176,11 @@
       "sha512": "sha512-ojD0PX0XhneCsUbAZVKdb7h/70vyYMDYs85lwEI+LngEONe/17A0cFaRFqZU+sOEidcVswYWikYOQ9PPfjlbtQ==",
       "path": "system.security.principal.windows/4.7.0",
       "hashPath": "system.security.principal.windows.4.7.0.nupkg.sha512"
+    },
+    "VerkoopVoetbalTruitjes.Data/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     },
     "VerkoopVoetbalTruitjes.Domain/1.0.0": {
       "type": "project",

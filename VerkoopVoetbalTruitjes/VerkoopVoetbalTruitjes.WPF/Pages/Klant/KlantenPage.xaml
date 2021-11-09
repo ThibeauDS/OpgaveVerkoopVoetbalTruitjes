@@ -1,0 +1,33 @@
+﻿<Page x:Class="VerkoopVoetbalTruitjes.WPF.Pages.Klant.KlantenPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:VerkoopVoetbalTruitjes.WPF.Pages.Klant"
+      mc:Ignorable="d" 
+      FontFamily="Microsoft Sans Serif"
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="KlantenPage">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Frame Grid.ColumnSpan="2" Name="MainView" NavigationUIVisibility="Hidden"/>
+
+        <Button Name="CreateCustomerBtn" Click="CreateCustomerBtn_Click" MaxWidth="200" MaxHeight="200">
+            <StackPanel Orientation="Vertical">
+                <TextBlock FontFamily="Segoe Fluent Icons" Text="&#xe8fa;" FontSize="80" HorizontalAlignment="Center"/>
+                <TextBlock Text="Klant toevoegen" FontSize="20" Margin="0,20,0,0" HorizontalAlignment="Center"/>
+            </StackPanel>
+        </Button>
+
+        <Button Name="FindCustomerBtn" Click="FindCustomerBtn_Click" Grid.Column="1" MaxWidth="200" MaxHeight="200">
+            <StackPanel Orientation="Vertical">
+                <TextBlock FontFamily="Segoe Fluent Icons" Text="&#xe721;" FontSize="80" HorizontalAlignment="Center"/>
+                <TextBlock Text="Zoeken" FontSize="20" Margin="0,20,0,0" HorizontalAlignment="Center"/>
+            </StackPanel>
+        </Button>     
+    </Grid>
+</Page>

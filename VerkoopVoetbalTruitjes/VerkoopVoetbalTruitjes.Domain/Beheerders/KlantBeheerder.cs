@@ -43,10 +43,10 @@ namespace VerkoopVoetbalTruitjes.Domain.Beheerders
         {
             try
             {
-                if (!_repo.BestaatKlant(klant.KlantId))
-                {
-                    throw new KlantBeheerderException("Klant bestaat niet.");
-                }
+                //if (!_repo.BestaatKlant(klant.KlantId))
+                //{
+                //    throw new KlantBeheerderException("Klant bestaat niet.");
+                //}
                 _repo.KlantVerwijderen(klant);
             }
             catch (Exception ex)
@@ -71,15 +71,15 @@ namespace VerkoopVoetbalTruitjes.Domain.Beheerders
             }
         }
 
-        public void KlantWeergeven(Klant klant)
+        public Klant KlantWeergeven(Klant klant)
         {
             try
             {
-                if (!_repo.BestaatKlant(klant.KlantId))
-                {
-                    throw new KlantBeheerderException("Klant bestaat niet.");
-                }
-                _repo.KlantWeergeven(klant);
+                //if (!_repo.BestaatKlant(klant.KlantId))
+                //{
+                //    throw new KlantBeheerderException("Klant bestaat niet.");
+                //}
+                return _repo.KlantWeergeven(klant);
             }
             catch (Exception ex)
             {

@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET5_0;NETCOREAPP
 C:\Users\thibe\Documents\GitHub\OpgaveVerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes.WPF\App.xaml
-4942014577
+7-1149710358
 
-6-1370709768
-195-1484298468
-MainWindow.xaml;Pages\BestellingenPage.xaml;Pages\DashboardPage.xaml;Pages\KlantenPage.xaml;
+9-1109021290
+196-919168961
+MainWindow.xaml;Pages\Bestelling\BestellingenPage.xaml;Pages\Dashboard\DashboardPage.xaml;Pages\Klant\KlantenPage.xaml;Pages\Klant\KlantToevoegenPage.xaml;Pages\Klant\KlantZoekenPage.xaml;Pages\Voetbaltruitje\VoetbaltruitjePage.xaml;
 
 False
 
