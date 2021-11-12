@@ -27,12 +27,12 @@ namespace VerkoopVoetbalTruitjes.WPF.Pages.Bestelling
 
         private void CreateOrderBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            NavigationService.Navigate(new Uri("/Pages/Bestelling/BestellingToevoegenPage.xaml", UriKind.Relative));
         }
 
         private void FindOrderBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            NavigationService.Navigate(new Uri("/Pages/Bestelling/BestellingZoekenPage.xaml", UriKind.Relative));
         }
     }
 }

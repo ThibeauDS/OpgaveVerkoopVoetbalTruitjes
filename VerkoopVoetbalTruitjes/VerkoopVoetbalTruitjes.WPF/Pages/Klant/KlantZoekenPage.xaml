@@ -28,7 +28,7 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <TextBlock Text="Id" Margin="0,0,5,0"/>
-            <TextBox Name="Id" Text="" Grid.Column="1" MinWidth="20" PreviewTextInput="Id_PreviewTextInput"/>
+            <TextBox Name="Id" Text="" Grid.Column="1" MinWidth="20"/>
             <TextBlock Text="Naam" Grid.Column="2" Margin="30,0,5,0"/>
             <TextBox Name="Name" Text="" Grid.Column="3"/>
             <TextBlock Text="Adres" Grid.Column="4" Margin="30,0,5,0"/>
@@ -37,11 +37,12 @@
             <Button Name="SearchBtn" Click="SearchBtn_Click" FontFamily="Segoe Fluent Icons" Content="&#xe721;" Grid.Row="1" Grid.Column="5" Width="25" Height="25" 
                     HorizontalAlignment="Right" Margin="0,10,0,0"/>
         </Grid>
-        <DataGrid Name="DataGridCustomers" Grid.Row="1" Margin="50" CanUserReorderColumns="False" AutoGenerateColumns="False">
+        <DataGrid Name="DataGridCustomers" Grid.Row="1" Margin="50" CanUserReorderColumns="False" AutoGenerateColumns="False" SelectedItem="{Binding SelectedRow, Mode=OneWay}" 
+                  CanUserSortColumns="False" CanUserResizeRows="False" CanUserAddRows="False" CanUserDeleteRows="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding KlantId, Mode=OneWay}" CanUserResize="False"/>
                 <DataGridTextColumn Header="Naam" Binding="{Binding Naam, Mode=OneWay}"/>
-                <DataGridTextColumn Header="Adres" Width="200"  Binding="{Binding Adres, Mode=OneWay}"/>
+                <DataGridTextColumn Header="Adres" Binding="{Binding Adres, Mode=OneWay}"/>
             </DataGrid.Columns>
             <DataGrid.ContextMenu>
                 <ContextMenu>

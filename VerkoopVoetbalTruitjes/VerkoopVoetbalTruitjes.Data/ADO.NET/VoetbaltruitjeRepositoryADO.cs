@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using VerkoopVoetbalTruitjes.Data.Exceptions;
 using VerkoopVoetbalTruitjes.Domain.Interfaces;
 using VerkoopVoetbalTruitjes.Domain.Klassen;
 
@@ -10,26 +11,75 @@ namespace VerkoopVoetbalTruitjes.Data.ADO.NET
     //TODO: Moet nog geïmplementeerd worden
     public class VoetbaltruitjeRepositoryADO : IVoetbaltruitjeRepository
     {
-        private string _connectionString;
+        #region Properties
+        private readonly string _connectionString;
+        #endregion
 
+        #region Constructors
         public VoetbaltruitjeRepositoryADO(string connectionString)
         {
             _connectionString = connectionString;
         }
+        #endregion
 
-        private SqlConnection getConnection()
+        #region Methods
+        private SqlConnection GetConnection()
         {
-            SqlConnection connection = new SqlConnection(_connectionString);
+            SqlConnection connection = new(_connectionString);
             return connection;
         }
+
         public bool BestaatVoetbaltruitje(int id)
         {
-            throw new NotImplementedException();
+            string sql = "SELECT COUNT(*) FROM [dbo].[Truitje] WHERE Id = @Id";
+            SqlConnection connection = GetConnection();
+            using SqlCommand command = new(sql, connection);
+            try
+            {
+                connection.Open();
+                command.Parameters.AddWithValue("@Id", id);
+                int n = (int)command.ExecuteScalar();
+                if (n > 0)
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                throw new VoetbaltruitjeRepositoryADOException("BestaatVoetbaltruitje - error", ex);
+            }
+            finally
+            {
+                connection.Close();
+            }
         }
 
         public void VoetbaltruitjeToevoegen(Voetbaltruitje voetbaltruitje)
         {
-            throw new NotImplementedException();
+            string sql = "INSERT INTO [dbo].[Truitje] (Maat, Seizoen, Prijs, Versie, Thuis, Competitie, Ploeg) VALUES (@Maat, @Seizoen, @Prijs, @Versie, @Thuis, @Competitie, @Ploeg)";
+            SqlConnection connection = GetConnection();
+            using SqlCommand command = new(sql, connection);
+            try
+            {
+                connection.Open();
+                command.Parameters.AddWithValue("@Maat", voetbaltruitje.Kledingmaat.ToString());
+                command.Parameters.AddWithValue("@Seizoen", voetbaltruitje.Seizoen);
+                command.Parameters.AddWithValue("@Prijs", voetbaltruitje.Prijs);
+                command.Parameters.AddWithValue("@Versie", voetbaltruitje.ClubSet.Versie);
+                command.Parameters.AddWithValue("@Thuis", voetbaltruitje.ClubSet.Thuis);
+                command.Parameters.AddWithValue("@Competitie", voetbaltruitje.Club.Competitie);
+                command.Parameters.AddWithValue("@Ploeg", voetbaltruitje.Club.Ploeg);
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new KlantRepositoryADOException("VoetbaltruitjeToevoegen - error", ex);
+            }
+            finally
+            {
+                connection.Close();
+            }
         }
 
         public void VoetbaltruitjeUpdaten(Voetbaltruitje voetbaltruitje)
@@ -47,116 +97,175 @@ namespace VerkoopVoetbalTruitjes.Data.ADO.NET
             throw new NotImplementedException();
         }
 
-        public IReadOnlyList<Voetbaltruitje> GeefTruitjes(string competitie, string club, string seizoen, string kledingmaat, int? versie, bool? thuis, double? prijs, bool strikt = true)
+        public IReadOnlyList<Voetbaltruitje> VoetbaltruitjeWeergeven(int id, string competitie, string ploeg, string seizoen, double? prijs, bool? thuis, int versie, string maat)
         {
-            List<Voetbaltruitje> voetbaltruitjes = new();
-            SqlConnection connection = getConnection();
-            string query = "SELECT * FROM dbo.Voetbaltruitje WHERE ";
-            bool AND = false;
+            IEnumerable<Voetbaltruitje> voetbaltruitjes;
+            bool isWhere = true;
+            bool isAnd = false;
+            string sql = "SELECT * FROM [dbo].[Truitje]";
+            if (id != 0)
+            {
+                if (isWhere)
+                {
+                    sql += " WHERE ";
+                    isWhere = false;
+                }
+                if (isAnd)
+                {
+                    sql += " AND ";
+                }
+                else
+                {
+                    isAnd = true;
+                }
+                sql += "Id = @Id";
+            }
             if (!string.IsNullOrWhiteSpace(competitie))
             {
-                AND = true;
-                if (strikt)
+                if (isWhere)
                 {
-                    query += " competitie=@competitie";
+                    sql += " WHERE ";
+                    isWhere = false;
+                }
+                if (isAnd)
+                {
+                    sql += " AND ";
                 }
                 else
                 {
-                    query += " UPPER(competitie)=UPPER(@competitie)";
+                    isAnd = true;
                 }
+                sql += "Competitie = @Competitie";
             }
-            if (!string.IsNullOrWhiteSpace(club))
+            if (!string.IsNullOrWhiteSpace(ploeg))
             {
-                if (AND) query += " AND "; else AND = true;
-                if (strikt)
+                if (isWhere)
                 {
-                    query += " club=@club";
+                    sql += " WHERE ";
+                    isWhere = false;
+                }
+                if (isAnd)
+                {
+                    sql += " AND ";
                 }
                 else
                 {
-                    query += " UPPER(club)=UPPER(@club)";
+                    isAnd = true;
                 }
+                sql += "Ploeg = @Ploeg";
             }
             if (!string.IsNullOrWhiteSpace(seizoen))
             {
-                if (AND) query += " AND "; else AND = true;
-                if (strikt)
+                if (isWhere)
                 {
-                    query += " seizoen=@seizoen";
+                    sql += " WHERE ";
+                    isWhere = false;
+                }
+                if (isAnd)
+                {
+                    sql += " AND ";
                 }
                 else
                 {
-                    query += " UPPER(seizoen)=UPPER(@seizoen)";
+                    isAnd = true;
                 }
-            }
-            if (!string.IsNullOrWhiteSpace(kledingmaat))
-            {
-                if (AND) query += " AND "; else AND = true;
-                if (strikt)
-                {
-                    query += " kledingmaat=@kledingmaat";
-                }
-                else
-                {
-                    query += " UPPER(kledingmaat)=UPPER(@kledingmaat)";
-                }
-            }
-            if (versie != null)
-            {
-
-            }
-            if (thuis != null)
-            {
-
+                sql += "Seizoen = @Seizoen";
             }
             if (prijs != null)
             {
-
+                if (isWhere)
+                {
+                    sql += " WHERE ";
+                    isWhere = false;
+                }
+                if (isAnd)
+                {
+                    sql += " AND ";
+                }
+                else
+                {
+                    isAnd = true;
+                }
+                sql += "Prijs = @Prijs";
             }
-
-            using (SqlCommand command = connection.CreateCommand())
+            if (thuis != null)
             {
-                try
+                if (isWhere)
                 {
-                    connection.Open();
-                    if (!string.IsNullOrWhiteSpace(competitie))
-                    {
-                        command.Parameters.Add(new SqlParameter("@competitie", SqlDbType.NVarChar));
-                        command.Parameters[@competitie].Value = competitie;
-                    }
-                    command.CommandText = query;
-                    if (!string.IsNullOrWhiteSpace(club))
-                    {
-                        command.Parameters.Add(new SqlParameter("@club", SqlDbType.NVarChar));
-                        command.Parameters[@club].Value = club;
-                    }
-                    command.CommandText = query;
-                    if (!string.IsNullOrWhiteSpace(seizoen))
-                    {
-                        command.Parameters.Add(new SqlParameter("@seizoen", SqlDbType.NVarChar));
-                        command.Parameters[@seizoen].Value = seizoen;
-                    }
-                    command.CommandText = query;
-                    if (!string.IsNullOrWhiteSpace(kledingmaat))
-                    {
-                        command.Parameters.Add(new SqlParameter("@kledingmaat", SqlDbType.NVarChar));
-                        command.Parameters[@kledingmaat].Value = kledingmaat;
-                    }
-                    command.CommandText = query;
-
-                    SqlDataReader dataReader = command.ExecuteReader();
-                    while (dataReader.Read())
-                    {
-                        int voetbaltruitjeId = (int)dataReader["Id"];
-                    }
+                    sql += " WHERE ";
+                    isWhere = false;
                 }
-                catch (System.Exception)
+                if (isAnd)
                 {
-
-                    throw;
+                    sql += " AND ";
                 }
+                else
+                {
+                    isAnd = true;
+                }
+                sql += "Thuis = @Thuis";
+            }
+            if (versie != 0)
+            {
+                if (isWhere)
+                {
+                    sql += " WHERE ";
+                    isWhere = false;
+                }
+                if (isAnd)
+                {
+                    sql += " AND ";
+                }
+                else
+                {
+                    isAnd = true;
+                }
+                sql += "Versie = @Versie";
+            }
+            if (!string.IsNullOrWhiteSpace(maat))
+            {
+                if (isWhere)
+                {
+                    sql += " WHERE ";
+                    isWhere = false;
+                }
+                if (isAnd)
+                {
+                    sql += " AND ";
+                }
+                else
+                {
+                    isAnd = true;
+                }
+                sql += "Maat = @Maat";
+            }
+            SqlConnection connection = GetConnection();
+            using SqlCommand command = new(sql, connection);
+            try
+            {
+                connection.Open();
+                //TODO: Implementatie van VoetbaltruitjeWeergeven
+                if (id != 0)
+                {
+                    command.Parameters.AddWithValue("@Id", id);
+                }
+                IDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    voetbaltruitjes.Add(new Voetbaltruitje();
+                }
+                reader.Close();
                 return voetbaltruitjes;
             }
+            catch (Exception ex)
+            {
+                throw new KlantRepositoryADOException("VoetbaltruitjeWeergeven - error", ex);
+            }
+            finally
+            {
+                connection.Close();
+            }
         }
+        #endregion
     }
 }

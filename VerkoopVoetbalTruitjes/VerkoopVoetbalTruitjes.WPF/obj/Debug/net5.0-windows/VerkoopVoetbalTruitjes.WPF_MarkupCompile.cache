@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET5_0;NETCOREAPP
 C:\Users\thibe\Documents\GitHub\OpgaveVerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes.WPF\App.xaml
-7-1149710358
+14-18847369
 
-9-1109021290
+16-1516860460
 196-919168961
-MainWindow.xaml;Pages\Bestelling\BestellingenPage.xaml;Pages\Dashboard\DashboardPage.xaml;Pages\Klant\KlantenPage.xaml;Pages\Klant\KlantToevoegenPage.xaml;Pages\Klant\KlantZoekenPage.xaml;Pages\Voetbaltruitje\VoetbaltruitjePage.xaml;
+MainWindow.xaml;Pages\Bestelling\BestellingenPage.xaml;Pages\Bestelling\BestellingToevoegenPage.xaml;Pages\Bestelling\BestellingUpdatenPage.xaml;Pages\Bestelling\BestellingZoekenPage.xaml;Pages\Dashboard\DashboardPage.xaml;Pages\Klant\KlantenPage.xaml;Pages\Klant\KlantToevoegenPage.xaml;Pages\Klant\KlantUpdatenPage.xaml;Pages\Klant\KlantZoekenPage.xaml;Pages\Voetbaltruitje\VoetbaltruitjePage.xaml;Pages\Voetbaltruitje\VoetbaltruitjeToevoegenPage.xaml;Pages\Voetbaltruitje\VoetbaltruitjeUpdatenPage.xaml;Pages\Voetbaltruitje\VoetbaltruitjeZoekenPage.xaml;
 
 False
 

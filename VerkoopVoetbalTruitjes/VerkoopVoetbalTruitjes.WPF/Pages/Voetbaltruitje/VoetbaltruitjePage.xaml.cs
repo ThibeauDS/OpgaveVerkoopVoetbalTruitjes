@@ -27,12 +27,12 @@ namespace VerkoopVoetbalTruitjes.WPF.Pages.Voetbaltruitje
 
         private void CreateTruitjeBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            NavigationService.Navigate(new Uri("/Pages/Voetbaltruitje/VoetbaltruitjeToevoegenPage.xaml", UriKind.Relative));
         }
 
         private void FindTruitjeBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            NavigationService.Navigate(new Uri("/Pages/Voetbaltruitje/VoetbaltruitjeZoekenPage.xaml", UriKind.Relative));
         }
     }
 }

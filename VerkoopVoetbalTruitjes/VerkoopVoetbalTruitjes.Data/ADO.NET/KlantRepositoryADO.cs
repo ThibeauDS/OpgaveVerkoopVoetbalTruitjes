@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using VerkoopVoetbalTruitjes.Data.Exceptions;
@@ -7,7 +8,6 @@ using VerkoopVoetbalTruitjes.Domain.Klassen;
 
 namespace VerkoopVoetbalTruitjes.Data.ADO.NET
 {
-    //TODO: Moet nog geïmplementeerd worden
     public class KlantRepositoryADO : IKlantRepository
     {
         #region Properties
@@ -27,6 +27,7 @@ namespace VerkoopVoetbalTruitjes.Data.ADO.NET
             SqlConnection connection = new(_connectionString);
             return connection;
         }
+
         public bool BestaatKlant(int id)
         {
             string sql = "SELECT COUNT(*) FROM [dbo].[Klant] WHERE Id = @Id";
@@ -77,7 +78,25 @@ namespace VerkoopVoetbalTruitjes.Data.ADO.NET
 
         public void KlantUpdaten(Klant klant)
         {
-            throw new NotImplementedException();
+            string sql = "UPDATE [dbo].[Klant] SET Naam = @Naam, Adres = @Adres WHERE Id = @Id";
+            SqlConnection connection = GetConnection();
+            using SqlCommand command = new(sql, connection);
+            try
+            {
+                connection.Open();
+                command.Parameters.AddWithValue("@Id", klant.KlantId);
+                command.Parameters.AddWithValue("@Naam", klant.Naam);
+                command.Parameters.AddWithValue("@Adres", klant.Adres);
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new KlantRepositoryADOException("KlantUpdaten - error", ex);
+            }
+            finally
+            {
+                connection.Close();
+            }
         }
 
         public void KlantVerwijderen(Klant klant)
@@ -101,31 +120,87 @@ namespace VerkoopVoetbalTruitjes.Data.ADO.NET
             }
         }
 
-        public Klant KlantWeergeven(Klant klant)
+        public List<Klant> KlantWeergeven(int id, string naam, string adres)
         {
-            Klant klant1 = null;
-            int id = 0;
-            string sql = "SELECT * FROM [dbo].[Klant] WHERE Naam = @Naam AND Adres = @Adres";
-            if (klant.KlantId != 0)
+            List<Klant> klanten = new();
+            bool isWhere = true;
+            bool isAnd = false;
+            string sql = "SELECT * FROM [dbo].[Klant]";
+            if (id != 0)
             {
-                sql = "SELECT * FROM [dbo].[Klant] WHERE Id = @Id AND Naam = @Naam AND Adres = @Adres";
+                if (isWhere)
+                {
+                    sql += " WHERE ";
+                    isWhere = false;
+                }
+                if (isAnd)
+                {
+                    sql += " AND ";
+                }
+                else
+                {
+                    isAnd = true;
+                }
+                sql += "Id = @Id";
+            }
+            if (!string.IsNullOrWhiteSpace(naam))
+            {
+                if (isWhere)
+                {
+                    sql += " WHERE ";
+                    isWhere = false;
+                }
+                if (isAnd)
+                {
+                    sql += " AND ";
+                }
+                else
+                {
+                    isAnd = true;
+                }
+                sql += "Naam = @Naam";
+            }
+            if (!string.IsNullOrWhiteSpace(adres))
+            {
+                if (isWhere)
+                {
+                    sql += " WHERE ";
+                    isWhere = false;
+                }
+                if (isAnd)
+                {
+                    sql += " AND ";
+                }
+                else
+                {
+                    isAnd = true;
+                }
+                sql += "Adres = @Adres";
             }
             SqlConnection connection = GetConnection();
             using SqlCommand command = new(sql, connection);
             try
             {
                 connection.Open();
-                if (klant.KlantId != 0)
+                if (id != 0)
                 {
-                    command.Parameters.AddWithValue("@Id", klant.KlantId);
+                    command.Parameters.AddWithValue("@Id", id);
                 }
-                command.Parameters.AddWithValue("@Naam", klant.Naam);
-                command.Parameters.AddWithValue("@Adres", klant.Adres);
+                if (!string.IsNullOrWhiteSpace(naam))
+                {
+                    command.Parameters.AddWithValue("@Naam", naam);
+                }
+                if (!string.IsNullOrWhiteSpace(adres))
+                {
+                    command.Parameters.AddWithValue("@Adres", adres);
+                }
                 IDataReader reader = command.ExecuteReader();
-                reader.Read();
-                klant1 = new((int)reader["Id"], (string)reader["Naam"], (string)reader["Adres"]);
+                while (reader.Read())
+                {
+                    klanten.Add(new Klant((int)reader["Id"], (string)reader["Naam"], (string)reader["Adres"]));
+                }
                 reader.Close();
-                return klant1;
+                return klanten;
             }
             catch (Exception ex)
             {

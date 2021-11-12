@@ -35,6 +35,9 @@ namespace VerkoopVoetbalTruitjes.WPF
         private DashboardPage _dashbordPage = new();
         public string connectionString;
         public static KlantBeheerder klantBeheerder;
+        public static VoetbaltruitjeBeheerder voetbaltruitjeBeheerder;
+        public static BestellingBeheerder bestellingBeheerder;
+        public static ClubBeheerder clubBeheerder;
         #endregion
 
         #region Constructors
@@ -43,6 +46,9 @@ namespace VerkoopVoetbalTruitjes.WPF
             InitializeComponent();
             connectionString = ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString;
             klantBeheerder = new(new KlantRepositoryADO(connectionString));
+            voetbaltruitjeBeheerder = new(new VoetbaltruitjeRepositoryADO(connectionString));
+            bestellingBeheerder = new(new BestellingRepositoryADO(connectionString));
+            clubBeheerder = new(new ClubRepositoryADO(connectionString));
         }
         #endregion
 

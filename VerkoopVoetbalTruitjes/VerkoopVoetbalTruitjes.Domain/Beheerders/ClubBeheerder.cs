@@ -40,10 +40,10 @@ namespace VerkoopVoetbalTruitjes.Domain.Beheerders
                     throw new ClubBeheerderException("Competitie mag niet leeg zijn.");
                 }
 
-                if (!_repo.BestaatCompetitie(competitie))
-                {
-                    throw new ClubBeheerderException("Competitie bestaat niet.");
-                }
+                //if (!_repo.BestaatCompetitie(competitie))
+                //{
+                //    throw new ClubBeheerderException("Competitie bestaat niet.");
+                //}
                 return _repo.GeefPloegen(competitie);
             }
             catch (Exception ex)

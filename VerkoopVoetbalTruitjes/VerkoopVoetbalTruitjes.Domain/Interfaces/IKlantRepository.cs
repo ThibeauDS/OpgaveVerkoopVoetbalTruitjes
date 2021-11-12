@@ -1,4 +1,5 @@
-﻿using VerkoopVoetbalTruitjes.Domain.Klassen;
+﻿using System.Collections.Generic;
+using VerkoopVoetbalTruitjes.Domain.Klassen;
 
 namespace VerkoopVoetbalTruitjes.Domain.Interfaces
 {
@@ -8,6 +9,6 @@ namespace VerkoopVoetbalTruitjes.Domain.Interfaces
         void KlantToevoegen(Klant klant);
         void KlantVerwijderen(Klant klant);
         void KlantUpdaten(Klant klant);
-        Klant KlantWeergeven(Klant klant);
+        List<Klant> KlantWeergeven(int id, string naam, string adres);
     }
 }

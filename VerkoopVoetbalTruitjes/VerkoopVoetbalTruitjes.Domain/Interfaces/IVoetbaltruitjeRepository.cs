@@ -10,8 +10,7 @@ namespace VerkoopVoetbalTruitjes.Domain.Interfaces
         void VoetbaltruitjeToevoegen(Voetbaltruitje voetbaltruitje);
         void VoetbaltruitjeVerwijderen(Voetbaltruitje voetbaltruitje);
         void VoetbaltruitjeUpdaten(Voetbaltruitje voetbaltruitje);
-        void VoetbaltruitjeWeergeven(Voetbaltruitje voetbaltruitje);
-        IReadOnlyList<Voetbaltruitje> GeefTruitjes(string competitie, string club, string seizoen, string kledingmaat, int? versie, bool? thuis, double? prijs, bool strikt = true);
+        IReadOnlyList<Voetbaltruitje> VoetbaltruitjeWeergeven(int id, string competitie, string ploeg, string seizoen, double? prijs, bool? thuis, int versie, string maat);
         bool BestaatVoetbaltruitje(int id);
     }
 }

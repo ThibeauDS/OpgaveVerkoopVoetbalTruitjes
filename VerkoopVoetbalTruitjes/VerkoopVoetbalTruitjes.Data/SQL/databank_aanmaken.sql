@@ -1,12 +1,12 @@
 ﻿CREATE TABLE [dbo].[Club] (
-    [Id]         INT            NOT NULL,
+    [Id]         INT            IDENTITY (1, 1) NOT NULL,
     [Competitie] NVARCHAR (50)  NOT NULL,
     [Ploeg]      NVARCHAR (100) NOT NULL,
     PRIMARY KEY CLUSTERED ([Id] ASC)
 );
 GO
 CREATE TABLE [dbo].[ClubSet] (
-    [Id]     INT NOT NULL,
+    [Id]     INT IDENTITY (1, 1) NOT NULL,
     [Versie] INT NOT NULL,
     [Thuis]  BIT NOT NULL,
     PRIMARY KEY CLUSTERED ([Id] ASC)
@@ -20,7 +20,7 @@ CREATE TABLE [dbo].[Klant] (
 );
 GO
 CREATE TABLE [dbo].[Truitje] (
-    [Id]         INT            NOT NULL,
+    [Id]         INT            IDENTITY (1, 1) NOT NULL,
     [Maat]       NVARCHAR (10)  NOT NULL,
     [Seizoen]    NVARCHAR (20)  NOT NULL,
     [Prijs]      FLOAT (53)     NOT NULL,
@@ -32,7 +32,7 @@ CREATE TABLE [dbo].[Truitje] (
 );
 GO
 CREATE TABLE [dbo].[Bestellingen] (
-    [Id]           INT        NOT NULL,
+    [Id]           INT        IDENTITY (1, 1) NOT NULL,
     [Datum]        DATETIME   NOT NULL,
     [Verkoopprijs] FLOAT (53) NOT NULL,
     [Betaald]      BIT        NOT NULL,

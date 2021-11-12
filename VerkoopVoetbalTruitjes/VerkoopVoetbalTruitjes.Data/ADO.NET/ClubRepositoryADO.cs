@@ -10,61 +10,87 @@ namespace VerkoopVoetbalTruitjes.Data.ADO.NET
     //TODO: Moet nog geïmplementeerd worden
     public class ClubRepositoryADO : IClubRepository
     {
-        private string _connectionString;
+        #region Properties
+        private readonly string _connectionString;
+        #endregion
 
+        #region Constructors
         public ClubRepositoryADO(string connectionString)
         {
             _connectionString = connectionString;
-        }
+        } 
+        #endregion
 
         private SqlConnection getConnection()
         {
-            SqlConnection connection = new SqlConnection(_connectionString);
+            SqlConnection connection = new(_connectionString);
             return connection;
         }
 
-        public bool BestaatCompetitie(string competitie)
-        {
-            throw new NotImplementedException();
-        }
+        //public bool BestaatCompetitie(string competitie)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         public IReadOnlyList<string> GeefCompetities()
         {
             List<string> competities = new();
             SqlConnection connection = getConnection();
-            string query = "SELECT DISTINCT competitie FROM dbo.ClubCompetitie ORDER by competitie";
-            using (SqlCommand command = connection.CreateCommand())
+            string query = "SELECT DISTINCT Competitie FROM dbo.Club ORDER by competitie";
+            using SqlCommand command = new(query, connection);
+            try
             {
                 connection.Open();
-
-                try
+                SqlDataReader dataReader = command.ExecuteReader();
+                while (dataReader.Read())
                 {
-                    command.CommandText = query;
-                    SqlDataReader dataReader = command.ExecuteReader();
-                    while (dataReader.Read())
-                    {
-                        string competitie = (string)dataReader["competitie"];
-                        competities.Add(competitie);
-                    }
+                    string competitie = (string)dataReader["competitie"];
+                    competities.Add(competitie);
+                }
 
-                    dataReader.Close();
-                    return competities;
-                }
-                catch (Exception ex)
-                {
+                dataReader.Close();
+                return competities;
+            }
+            catch (Exception ex)
+            {
 
-                    throw new ClubRepositoryADOException("Geefcompetities", ex);
-                }
-                finally
-                {
-                    connection.Close();
-                }
+                throw new ClubRepositoryADOException("Geefcompetities", ex);
+            }
+            finally
+            {
+                connection.Close();
             }
         }
 
         public IReadOnlyList<string> GeefPloegen(string competitie)
         {
-            throw new NotImplementedException();
+            List<string> ploegen = new();
+            SqlConnection connection = getConnection();
+            string query = "SELECT DISTINCT Ploeg FROM dbo.Club WHERE Competitie = @Competitie ORDER by Ploeg";
+            using SqlCommand command = new(query, connection);
+            try
+            {
+                connection.Open();
+                command.Parameters.AddWithValue("@Competitie", competitie);
+                SqlDataReader dataReader = command.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    string ploeg = (string)dataReader["Ploeg"];
+                    ploegen.Add(ploeg);
+                }
+
+                dataReader.Close();
+                return ploegen;
+            }
+            catch (Exception ex)
+            {
+
+                throw new ClubRepositoryADOException("GeefPloegen", ex);
+            }
+            finally
+            {
+                connection.Close();
+            }
         }
     }
 }

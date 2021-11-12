@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:VerkoopVoetbalTruitjes.WPF"
         mc:Ignorable="d"
         FontFamily="Microsoft Sans Serif"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" WindowStartupLocation="CenterScreen">
     <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>

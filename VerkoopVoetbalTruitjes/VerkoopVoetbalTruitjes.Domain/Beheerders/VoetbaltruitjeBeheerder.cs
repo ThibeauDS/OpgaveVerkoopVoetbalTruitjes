@@ -72,15 +72,15 @@ namespace VerkoopVoetbalTruitjes.Domain.Beheerders
             }
         }
 
-        public void VoetbaltruitjeWeergeven(Voetbaltruitje voetbaltruitje)
+        public IReadOnlyList<Voetbaltruitje> VoetbaltruitjeWeergeven(int id, string competitie, string ploeg, string seizoen, double? prijs, bool? thuis, int versie, string maat)
         {
             try
             {
-                if (!_repo.BestaatVoetbaltruitje(voetbaltruitje.Id))
+                if (!_repo.BestaatVoetbaltruitje(id))
                 {
                     throw new VoetbaltruitjeBeheerderException("Voetbaltruitje bestaat niet.");
                 }
-                _repo.VoetbaltruitjeWeergeven(voetbaltruitje);
+                return _repo.VoetbaltruitjeWeergeven(id, competitie, ploeg, seizoen, prijs, thuis, versie, maat);
             }
             catch (Exception ex)
             {

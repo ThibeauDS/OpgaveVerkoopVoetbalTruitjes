@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using VerkoopVoetbalTruitjes.Domain.Exceptions;
 using VerkoopVoetbalTruitjes.Domain.Interfaces;
 using VerkoopVoetbalTruitjes.Domain.Klassen;
@@ -71,7 +72,7 @@ namespace VerkoopVoetbalTruitjes.Domain.Beheerders
             }
         }
 
-        public Klant KlantWeergeven(Klant klant)
+        public List<Klant> KlantWeergeven(int id, string naam, string adres)
         {
             try
             {
@@ -79,7 +80,7 @@ namespace VerkoopVoetbalTruitjes.Domain.Beheerders
                 //{
                 //    throw new KlantBeheerderException("Klant bestaat niet.");
                 //}
-                return _repo.KlantWeergeven(klant);
+                return _repo.KlantWeergeven(id, naam, adres);
             }
             catch (Exception ex)
             {

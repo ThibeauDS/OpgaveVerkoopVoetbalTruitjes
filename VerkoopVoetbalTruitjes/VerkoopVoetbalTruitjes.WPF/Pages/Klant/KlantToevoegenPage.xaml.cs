@@ -42,6 +42,7 @@ namespace VerkoopVoetbalTruitjes.WPF.Pages.Klant
                 _klantBeheerder = new(new KlantRepositoryADO(_connectionString));
                 Domain.Klassen.Klant klant = new(Name.Text, Address.Text);
                 _klantBeheerder.KlantToevoegen(klant);
+                MessageBox.Show("Klant is aangemaakt", Title, MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ex)
             {

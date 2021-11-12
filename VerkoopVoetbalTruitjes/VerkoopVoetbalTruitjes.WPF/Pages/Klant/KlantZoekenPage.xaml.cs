@@ -22,28 +22,34 @@ namespace VerkoopVoetbalTruitjes.WPF.Pages.Klant
     /// </summary>
     public partial class KlantZoekenPage : Page
     {
+        #region Properties
+        internal static Domain.Klassen.Klant _selectedKlant = null;
+        #endregion
+
         public KlantZoekenPage()
         {
             InitializeComponent();
-        }
-
-        private void Id_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-
         }
 
         private void SearchBtn_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                Domain.Klassen.Klant klant = new(Name.Text, Address.Text);
-                if (!string.IsNullOrWhiteSpace(Id.Text))
+                int id;
+                if (string.IsNullOrWhiteSpace(Id.Text))
                 {
-                    klant.ZetKlantId(int.Parse(Id.Text));
+                    id = 0;
                 }
-                Domain.Klassen.Klant klantDb = MainWindow.klantBeheerder.KlantWeergeven(klant);
+                else
+                {
+                    id = int.Parse(Id.Text);
+                }
+                List<Domain.Klassen.Klant> klanten = MainWindow.klantBeheerder.KlantWeergeven(id, Name.Text, Address.Text);
                 ObservableCollection<Domain.Klassen.Klant> ts = new();
-                ts.Add(klantDb);
+                foreach (Domain.Klassen.Klant klant in klanten)
+                {
+                    ts.Add(klant);
+                }
                 DataGridCustomers.ItemsSource = ts;
             }
             catch (Exception ex)
@@ -54,16 +60,24 @@ namespace VerkoopVoetbalTruitjes.WPF.Pages.Klant
 
         private void UpdateCustomer_Click(object sender, RoutedEventArgs e)
         {
-            Domain.Klassen.Klant klant = (Domain.Klassen.Klant)sender;
+            try
+            {
+                _selectedKlant = (Domain.Klassen.Klant)DataGridCustomers.CurrentItem;
+                NavigationService.Navigate(new Uri("/Pages/Klant/KlantUpdatenPage.xaml", UriKind.Relative));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, Title, MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void DeleteCustomer_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                Domain.Klassen.Klant klant = (Domain.Klassen.Klant)sender;
+                Domain.Klassen.Klant klant = (Domain.Klassen.Klant)DataGridCustomers.CurrentItem;
                 MainWindow.klantBeheerder.KlantVerwijderen(klant);
-                DataGridCustomers.ItemsSource = null;
+                SearchBtn_Click(sender, e);
             }
             catch (Exception ex)
             {

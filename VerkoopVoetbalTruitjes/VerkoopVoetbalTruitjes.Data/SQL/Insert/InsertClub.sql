@@ -1,0 +1,9 @@
+﻿INSERT INTO [dbo].[Club] (Competitie, Ploeg) VALUES ('BK', 'Ploeg 1');
+INSERT INTO [dbo].[Club] (Competitie, Ploeg) VALUES ('BK', 'Ploeg 2');
+INSERT INTO [dbo].[Club] (Competitie, Ploeg) VALUES ('BK', 'Ploeg 3');
+INSERT INTO [dbo].[Club] (Competitie, Ploeg) VALUES ('EK', 'Ploeg 4');
+INSERT INTO [dbo].[Club] (Competitie, Ploeg) VALUES ('EK', 'Ploeg 5');
+INSERT INTO [dbo].[Club] (Competitie, Ploeg) VALUES ('EK', 'Ploeg 6');
+INSERT INTO [dbo].[Club] (Competitie, Ploeg) VALUES ('WK', 'Ploeg 7');
+INSERT INTO [dbo].[Club] (Competitie, Ploeg) VALUES ('WK', 'Ploeg 8');
+INSERT INTO [dbo].[Club] (Competitie, Ploeg) VALUES ('WK', 'Ploeg 9');

@@ -77,3 +77,17 @@ C:\Users\thibe\Documents\GitHub\OpgaveVerkoopVoetbalTruitjes\VerkoopVoetbalTruit
 C:\Users\thibe\Documents\GitHub\OpgaveVerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes.WPF\obj\Debug\net5.0-windows\Pages\Klant\KlantZoekenPage.g.cs
 C:\Users\thibe\Documents\GitHub\OpgaveVerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes.WPF\obj\Debug\net5.0-windows\Pages\Klant\KlantToevoegenPage.baml
 C:\Users\thibe\Documents\GitHub\OpgaveVerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes.WPF\obj\Debug\net5.0-windows\Pages\Klant\KlantZoekenPage.baml
+C:\Users\thibe\Documents\GitHub\OpgaveVerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes.WPF\obj\Debug\net5.0-windows\Pages\Klant\KlantUpdatenPage.g.cs
+C:\Users\thibe\Documents\GitHub\OpgaveVerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes.WPF\obj\Debug\net5.0-windows\Pages\Klant\KlantUpdatenPage.baml
+C:\Users\thibe\Documents\GitHub\OpgaveVerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes.WPF\obj\Debug\net5.0-windows\Pages\Bestelling\BestellingToevoegenPage.g.cs
+C:\Users\thibe\Documents\GitHub\OpgaveVerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes.WPF\obj\Debug\net5.0-windows\Pages\Bestelling\BestellingUpdatenPage.g.cs
+C:\Users\thibe\Documents\GitHub\OpgaveVerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes.WPF\obj\Debug\net5.0-windows\Pages\Bestelling\BestellingZoekenPage.g.cs
+C:\Users\thibe\Documents\GitHub\OpgaveVerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes.WPF\obj\Debug\net5.0-windows\Pages\Voetbaltruitje\VoetbaltruitjeToevoegenPage.g.cs
+C:\Users\thibe\Documents\GitHub\OpgaveVerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes.WPF\obj\Debug\net5.0-windows\Pages\Voetbaltruitje\VoetbaltruitjeUpdatenPage.g.cs
+C:\Users\thibe\Documents\GitHub\OpgaveVerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes.WPF\obj\Debug\net5.0-windows\Pages\Voetbaltruitje\VoetbaltruitjeZoekenPage.g.cs
+C:\Users\thibe\Documents\GitHub\OpgaveVerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes.WPF\obj\Debug\net5.0-windows\Pages\Bestelling\BestellingToevoegenPage.baml
+C:\Users\thibe\Documents\GitHub\OpgaveVerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes.WPF\obj\Debug\net5.0-windows\Pages\Bestelling\BestellingUpdatenPage.baml
+C:\Users\thibe\Documents\GitHub\OpgaveVerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes.WPF\obj\Debug\net5.0-windows\Pages\Bestelling\BestellingZoekenPage.baml
+C:\Users\thibe\Documents\GitHub\OpgaveVerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes.WPF\obj\Debug\net5.0-windows\Pages\Voetbaltruitje\VoetbaltruitjeToevoegenPage.baml
+C:\Users\thibe\Documents\GitHub\OpgaveVerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes.WPF\obj\Debug\net5.0-windows\Pages\Voetbaltruitje\VoetbaltruitjeUpdatenPage.baml
+C:\Users\thibe\Documents\GitHub\OpgaveVerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes.WPF\obj\Debug\net5.0-windows\Pages\Voetbaltruitje\VoetbaltruitjeZoekenPage.baml
