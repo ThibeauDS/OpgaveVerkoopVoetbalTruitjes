@@ -65,8 +65,54 @@ namespace VerkoopVoetbalTruitjes.WPF.Pages.Voetbaltruitje
         {
             try
             {
-                //TODO: SearchBtn voor truitje in orde brengen
-                MainWindow.voetbaltruitjeBeheerder.VoetbaltruitjeWeergeven()
+                string competitie = "";
+                string ploeg = "";
+                double? prijs = null;
+                bool? thuis = null;
+                string maat = "";
+                if (!int.TryParse(Id.Text, out int id))
+                {
+                    id = 0;
+                }
+                if (ComboBoxCompetitie.SelectedIndex != 0 && ComboBoxCompetitie != null)
+                {
+                    competitie = ComboBoxCompetitie.SelectedItem.ToString();
+                }
+                if (ComboBoxPloeg.SelectedIndex != 0 && ComboBoxPloeg != null && ComboBoxPloeg.Items.Count != 0)
+                {
+                    ploeg = ComboBoxPloeg.SelectedItem.ToString();
+                }
+                if(double.TryParse(Prijs.Text, out double prijs2))
+                {
+                    prijs = prijs2;
+                }
+                if (!int.TryParse(Versie.Text, out int versie))
+                {
+                    versie = 0;
+                }
+                if (Thuis.IsChecked == true)
+                {
+                    thuis = true;
+                }
+                if (Uit.IsChecked == true)
+                {
+                    thuis = false;
+                }
+                if (Thuis.IsChecked == Uit.IsChecked)
+                {
+                    thuis = null;
+                }
+                if (ComboBoxMaat.SelectedIndex != 0 && ComboBoxMaat != null)
+                {
+                    maat = ComboBoxMaat.SelectedItem.ToString();
+                }
+                IReadOnlyList<Domain.Klassen.Voetbaltruitje> voetbaltruitjes = MainWindow.voetbaltruitjeBeheerder.VoetbaltruitjeWeergeven(id, competitie, ploeg, Seizoen.Text, prijs, thuis, versie, maat);
+                ObservableCollection<Domain.Klassen.Voetbaltruitje> ts = new();
+                foreach (var voetbaltruitje in voetbaltruitjes)
+                {
+                    ts.Add(voetbaltruitje);
+                }
+                DataGridTruitjes.ItemsSource = ts;
             }
             catch (Exception ex)
             {
@@ -76,12 +122,16 @@ namespace VerkoopVoetbalTruitjes.WPF.Pages.Voetbaltruitje
 
         private void UpdateVoetbaltruitje_Click(object sender, RoutedEventArgs e)
         {
-
+            Application.Current.Properties["Voetbaltruitje"] = (Domain.Klassen.Voetbaltruitje)DataGridTruitjes.CurrentItem;
+            NavigationService.Navigate(new Uri("/Pages/Voetbaltruitje/VoetbaltruitjeUpdatenPage.xaml", UriKind.Relative));
         }
 
         private void DeleteVoetbaltruitje_Click(object sender, RoutedEventArgs e)
         {
-
+            Domain.Klassen.Voetbaltruitje voetbaltruitje = (Domain.Klassen.Voetbaltruitje)DataGridTruitjes.CurrentItem;
+            MainWindow.voetbaltruitjeBeheerder.VoetbaltruitjeVerwijderen(voetbaltruitje);
+            MessageBox.Show("Voetbaltruitje is verwijderd", Title, MessageBoxButton.OK, MessageBoxImage.Information);
+            SearchBtn_Click(sender, e);
         }
     }
 }

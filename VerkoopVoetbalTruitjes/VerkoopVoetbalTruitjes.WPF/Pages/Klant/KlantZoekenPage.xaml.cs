@@ -23,7 +23,6 @@ namespace VerkoopVoetbalTruitjes.WPF.Pages.Klant
     public partial class KlantZoekenPage : Page
     {
         #region Properties
-        internal static Domain.Klassen.Klant _selectedKlant = null;
         #endregion
 
         public KlantZoekenPage()
@@ -62,7 +61,7 @@ namespace VerkoopVoetbalTruitjes.WPF.Pages.Klant
         {
             try
             {
-                _selectedKlant = (Domain.Klassen.Klant)DataGridCustomers.CurrentItem;
+                Application.Current.Properties["SelectedKlant"] = (Domain.Klassen.Klant)DataGridCustomers.CurrentItem;
                 NavigationService.Navigate(new Uri("/Pages/Klant/KlantUpdatenPage.xaml", UriKind.Relative));
             }
             catch (Exception ex)
@@ -77,6 +76,7 @@ namespace VerkoopVoetbalTruitjes.WPF.Pages.Klant
             {
                 Domain.Klassen.Klant klant = (Domain.Klassen.Klant)DataGridCustomers.CurrentItem;
                 MainWindow.klantBeheerder.KlantVerwijderen(klant);
+                MessageBox.Show("Klant is verwijderd", Title, MessageBoxButton.OK, MessageBoxImage.Information);
                 SearchBtn_Click(sender, e);
             }
             catch (Exception ex)

@@ -33,7 +33,7 @@ namespace VerkoopVoetbalTruitjes.WPF.Pages.Voetbaltruitje
             {
                 bool thuis = true;
                 bool isOk = true;
-                if (Thuis.IsChecked == null)
+                if (Thuis.IsChecked == null || Thuis.IsChecked == false)
                 {
                     thuis = false;
                 }

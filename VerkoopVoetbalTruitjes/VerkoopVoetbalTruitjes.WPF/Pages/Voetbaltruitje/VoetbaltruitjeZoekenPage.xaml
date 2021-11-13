@@ -62,24 +62,29 @@
         <Button Name="SearchBtn" Click="SearchBtn_Click" FontFamily="Segoe Fluent Icons" Content="&#xe721;" Grid.Row="4" Grid.Column="3" Width="25" Height="25" 
                     HorizontalAlignment="Right" VerticalAlignment="Top"/>
 
-        <DataGrid Name="DataGridCustomers" Grid.Row="5" Grid.ColumnSpan="4" Margin="50" CanUserReorderColumns="False" AutoGenerateColumns="False" SelectedItem="{Binding SelectedRow, Mode=OneWay}" 
+        <DataGrid Name="DataGridTruitjes" Grid.Row="5" Grid.ColumnSpan="4" Margin="50" CanUserReorderColumns="False" AutoGenerateColumns="False" SelectedItem="{Binding SelectedRow, Mode=OneWay}" 
                   CanUserSortColumns="False" CanUserResizeRows="False" CanUserAddRows="False" CanUserDeleteRows="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding Id, Mode=OneWay}" CanUserResize="False"/>
-                <DataGridTextColumn Header="Competitie" Binding="{Binding Competitie, Mode=OneWay}"/>
-                <DataGridTextColumn Header="Ploeg" Binding="{Binding Ploeg, Mode=OneWay}"/>
+                <DataGridTextColumn Header="Competitie" Binding="{Binding Club.Competitie, Mode=OneWay}"/>
+                <DataGridTextColumn Header="Ploeg" Binding="{Binding Club.Ploeg, Mode=OneWay}"/>
                 <DataGridTextColumn Header="Seizoen" Binding="{Binding Seizoen, Mode=OneWay}"/>
                 <DataGridTextColumn Header="Prijs" Binding="{Binding Prijs, Mode=OneWay}"/>
-                <DataGridTextColumn Header="Thuis/Uit" Binding="{Binding Thuis, Mode=OneWay}"/>
-                <DataGridTextColumn Header="Versie" Binding="{Binding Versie, Mode=OneWay}"/>
-                <DataGridTextColumn Header="Kledingmaat" Binding="{Binding Maat, Mode=OneWay}"/>
+                <DataGridTextColumn Header="Kledingmaat" Binding="{Binding Kledingmaat, Mode=OneWay}"/>
+                <DataGridTextColumn Header="Thuis" Binding="{Binding ClubSet.Thuis, Mode=OneWay}"/>
+                <DataGridTextColumn Header="Versie" Binding="{Binding ClubSet.Versie, Mode=OneWay}"/>
             </DataGrid.Columns>
-            <DataGrid.ContextMenu>
-                <ContextMenu>
+            <DataGrid.Resources>
+                <ContextMenu x:Key="ContextMenu" DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
                     <MenuItem Name="UpdateVoetbaltruitje" Header="Aanpassen" Click="UpdateVoetbaltruitje_Click"/>
                     <MenuItem Name="DeleteVoetbaltruitje" Header="Verwjderen" Click="DeleteVoetbaltruitje_Click"/>
                 </ContextMenu>
-            </DataGrid.ContextMenu>
+            </DataGrid.Resources>
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Setter Property="ContextMenu" Value="{StaticResource ContextMenu}"/>
+                </Style>
+            </DataGrid.RowStyle>
         </DataGrid>
     </Grid>
 </Page>

@@ -44,12 +44,17 @@
                 <DataGridTextColumn Header="Naam" Binding="{Binding Naam, Mode=OneWay}"/>
                 <DataGridTextColumn Header="Adres" Binding="{Binding Adres, Mode=OneWay}"/>
             </DataGrid.Columns>
-            <DataGrid.ContextMenu>
-                <ContextMenu>
+            <DataGrid.Resources>
+                <ContextMenu x:Key="ContextMenu" DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
                     <MenuItem Name="UpdateCustomer" Header="Aanpassen" Click="UpdateCustomer_Click"/>
                     <MenuItem Name="DeleteCustomer" Header="Verwjderen" Click="DeleteCustomer_Click"/>
                 </ContextMenu>
-            </DataGrid.ContextMenu>
+            </DataGrid.Resources>
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Setter Property="ContextMenu" Value="{StaticResource ContextMenu}"/>
+                </Style>
+            </DataGrid.RowStyle>
         </DataGrid>
     </Grid>
 </Page>

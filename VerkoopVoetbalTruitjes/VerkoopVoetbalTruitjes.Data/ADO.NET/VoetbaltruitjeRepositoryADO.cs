@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using VerkoopVoetbalTruitjes.Data.Exceptions;
+using VerkoopVoetbalTruitjes.Domain.Enums;
 using VerkoopVoetbalTruitjes.Domain.Interfaces;
 using VerkoopVoetbalTruitjes.Domain.Klassen;
 
@@ -74,7 +75,7 @@ namespace VerkoopVoetbalTruitjes.Data.ADO.NET
             }
             catch (Exception ex)
             {
-                throw new KlantRepositoryADOException("VoetbaltruitjeToevoegen - error", ex);
+                throw new VoetbaltruitjeRepositoryADOException("VoetbaltruitjeToevoegen - error", ex);
             }
             finally
             {
@@ -84,22 +85,56 @@ namespace VerkoopVoetbalTruitjes.Data.ADO.NET
 
         public void VoetbaltruitjeUpdaten(Voetbaltruitje voetbaltruitje)
         {
-            throw new NotImplementedException();
+            string sql = "UPDATE [dbo].[Truitje] SET Maat = @Maat, Seizoen = @Seizoen, Prijs = @Prijs, Versie = @Versie, Thuis = @Thuis, Competitie = @Competitie, Ploeg = @Ploeg WHERE Id = @Id";
+            SqlConnection connection = GetConnection();
+            using SqlCommand command = new(sql, connection);
+            try
+            {
+                connection.Open();
+                command.Parameters.AddWithValue("@Id", voetbaltruitje.Id);
+                command.Parameters.AddWithValue("@Maat", voetbaltruitje.Kledingmaat.ToString());
+                command.Parameters.AddWithValue("@Seizoen", voetbaltruitje.Seizoen);
+                command.Parameters.AddWithValue("@Prijs", voetbaltruitje.Prijs);
+                command.Parameters.AddWithValue("@Versie", voetbaltruitje.ClubSet.Versie);
+                command.Parameters.AddWithValue("@Thuis", voetbaltruitje.ClubSet.Thuis);
+                command.Parameters.AddWithValue("@Competitie", voetbaltruitje.Club.Competitie);
+                command.Parameters.AddWithValue("@Ploeg", voetbaltruitje.Club.Ploeg);
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new VoetbaltruitjeRepositoryADOException("VoetbaltruitjeVerwijderen - error", ex);
+            }
+            finally
+            {
+                connection.Close();
+            }
         }
 
         public void VoetbaltruitjeVerwijderen(Voetbaltruitje voetbaltruitje)
         {
-            throw new NotImplementedException();
-        }
-
-        public void VoetbaltruitjeWeergeven(Voetbaltruitje voetbaltruitje)
-        {
-            throw new NotImplementedException();
+            string sql = "DELETE FROM [dbo].[Truitje] WHERE Id = @Id";
+            SqlConnection connection = GetConnection();
+            using SqlCommand command = new(sql, connection);
+            try
+            {
+                connection.Open();
+                command.Parameters.AddWithValue("@Id", voetbaltruitje.Id);
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new VoetbaltruitjeRepositoryADOException("VoetbaltruitjeVerwijderen - error", ex);
+            }
+            finally
+            {
+                connection.Close();
+            }
         }
 
         public IReadOnlyList<Voetbaltruitje> VoetbaltruitjeWeergeven(int id, string competitie, string ploeg, string seizoen, double? prijs, bool? thuis, int versie, string maat)
         {
-            IEnumerable<Voetbaltruitje> voetbaltruitjes;
+            List<Voetbaltruitje> voetbaltruitjes = new();
             bool isWhere = true;
             bool isAnd = false;
             string sql = "SELECT * FROM [dbo].[Truitje]";
@@ -244,22 +279,53 @@ namespace VerkoopVoetbalTruitjes.Data.ADO.NET
             try
             {
                 connection.Open();
-                //TODO: Implementatie van VoetbaltruitjeWeergeven
                 if (id != 0)
                 {
                     command.Parameters.AddWithValue("@Id", id);
                 }
+                if (!string.IsNullOrWhiteSpace(competitie))
+                {
+                    command.Parameters.AddWithValue("@Competitie", competitie);
+                }
+                if (!string.IsNullOrWhiteSpace(ploeg))
+                {
+                    command.Parameters.AddWithValue("@Ploeg", ploeg);
+                }
+                if (!string.IsNullOrWhiteSpace(seizoen))
+                {
+                    command.Parameters.AddWithValue("@Seizoen", seizoen);
+                }
+                if (prijs != null)
+                {
+                    command.Parameters.AddWithValue("@Prijs", prijs);
+                }
+                if (thuis != null)
+                {
+                    command.Parameters.AddWithValue("@Thuis", thuis);
+                }
+                if (versie != 0)
+                {
+                    command.Parameters.AddWithValue("@Versie", versie);
+                }
+                if (!string.IsNullOrWhiteSpace(maat))
+                {
+                    command.Parameters.AddWithValue("@Maat", maat);
+                }
                 IDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    voetbaltruitjes.Add(new Voetbaltruitje();
+                    Club club = new((string)reader["Competitie"], (string)reader["Ploeg"]);
+                    ClubSet clubSet = new((bool)reader["Thuis"], (int)reader["Versie"]);
+                    Kledingmaat kledingmaat = (Kledingmaat)Enum.Parse(typeof(Kledingmaat), (string)reader["Maat"]);
+                    Voetbaltruitje voetbaltruitje = new((int)reader["Id"], club, (string)reader["Seizoen"], (double)reader["Prijs"], kledingmaat, clubSet);
+                    voetbaltruitjes.Add(voetbaltruitje);
                 }
                 reader.Close();
                 return voetbaltruitjes;
             }
             catch (Exception ex)
             {
-                throw new KlantRepositoryADOException("VoetbaltruitjeWeergeven - error", ex);
+                throw new VoetbaltruitjeRepositoryADOException("VoetbaltruitjeWeergeven - error", ex);
             }
             finally
             {

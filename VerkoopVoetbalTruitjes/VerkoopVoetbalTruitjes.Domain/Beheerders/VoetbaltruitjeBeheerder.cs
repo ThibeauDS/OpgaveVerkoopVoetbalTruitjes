@@ -59,7 +59,7 @@ namespace VerkoopVoetbalTruitjes.Domain.Beheerders
         {
             try
             {
-                if (_repo.BestaatVoetbaltruitje(voetbaltruitje.Id))
+                if (!_repo.BestaatVoetbaltruitje(voetbaltruitje.Id))
                 {
                     //voetbaltruitje dbVoetbaltruitje = 
                     throw new VoetbaltruitjeBeheerderException("Voetbaltruitje bestaat niet.");
@@ -76,10 +76,10 @@ namespace VerkoopVoetbalTruitjes.Domain.Beheerders
         {
             try
             {
-                if (!_repo.BestaatVoetbaltruitje(id))
-                {
-                    throw new VoetbaltruitjeBeheerderException("Voetbaltruitje bestaat niet.");
-                }
+                //if (!_repo.BestaatVoetbaltruitje(id))
+                //{
+                //    throw new VoetbaltruitjeBeheerderException("Voetbaltruitje bestaat niet.");
+                //}
                 return _repo.VoetbaltruitjeWeergeven(id, competitie, ploeg, seizoen, prijs, thuis, versie, maat);
             }
             catch (Exception ex)

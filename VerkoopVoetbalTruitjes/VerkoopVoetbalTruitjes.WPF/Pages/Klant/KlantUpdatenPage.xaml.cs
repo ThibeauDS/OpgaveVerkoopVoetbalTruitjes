@@ -20,6 +20,10 @@ namespace VerkoopVoetbalTruitjes.WPF.Pages.Klant
     /// </summary>
     public partial class KlantUpdatenPage : Page
     {
+        #region Properties
+        private Domain.Klassen.Klant _klant = (Domain.Klassen.Klant)Application.Current.Properties["SelectedKlant"];
+        #endregion
+
         public KlantUpdatenPage()
         {
             InitializeComponent();
@@ -34,7 +38,7 @@ namespace VerkoopVoetbalTruitjes.WPF.Pages.Klant
         {
             try
             {
-                Domain.Klassen.Klant klant = KlantZoekenPage._selectedKlant;
+                Domain.Klassen.Klant klant = _klant;
                 klant.ZetNaam(Name.Text);
                 klant.ZetAdres(Address.Text);
                 MainWindow.klantBeheerder.KlantUpdaten(klant);
@@ -44,6 +48,12 @@ namespace VerkoopVoetbalTruitjes.WPF.Pages.Klant
             {
                 MessageBox.Show(ex.Message, Title, MessageBoxButton.OK, MessageBoxImage.Information);
             }
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            Name.Text = _klant.Naam;
+            Address.Text = _klant.Adres;
         }
     }
 }

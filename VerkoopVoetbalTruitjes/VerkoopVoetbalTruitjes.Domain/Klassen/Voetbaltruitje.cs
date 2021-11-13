@@ -64,7 +64,7 @@ namespace VerkoopVoetbalTruitjes.Domain.Klassen
         }
         public override string ToString()
         {
-            return $"{Id} - {Club.Ploeg} - {Seizoen} - {Prijs} - {Kledingmaat} - {ClubSet}";
+            return $"{Id} - {Club.Competitie} - {Club.Ploeg} - {Seizoen} - {Prijs} - {Kledingmaat} - {ClubSet.Thuis} - {ClubSet.Versie}";
         }
 
         public override bool Equals(object obj)
