@@ -7,7 +7,6 @@ using VerkoopVoetbalTruitjes.Data.Exceptions;
 
 namespace VerkoopVoetbalTruitjes.Data.ADO.NET
 {
-    //TODO: Moet nog geïmplementeerd worden
     public class ClubRepositoryADO : IClubRepository
     {
         #region Properties

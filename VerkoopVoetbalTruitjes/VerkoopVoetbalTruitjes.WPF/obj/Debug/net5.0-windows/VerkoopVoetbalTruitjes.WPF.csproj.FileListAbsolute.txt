@@ -91,3 +91,7 @@ C:\Users\thibe\Documents\GitHub\OpgaveVerkoopVoetbalTruitjes\VerkoopVoetbalTruit
 C:\Users\thibe\Documents\GitHub\OpgaveVerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes.WPF\obj\Debug\net5.0-windows\Pages\Voetbaltruitje\VoetbaltruitjeToevoegenPage.baml
 C:\Users\thibe\Documents\GitHub\OpgaveVerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes.WPF\obj\Debug\net5.0-windows\Pages\Voetbaltruitje\VoetbaltruitjeUpdatenPage.baml
 C:\Users\thibe\Documents\GitHub\OpgaveVerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes.WPF\obj\Debug\net5.0-windows\Pages\Voetbaltruitje\VoetbaltruitjeZoekenPage.baml
+C:\Users\thibe\Documents\GitHub\OpgaveVerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes.WPF\obj\Debug\net5.0-windows\Pages\Bestelling\BestellingKlantSelecterenPage.g.cs
+C:\Users\thibe\Documents\GitHub\OpgaveVerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes.WPF\obj\Debug\net5.0-windows\Pages\Bestelling\BestellingTruitjeSelecterenPage.g.cs
+C:\Users\thibe\Documents\GitHub\OpgaveVerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes.WPF\obj\Debug\net5.0-windows\Pages\Bestelling\BestellingKlantSelecterenPage.baml
+C:\Users\thibe\Documents\GitHub\OpgaveVerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes\VerkoopVoetbalTruitjes.WPF\obj\Debug\net5.0-windows\Pages\Bestelling\BestellingTruitjeSelecterenPage.baml

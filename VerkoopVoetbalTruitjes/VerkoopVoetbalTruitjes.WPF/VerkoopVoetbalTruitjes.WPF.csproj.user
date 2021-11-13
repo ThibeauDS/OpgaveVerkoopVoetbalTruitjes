@@ -10,7 +10,13 @@
     <Compile Update="Pages\Bestelling\BestellingenPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Pages\Bestelling\BestellingKlantSelecterenPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Pages\Bestelling\BestellingToevoegenPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\Bestelling\BestellingTruitjeSelecterenPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Pages\Bestelling\BestellingUpdatenPage.xaml.cs">
@@ -54,7 +60,13 @@
     <Page Update="Pages\Bestelling\BestellingenPage.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Pages\Bestelling\BestellingKlantSelecterenPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Pages\Bestelling\BestellingToevoegenPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\Bestelling\BestellingTruitjeSelecterenPage.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Pages\Bestelling\BestellingUpdatenPage.xaml">

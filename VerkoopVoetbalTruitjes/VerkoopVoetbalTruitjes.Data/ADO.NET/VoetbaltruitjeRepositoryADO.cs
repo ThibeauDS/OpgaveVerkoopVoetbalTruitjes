@@ -9,7 +9,6 @@ using VerkoopVoetbalTruitjes.Domain.Klassen;
 
 namespace VerkoopVoetbalTruitjes.Data.ADO.NET
 {
-    //TODO: Moet nog geïmplementeerd worden
     public class VoetbaltruitjeRepositoryADO : IVoetbaltruitjeRepository
     {
         #region Properties

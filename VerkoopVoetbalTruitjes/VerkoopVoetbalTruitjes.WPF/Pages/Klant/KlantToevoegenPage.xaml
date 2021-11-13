@@ -14,7 +14,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Grid>
+        <Grid Margin="10">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -28,10 +28,10 @@
             </Grid.ColumnDefinitions>
             <TextBlock Text="Naam" Margin="0,0,5,10"/>
             <TextBox Name="Name" Text="" Grid.Column="1" Margin="0,0,0,10"/>
-            <TextBlock Text="Adres" Grid.Row="1" Margin="0,0,5,0"/>
-            <TextBox Name="Address" Text="" Grid.Row="1" Grid.Column="1" Margin="0,0,0,10"/>
+            <TextBlock Text="Adres" Grid.Column="2" Margin="30,0,5,10"/>
+            <TextBox Name="Address" Text="" Grid.Column="3" Margin="0,0,0,10"/>
 
-            <Button Name="AddBtn" Click="AddBtn_Click" FontFamily="Segoe Fluent Icons" Content="&#xe710;" Grid.Row="2" Grid.Column="5" Width="25" Height="25" 
+            <Button Name="AddBtn" Click="AddBtn_Click" FontFamily="Segoe Fluent Icons" Content="&#xe710;" Grid.Row="1" Grid.Column="5" Width="25" Height="25" 
                     HorizontalAlignment="Right" VerticalAlignment="Top"/>
         </Grid>
     </Grid>

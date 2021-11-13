@@ -5,7 +5,7 @@ using VerkoopVoetbalTruitjes.Domain.Exceptions;
 
 namespace VerkoopVoetbalTruitjes.Domain.Klassen
 {
-    public class Voetbaltruitje 
+    public class Voetbaltruitje
     {
         #region Properties
         public int Id { get; private set; }
@@ -64,7 +64,12 @@ namespace VerkoopVoetbalTruitjes.Domain.Klassen
         }
         public override string ToString()
         {
-            return $"{Id} - {Club.Competitie} - {Club.Ploeg} - {Seizoen} - {Prijs} - {Kledingmaat} - {ClubSet.Thuis} - {ClubSet.Versie}";
+            string thuis = "Uit";
+            if (ClubSet.Thuis == true)
+            {
+                thuis = "Thuis";
+            }
+            return $"{Id} - {Club.Competitie} - {Club.Ploeg} - {Seizoen} - {Prijs} - {Kledingmaat} - {thuis} - {ClubSet.Versie}";
         }
 
         public override bool Equals(object obj)
@@ -81,7 +86,7 @@ namespace VerkoopVoetbalTruitjes.Domain.Klassen
         public override int GetHashCode()
         {
             return HashCode.Combine(Id, Club, Seizoen, Prijs, Kledingmaat, ClubSet);
-        } 
+        }
         #endregion
     }
 }
