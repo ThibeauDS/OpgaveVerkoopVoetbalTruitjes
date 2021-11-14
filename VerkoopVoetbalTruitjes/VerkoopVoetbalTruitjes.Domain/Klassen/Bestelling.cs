@@ -4,7 +4,7 @@ using VerkoopVoetbalTruitjes.Domain.Exceptions;
 
 namespace VerkoopVoetbalTruitjes.Domain.Klassen
 {
-    public class Bestelling 
+    public class Bestelling
     {
         #region Properties
         public int BestellingId { get; private set; }
@@ -32,8 +32,16 @@ namespace VerkoopVoetbalTruitjes.Domain.Klassen
             _producten = producten;
         }
         //constructor voor inlezen
-        public Bestelling(int bestellingId, Klant klant, DateTime tijdstip, double prijs, bool betaald, Dictionary<Voetbaltruitje, int> producten) : this(bestellingId, klant, tijdstip, producten)
+        public Bestelling(int bestellingId, Klant klant, DateTime tijdstip, double prijs, bool betaald, Dictionary<Voetbaltruitje, int> producten) : this(klant, tijdstip, prijs, betaald, producten)
         {
+            ZetBetaald(betaald);
+            ZetBestellingId(bestellingId);
+        }
+        public Bestelling(Klant klant, DateTime tijdstip, double prijs, bool betaald, Dictionary<Voetbaltruitje, int> producten) : this(tijdstip)
+        {
+            if (producten is null) throw new BestellingException("producten zijn leeg");
+            _producten = producten;
+            ZetKlant(klant);
             //Prijs wordt niet gecontrolleerd
             Prijs = prijs;
             ZetBetaald(betaald);
@@ -176,7 +184,7 @@ namespace VerkoopVoetbalTruitjes.Domain.Klassen
         public override int GetHashCode()
         {
             return HashCode.Combine(BestellingId, Betaald, Prijs, Klant, Tijdstip, _producten);
-        } 
+        }
         #endregion
     }
 }

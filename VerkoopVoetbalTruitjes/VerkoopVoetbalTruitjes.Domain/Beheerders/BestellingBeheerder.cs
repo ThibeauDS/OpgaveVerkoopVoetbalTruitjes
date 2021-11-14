@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using VerkoopVoetbalTruitjes.Domain.Exceptions;
 using VerkoopVoetbalTruitjes.Domain.Interfaces;
 using VerkoopVoetbalTruitjes.Domain.Klassen;
@@ -23,10 +24,10 @@ namespace VerkoopVoetbalTruitjes.Domain.Beheerders
         {
             try
             {
-                if (_repo.BestaatBestelling(bestelling))
-                {
-                    throw new BestellingBeheerderException("Bestelling bestaat al.");
-                }
+                //if (_repo.BestaatBestelling(bestelling))
+                //{
+                //    throw new BestellingBeheerderException("Bestelling bestaat al.");
+                //}
                 _repo.BestellingToevoegen(bestelling);
             }
             catch (Exception ex)
@@ -67,15 +68,15 @@ namespace VerkoopVoetbalTruitjes.Domain.Beheerders
             }
         }
 
-        public void BestellingWeergeven(Bestelling bestelling)
+        public List<Bestelling> BestellingWeergeven(int id, DateTime? start,DateTime? end, Klant _klantSave)
         {
             try
             {
-                if (!_repo.BestaatBestelling(bestelling))
-                {
-                    throw new BestellingBeheerderException("Bestelling bestaat niet.");
-                }
-                _repo.BestellingWeergeven(bestelling);
+                //if (!_repo.BestaatBestelling(id))
+                //{
+                //    throw new BestellingBeheerderException("Bestelling bestaat niet.");
+                //}
+                return _repo.BestellingWeergeven(id, start, end, _klantSave);
             }
             catch (Exception ex)
             {

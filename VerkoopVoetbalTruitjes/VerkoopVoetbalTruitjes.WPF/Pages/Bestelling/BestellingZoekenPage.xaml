@@ -9,6 +9,56 @@
       Title="BestellingZoekenPage">
 
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="Id"/>
+            <TextBox Name="Id" Grid.Column="1" Margin="0,0,5,10"/>
+
+            <TextBlock Text="Startdatum" Grid.Column="2" Margin="30,0,5,10"/>
+            <DatePicker Name="StartDate" Grid.Column="3"/>
+
+            <TextBlock Text="Einddatum" Grid.Column="4" Margin="30,0,5,10"/>
+            <DatePicker Name="EndDate" Grid.Column="5"/>
+
+            <Button Name="SearchBtn" Click="SearchBtn_Click" FontFamily="Segoe Fluent Icons" Content="&#xe721;" Grid.Column="6" Grid.Row="2" Width="25" Height="25" 
+                    HorizontalAlignment="Right" />
+
+            <TextBlock Text="Klant" Grid.Row="1" Margin="0,0,5,10"/>
+            <TextBox Name="Customer" Grid.Row="1" Grid.Column="1" Margin="0,0,5,20" IsReadOnly="True" Loaded="Customer_Loaded"/>
+
+            <Button Name="SelectTruitjeBtn" Content="Selecteer Klant" Click="SelectTruitjeBtn_Click" Grid.Row="1" Grid.Column="2" Margin="30,0,5,10"/>
+        </Grid>
+
+        <ListView Name="ListViewOrders" Grid.Row="1" Margin="10">
+            <ListView.Resources>
+                <ContextMenu x:Key="ContextMenu" DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
+                    <MenuItem Name="UpdateVoetbaltruitje" Header="Aanpassen" Click="UpdateVoetbaltruitje_Click"/>
+                    <MenuItem Name="DeleteVoetbaltruitje" Header="Verwijderen" Click="DeleteVoetbaltruitje_Click"/>
+                </ContextMenu>
+            </ListView.Resources>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ContextMenu">
+                    <Setter Property="ContextMenu" Value="{StaticResource ContextMenu}"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+        </ListView>
     </Grid>
 </Page>

@@ -47,7 +47,7 @@
             <DataGrid.Resources>
                 <ContextMenu x:Key="ContextMenu" DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
                     <MenuItem Name="UpdateCustomer" Header="Aanpassen" Click="UpdateCustomer_Click"/>
-                    <MenuItem Name="DeleteCustomer" Header="Verwjderen" Click="DeleteCustomer_Click"/>
+                    <MenuItem Name="DeleteCustomer" Header="Verwijderen" Click="DeleteCustomer_Click"/>
                 </ContextMenu>
             </DataGrid.Resources>
             <DataGrid.RowStyle>

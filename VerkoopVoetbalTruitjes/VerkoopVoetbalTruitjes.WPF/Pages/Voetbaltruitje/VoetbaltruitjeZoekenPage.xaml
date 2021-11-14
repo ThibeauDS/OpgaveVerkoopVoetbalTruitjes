@@ -24,19 +24,19 @@
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <TextBlock Text="Competitie" Margin="0,0,5,0"/>
-        <ComboBox Name="ComboBoxCompetitie" Grid.Column="1" Margin="0,0,0,10" SelectionChanged="ComboBoxCompetitie_SelectionChanged" Loaded="ComboBoxCompetitie_Loaded"/>
+        <TextBlock Text="Competitie" Margin="10"/>
+        <ComboBox Name="ComboBoxCompetitie" Grid.Column="1" Margin="10" SelectionChanged="ComboBoxCompetitie_SelectionChanged" Loaded="ComboBoxCompetitie_Loaded"/>
 
-        <TextBlock Text="Ploeg" Margin="10,0,5,0" Grid.Column="2"/>
-        <ComboBox Name="ComboBoxPloeg" Grid.Column="3" Margin="0,0,0,10"/>
+        <TextBlock Text="Ploeg" Margin="10" Grid.Column="2"/>
+        <ComboBox Name="ComboBoxPloeg" Grid.Column="3" Margin="10"/>
 
-        <TextBlock Text="Seizoen" Grid.Row="1"/>
-        <TextBox Name="Seizoen" Grid.Row="1" Grid.Column="1" Margin="0,0,0,10"/>
+        <TextBlock Text="Seizoen" Grid.Row="1" Margin="10"/>
+        <TextBox Name="Seizoen" Grid.Row="1" Grid.Column="1" Margin="10"/>
 
-        <TextBlock Text="Prijs" Margin="10,0,5,0" Grid.Row="1" Grid.Column="2"/>
-        <TextBox Name="Prijs" Grid.Row="1" Grid.Column="3" Margin="0,0,0,10"/>
+        <TextBlock Text="Prijs" Margin="10" Grid.Row="1" Grid.Column="2"/>
+        <TextBox Name="Prijs" Grid.Row="1" Grid.Column="3" Margin="10"/>
 
-        <TextBlock Text="Id" Grid.Row="2"/>
+        <TextBlock Text="Id" Grid.Row="2" Margin="10"/>
         <TextBox Name="Id" Grid.Row="2" Grid.Column="1" Margin="0,0,0,10"/>
 
         <Grid Grid.Row="3" Grid.ColumnSpan="2" Margin="0,0,0,10">
@@ -49,20 +49,20 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <CheckBox Name="Thuis" Content="Thuis"/>
-            <CheckBox Name="Uit" Content="Uit"  Margin="10,0,5,0" Grid.Column="1"/>
+            <CheckBox Name="Thuis" Content="Thuis" Margin="10"/>
+            <CheckBox Name="Uit" Content="Uit" Margin="10" Grid.Column="1"/>
 
-            <TextBlock Text="Versie" Grid.Column="2" Margin="10,0,5,0"/>
-            <TextBox Name="Versie" Grid.Column="3" Margin="0,0,0,10"/>
+            <TextBlock Text="Versie" Grid.Column="2" Margin="10,10,0,10"/>
+            <TextBox Name="Versie" Grid.Column="3" Margin="10"/>
 
-            <TextBlock Text="Maat" Grid.Column="4" Margin="10,0,5,0"/>
-            <ComboBox Name="ComboBoxMaat" Grid.Column="5" Loaded="ComboBoxMaat_Loaded" Margin="0,0,0,10"/>
+            <TextBlock Text="Maat" Grid.Column="4" Margin="10,10,0,10"/>
+            <ComboBox Name="ComboBoxMaat" Grid.Column="5" Loaded="ComboBoxMaat_Loaded" Margin="10"/>
         </Grid>
 
-        <Button Name="SearchBtn" Click="SearchBtn_Click" FontFamily="Segoe Fluent Icons" Content="&#xe721;" Grid.Row="4" Grid.Column="3" Width="25" Height="25" 
+        <Button Name="SearchBtn" Click="SearchBtn_Click" FontFamily="Segoe Fluent Icons" Content="&#xe721;" Grid.Row="4" Grid.Column="3" Width="25" Height="25" Margin="10"
                     HorizontalAlignment="Right" VerticalAlignment="Top"/>
 
-        <DataGrid Name="DataGridTruitjes" Grid.Row="5" Grid.ColumnSpan="4" Margin="50" CanUserReorderColumns="False" AutoGenerateColumns="False" SelectedItem="{Binding SelectedRow, Mode=OneWay}" 
+        <DataGrid Name="DataGridTruitjes" Grid.Row="5" Grid.ColumnSpan="4" Margin="10" CanUserReorderColumns="False" AutoGenerateColumns="False" SelectedItem="{Binding SelectedRow, Mode=OneWay}" 
                   CanUserSortColumns="False" CanUserResizeRows="False" CanUserAddRows="False" CanUserDeleteRows="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding Id, Mode=OneWay}" CanUserResize="False"/>
@@ -77,7 +77,7 @@
             <DataGrid.Resources>
                 <ContextMenu x:Key="ContextMenu" DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
                     <MenuItem Name="UpdateVoetbaltruitje" Header="Aanpassen" Click="UpdateVoetbaltruitje_Click"/>
-                    <MenuItem Name="DeleteVoetbaltruitje" Header="Verwjderen" Click="DeleteVoetbaltruitje_Click"/>
+                    <MenuItem Name="DeleteVoetbaltruitje" Header="Verwijderen" Click="DeleteVoetbaltruitje_Click"/>
                 </ContextMenu>
             </DataGrid.Resources>
             <DataGrid.RowStyle>

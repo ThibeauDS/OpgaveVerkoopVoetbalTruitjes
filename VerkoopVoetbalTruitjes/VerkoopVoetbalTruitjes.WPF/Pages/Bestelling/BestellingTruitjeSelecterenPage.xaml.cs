@@ -21,6 +21,10 @@ namespace VerkoopVoetbalTruitjes.WPF.Pages.Bestelling
     /// </summary>
     public partial class BestellingTruitjeSelecterenPage : Page
     {
+        #region Properties
+        Dictionary<Domain.Klassen.Voetbaltruitje, int> _truitjes = new();
+        #endregion
+
         public BestellingTruitjeSelecterenPage()
         {
             InitializeComponent();
@@ -127,16 +131,41 @@ namespace VerkoopVoetbalTruitjes.WPF.Pages.Bestelling
 
         private void SelectBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (ListViewTruitjes.SelectedItem != null)
+            try
             {
-                ObservableCollection<Domain.Klassen.Voetbaltruitje> voetbaltruitjes = new();
-                voetbaltruitjes.Add((Domain.Klassen.Voetbaltruitje)ListViewTruitjes.SelectedItem);
-                Application.Current.Properties["Truitjes"] = voetbaltruitjes;
-                NavigationService.GoBack();
+                if (ListViewTruitjes.SelectedItem != null)
+                {
+                    Domain.Klassen.Voetbaltruitje voetbaltruitje = (Domain.Klassen.Voetbaltruitje)ListViewTruitjes.SelectedItem;
+                    if (!_truitjes.ContainsKey(voetbaltruitje))
+                    {
+                        _truitjes.Add(voetbaltruitje, 1);
+                        Application.Current.Properties["Truitjes"] = _truitjes;
+                        NavigationService.GoBack();
+                    }
+                    else
+                    {
+                        _truitjes.TryGetValue(voetbaltruitje, out int value);
+                        _truitjes[voetbaltruitje] = value + 1;
+                        Application.Current.Properties["Truitjes"] = _truitjes;
+                        NavigationService.GoBack();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Er is geen truitje geselecteerd", Title, MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Er is geen truitje geselecteerd", Title, MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show(ex.Message, Title, MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (Application.Current.Properties["Truitjes"] != null)
+            {
+                _truitjes = (Dictionary<Domain.Klassen.Voetbaltruitje, int>)Application.Current.Properties["Truitjes"];
             }
         }
     }
