@@ -48,7 +48,7 @@
         </Grid>
 
         <ListView Name="ListViewOrders" Grid.Row="1" Margin="10">
-            <ListView.Resources>
+            <!--<ListView.Resources>
                 <ContextMenu x:Key="ContextMenu" DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
                     <MenuItem Name="UpdateVoetbaltruitje" Header="Aanpassen" Click="UpdateVoetbaltruitje_Click"/>
                     <MenuItem Name="DeleteVoetbaltruitje" Header="Verwijderen" Click="DeleteVoetbaltruitje_Click"/>
@@ -56,9 +56,9 @@
             </ListView.Resources>
             <ListView.ItemContainerStyle>
                 <Style TargetType="ContextMenu">
-                    <Setter Property="ContextMenu" Value="{StaticResource ContextMenu}"/>
+                    <Setter Property="ContextMenu" Value="{DynamicResource ContextMenu}"/>
                 </Style>
-            </ListView.ItemContainerStyle>
+            </ListView.ItemContainerStyle>-->
         </ListView>
     </Grid>
 </Page>

@@ -23,7 +23,7 @@ namespace VerkoopVoetbalTruitjes.WPF.Pages.Bestelling
     {
         #region Properties
         private Domain.Klassen.Klant _klant = (Domain.Klassen.Klant)Application.Current.Properties["Klant"];
-        private Domain.Klassen.Klant _klantSave;
+        private Domain.Klassen.Klant _klantSave = (Domain.Klassen.Klant)Application.Current.Properties["SavedKlant"];
         private Dictionary<Domain.Klassen.Voetbaltruitje, int> _truitjes = (Dictionary<Domain.Klassen.Voetbaltruitje, int>)Application.Current.Properties["Truitjes"];
         #endregion
 
@@ -52,15 +52,17 @@ namespace VerkoopVoetbalTruitjes.WPF.Pages.Bestelling
                     betaald = true;
                 }
                 double.TryParse(Price.Text, out double prijs);
-                if (Customer.Text != null && _truitjes != null && _truitjes.Count != 0)
+                if (Customer.Text != null && _truitjes != null && _truitjes.Count != 0 && _klantSave != null)
                 {
                     Domain.Klassen.Bestelling bestelling = new(_klantSave, DateTime.Now, prijs, betaald, _truitjes);
                     MainWindow.bestellingBeheerder.BestellingToevoegen(bestelling);
+                    Application.Current.Properties["Truitjes"] = null;
                     Customer.Text = null;
-                    DataGridTruitjes = null;
                     Price.Text = null;
                     IsPayed.IsChecked = false;
-                    Application.Current.Properties["Truitjes"] = null;
+                    _truitjes.Clear();
+                    DataGridTruitjes_Loaded(sender, e);
+                    MessageBox.Show("Bestelling geplaatst", Title, MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 else
                 {
@@ -79,7 +81,7 @@ namespace VerkoopVoetbalTruitjes.WPF.Pages.Bestelling
             if (_klant != null)
             {
                 Customer.Text = _klant.ToString();
-                _klantSave = _klant;
+                Application.Current.Properties["SavedKlant"] = _klant;
             }
         }
 
@@ -116,9 +118,9 @@ namespace VerkoopVoetbalTruitjes.WPF.Pages.Bestelling
 
         private void DataGridTruitjes_Loaded(object sender, RoutedEventArgs e)
         {
+            ObservableCollection<KeyValuePair<Domain.Klassen.Voetbaltruitje, int>> oc = new();
             if (_truitjes != null && _truitjes.Count != 0)
             {
-                ObservableCollection<KeyValuePair<Domain.Klassen.Voetbaltruitje, int>> oc = new();
                 foreach (var truitje in _truitjes)
                 {
                     oc.Add(truitje);
@@ -128,7 +130,8 @@ namespace VerkoopVoetbalTruitjes.WPF.Pages.Bestelling
             }
             else
             {
-                DataGridTruitjes.ItemsSource = null;
+                oc.Clear();
+                DataGridTruitjes.ItemsSource = oc;
             }
         }
     }

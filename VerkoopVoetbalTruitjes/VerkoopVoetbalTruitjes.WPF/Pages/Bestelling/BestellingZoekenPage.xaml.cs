@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -50,6 +51,12 @@ namespace VerkoopVoetbalTruitjes.WPF.Pages.Bestelling
                     end = EndDate.SelectedDate;
                 }
                 List<Domain.Klassen.Bestelling> bestellingen = MainWindow.bestellingBeheerder.BestellingWeergeven(id, start, end, _klantSave);
+                ObservableCollection<Domain.Klassen.Bestelling> ts = new();
+                foreach (Domain.Klassen.Bestelling bestelling in bestellingen)
+                {
+                    ts.Add(bestelling);
+                }
+                ListViewOrders.ItemsSource = ts;
             }
             catch (Exception ex)
             {

@@ -40,7 +40,7 @@ namespace VerkoopVoetbalTruitjes.Domain.Beheerders
         {
             try
             {
-                if (!_repo.BestaatBestelling(bestelling))
+                if (!_repo.BestaatBestelling(bestelling.BestellingId))
                 {
                     throw new BestellingBeheerderException("Bestelling bestaat niet.");
                 }
@@ -56,7 +56,7 @@ namespace VerkoopVoetbalTruitjes.Domain.Beheerders
         {
             try
             {
-                if (!_repo.BestaatBestelling(bestelling))
+                if (!_repo.BestaatBestelling(bestelling.BestellingId))
                 {
                     throw new BestellingBeheerderException("Bestelling bestaat niet.");
                 }

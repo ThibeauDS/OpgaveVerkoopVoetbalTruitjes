@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using VerkoopVoetbalTruitjes.Data.Exceptions;
+using VerkoopVoetbalTruitjes.Domain.Enums;
 using VerkoopVoetbalTruitjes.Domain.Interfaces;
 using VerkoopVoetbalTruitjes.Domain.Klassen;
 
@@ -106,29 +107,29 @@ namespace VerkoopVoetbalTruitjes.Data.ADO.NET
         public List<Bestelling> BestellingWeergeven(int id, DateTime? start, DateTime? end, Klant _klantSave)
         {
             List<Bestelling> bestellingen = new();
+            Dictionary<Voetbaltruitje, int> producten = new();
             bool isWhere = true;
             bool isAnd = false;
-            string sql = "SELECT * FROM [dbo].[Bestellingen]";
-            string sql2 = "SELECT * [dbo].[BestellingTruitje]";
+            string sql = "SELECT b.*, bt.BestellingID AS BestellingId, bt.TruitjeID AS TruitjeId, bt.Aantal, t.Id AS VoetbaltruitjeId, t.Maat, t.Seizoen, t.Prijs, t.Versie, t.Thuis, t.Competitie, t.Ploeg, k.Id AS KlantId, k.Naam, k.Adres FROM [dbo].[Bestellingen] b " +
+                "INNER JOIN[dbo].[BestellingTruitje] bt ON b.Id = bt.BestellingID " +
+                "INNER JOIN[dbo].[Truitje] t ON bt.TruitjeID = t.Id " +
+                "INNER JOIN [dbo].[Klant] k ON b.KlantID = k.Id";
             if (id != 0)
             {
                 if (isWhere)
                 {
                     sql += " WHERE ";
-                    sql2 += " WHERE ";
                     isWhere = false;
                 }
                 if (isAnd)
                 {
                     sql += " AND ";
-                    sql2 += " AND ";
                 }
                 else
                 {
                     isAnd = true;
                 }
-                sql += "Id = @Id";
-                sql2 += "BestellingId = @BestellingId";
+                sql += "b.Id = @Id";
             }
             if (start != null)
             {
@@ -145,7 +146,7 @@ namespace VerkoopVoetbalTruitjes.Data.ADO.NET
                 {
                     isAnd = true;
                 }
-                sql += "Datum >= @Start";
+                sql += "b.Datum >= @Start";
             }
             if (end != null)
             {
@@ -162,7 +163,7 @@ namespace VerkoopVoetbalTruitjes.Data.ADO.NET
                 {
                     isAnd = true;
                 }
-                sql += "Datum <= @Einde";
+                sql += "b.Datum <= @Einde";
             }
             if (_klantSave != null)
             {
@@ -179,18 +180,16 @@ namespace VerkoopVoetbalTruitjes.Data.ADO.NET
                 {
                     isAnd = true;
                 }
-                sql += "KlantID <= @KlantId";
+                sql += "b.KlantID <= @KlantId";
             }
             SqlConnection connection = GetConnection();
             SqlCommand command = new(sql, connection);
-            SqlCommand command2 = new(sql2, connection);
             try
             {
                 connection.Open();
                 if (id != 0)
                 {
                     command.Parameters.AddWithValue("@Id", id);
-                    command2.Parameters.AddWithValue("@BestellingID", id);
                 }
                 if (start != null)
                 {
@@ -207,7 +206,16 @@ namespace VerkoopVoetbalTruitjes.Data.ADO.NET
                 IDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    //TODO: In elkaar flantsen van de readers
+                    Club club = new((string)reader["Competitie"], (string)reader["Ploeg"]);
+                    ClubSet clubSet = new((bool)reader["Thuis"], (int)reader["Versie"]);
+                    Kledingmaat kledingmaat = (Kledingmaat)Enum.Parse(typeof(Kledingmaat), (string)reader["Maat"]);
+                    Voetbaltruitje voetbaltruitje = new((int)reader["VoetbaltruitjeId"], club, (string)reader["Seizoen"], (double)reader["Prijs"], kledingmaat, clubSet);
+                    int aantal = (int)reader["Aantal"];
+                    producten.Add(voetbaltruitje, aantal);
+                    Klant klant = new((int)reader["KlantId"], (string)reader["Naam"], (string)reader["Adres"]);
+                    Bestelling bestelling = new((int)reader["Id"], klant, (DateTime)reader["Datum"], (double)reader["Verkoopprijs"], (bool)reader["Betaald"], producten);
+                    bestellingen.Add(bestelling);
+                    producten.Clear();
                 }
                     return bestellingen;
             }
