@@ -82,6 +82,7 @@ namespace VerkoopVoetbalTruitjes.WPF.Pages.Bestelling
             {
                 Customer.Text = _klant.ToString();
                 Application.Current.Properties["SavedKlant"] = _klant;
+                _klantSave = _klant;
             }
         }
 

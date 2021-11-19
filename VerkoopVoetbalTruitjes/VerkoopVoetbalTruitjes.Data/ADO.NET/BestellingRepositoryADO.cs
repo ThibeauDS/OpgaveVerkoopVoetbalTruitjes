@@ -59,36 +59,40 @@ namespace VerkoopVoetbalTruitjes.Data.ADO.NET
         {
             int bestellingsId;
             var producten = bestelling.GeefProducten();
-            foreach (var voetbaltruitje in producten)
+
+            string sql = "INSERT INTO [dbo].[Bestellingen] (Datum, Verkoopprijs, Betaald, KlantID) VALUES (@Datum, @Verkoopprijs, @Betaald, @KlantID) SELECT SCOPE_IDENTITY()";
+            //SqlTransaction sqlTransaction = null;
+            SqlConnection connection = GetConnection();
+            SqlCommand command = new(sql, connection);
+            try
             {
-                string sql = "INSERT INTO [dbo].[Bestellingen] (Datum, Verkoopprijs, Betaald, KlantID, TruitjeID) VALUES (@Datum, @Verkoopprijs, @Betaald, @KlantID, @TruitjeID) SELECT SCOPE_IDENTITY()";
-                string sql2 = "INSERT INTO [dbo].[BestellingTruitje] (BestellingID, TruitjeID, Aantal) VALUES (@BestellingID, @TruitjeID, @Aantal)";
-                SqlConnection connection = GetConnection();
-                SqlCommand command = new(sql, connection);
-                SqlCommand command2 = new(sql2, connection);
-                try
+                connection.Open();
+                //sqlTransaction = connection.BeginTransaction();
+                command.Parameters.AddWithValue("@Datum", bestelling.Tijdstip);
+                command.Parameters.AddWithValue("@Verkoopprijs", bestelling.Prijs);
+                command.Parameters.AddWithValue("@Betaald", bestelling.Betaald);
+                command.Parameters.AddWithValue("@KlantID", bestelling.Klant.KlantId);
+                //command.Parameters.AddWithValue("@TruitjeID", voetbaltruitje.Key.Id);
+                bestellingsId = Decimal.ToInt32((decimal)command.ExecuteScalar());
+                foreach (var voetbaltruitje in producten)
                 {
-                    connection.Open();
-                    command.Parameters.AddWithValue("@Datum", bestelling.Tijdstip);
-                    command.Parameters.AddWithValue("@Verkoopprijs", bestelling.Prijs);
-                    command.Parameters.AddWithValue("@Betaald", bestelling.Betaald);
-                    command.Parameters.AddWithValue("@KlantID", bestelling.Klant.KlantId);
-                    command.Parameters.AddWithValue("@TruitjeID", voetbaltruitje.Key.Id);
-                    bestellingsId = Decimal.ToInt32((decimal)command.ExecuteScalar());
+                    string sql2 = "INSERT INTO [dbo].[BestellingTruitje] (BestellingID, TruitjeID, Aantal) VALUES (@BestellingID, @TruitjeID, @Aantal)";
+                    SqlCommand command2 = new(sql2, connection);
                     command2.Parameters.AddWithValue("@BestellingID", bestellingsId);
                     command2.Parameters.AddWithValue("@TruitjeID", voetbaltruitje.Key.Id);
                     command2.Parameters.AddWithValue("@Aantal", voetbaltruitje.Value);
                     command2.ExecuteNonQuery();
-
                 }
-                catch (Exception ex)
-                {
-                    throw new BestellingRepositoryADOException("BestellingToevoegen - error", ex);
-                }
-                finally
-                {
-                    connection.Close();
-                }
+            }
+            catch (Exception ex)
+            {
+                //sqlTransaction.Rollback();
+                throw new BestellingRepositoryADOException("BestellingToevoegen - error", ex);
+            }
+            finally
+            {
+                //sqlTransaction.Commit();
+                connection.Close();
             }
         }
 
@@ -114,6 +118,7 @@ namespace VerkoopVoetbalTruitjes.Data.ADO.NET
                 "INNER JOIN[dbo].[BestellingTruitje] bt ON b.Id = bt.BestellingID " +
                 "INNER JOIN[dbo].[Truitje] t ON bt.TruitjeID = t.Id " +
                 "INNER JOIN [dbo].[Klant] k ON b.KlantID = k.Id";
+            string sql2 = "SELECT BestellingID AS BestellingId, TruitjeID AS TruitjeId, Aantal FROM [dbo].[BestellingTruitje]";
             if (id != 0)
             {
                 if (isWhere)
@@ -184,6 +189,7 @@ namespace VerkoopVoetbalTruitjes.Data.ADO.NET
             }
             SqlConnection connection = GetConnection();
             SqlCommand command = new(sql, connection);
+            SqlCommand command2 = new(sql2, connection);
             try
             {
                 connection.Open();
@@ -206,18 +212,23 @@ namespace VerkoopVoetbalTruitjes.Data.ADO.NET
                 IDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    Club club = new((string)reader["Competitie"], (string)reader["Ploeg"]);
-                    ClubSet clubSet = new((bool)reader["Thuis"], (int)reader["Versie"]);
-                    Kledingmaat kledingmaat = (Kledingmaat)Enum.Parse(typeof(Kledingmaat), (string)reader["Maat"]);
-                    Voetbaltruitje voetbaltruitje = new((int)reader["VoetbaltruitjeId"], club, (string)reader["Seizoen"], (double)reader["Prijs"], kledingmaat, clubSet);
-                    int aantal = (int)reader["Aantal"];
-                    producten.Add(voetbaltruitje, aantal);
                     Klant klant = new((int)reader["KlantId"], (string)reader["Naam"], (string)reader["Adres"]);
+                    int bestellingId = (int)reader["Id"];
+                    IDataReader reader2 = command2.ExecuteReader();
+                    while (reader2.Read())
+                    {
+                        Club club = new((string)reader["Competitie"], (string)reader["Ploeg"]);
+                        ClubSet clubSet = new((bool)reader["Thuis"], (int)reader["Versie"]);
+                        Kledingmaat kledingmaat = (Kledingmaat)Enum.Parse(typeof(Kledingmaat), (string)reader["Maat"]);
+                        Voetbaltruitje voetbaltruitje = new((int)reader["VoetbaltruitjeId"], club, (string)reader["Seizoen"], (double)reader["Prijs"], kledingmaat, clubSet);
+                        int aantal = (int)reader["Aantal"];
+                        producten.Add(voetbaltruitje, aantal);
+                    }
                     Bestelling bestelling = new((int)reader["Id"], klant, (DateTime)reader["Datum"], (double)reader["Verkoopprijs"], (bool)reader["Betaald"], producten);
                     bestellingen.Add(bestelling);
                     producten.Clear();
                 }
-                    return bestellingen;
+                return bestellingen;
             }
             catch (Exception ex)
             {

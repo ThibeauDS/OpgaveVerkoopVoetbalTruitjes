@@ -1,0 +1,11 @@
+﻿INSERT INTO [dbo].[Klant] (Naam, Adres) VALUES ('Thibeau De Smet', 'Sleistraat 26A, 9550 Woubrechtegem');
+INSERT INTO [dbo].[Klant] (Naam, Adres) VALUES ('Cristianne Goessens', 'Sleistraat 26B, 9550 Woubrechtegem');
+INSERT INTO [dbo].[Klant] (Naam, Adres) VALUES ('Conny Broodcooren', 'Sleistraat 26A, 9550 Woubrechtegem');
+INSERT INTO [dbo].[Klant] (Naam, Adres) VALUES ('Leentje Scheerlinck', 'Sleistraat 24, 9550 Woubrechtegem');
+INSERT INTO [dbo].[Klant] (Naam, Adres) VALUES ('Ullrich Van Waes', 'Lelielaan 4, 9185 Wachtebeke');
+INSERT INTO [dbo].[Klant] (Naam, Adres) VALUES ('Robert Van Waes', 'Lelielaan 4, 9185 Wachtebeke');
+INSERT INTO [dbo].[Klant] (Naam, Adres) VALUES ('An Van Geest', 'Lelielaan 4, 9185 Wachtebeke');
+INSERT INTO [dbo].[Klant] (Naam, Adres) VALUES ('Cédric De Smet', 'Heirweg 84, 9506 Idegem');
+INSERT INTO [dbo].[Klant] (Naam, Adres) VALUES ('Werner De Smet', 'Heirweg 84, 9506 Idegem');
+INSERT INTO [dbo].[Klant] (Naam, Adres) VALUES ('Marcel De Smet', 'Wellestraat 4, 9620 Zottegem');
+INSERT INTO [dbo].[Klant] (Naam, Adres) VALUES ('Godelieve', 'Wellestraat 4, 9620 Zottegem');
