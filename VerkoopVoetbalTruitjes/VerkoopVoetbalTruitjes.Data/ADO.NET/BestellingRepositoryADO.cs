@@ -104,21 +104,36 @@ namespace VerkoopVoetbalTruitjes.Data.ADO.NET
 
         public void BestellingVerwijderen(Bestelling bestelling)
         {
-            //TODO: Delete van bestelling
-            throw new NotImplementedException();
+            string sql = "DELETE FROM [dbo].[BestellingTruitje] WHERE BestellingID = @BestellingID";
+            string sql2 = "DELETE FROM [dbo].[Bestellingen] WHERE Id = @BestellingID";
+            SqlConnection connection = GetConnection();
+            using SqlCommand command = new(sql, connection);
+            using SqlCommand command2 = new(sql2, connection);
+            try
+            {
+                connection.Open();
+                command.Parameters.AddWithValue("@BestellingID", bestelling.BestellingId);
+                command.ExecuteNonQuery();
+                command2.Parameters.AddWithValue("@BestellingID", bestelling.BestellingId);
+                command2.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new BestellingRepositoryADOException("BestellingVerwijderen - error", ex);
+            }
+            finally
+            {
+                connection.Close();
+            }
         }
 
         public List<Bestelling> BestellingWeergeven(int id, DateTime? start, DateTime? end, Klant _klantSave)
         {
             List<Bestelling> bestellingen = new();
-            Dictionary<Voetbaltruitje, int> producten = new();
             bool isWhere = true;
             bool isAnd = false;
-            string sql = "SELECT b.*, bt.BestellingID AS BestellingId, bt.TruitjeID AS TruitjeId, bt.Aantal, t.Id AS VoetbaltruitjeId, t.Maat, t.Seizoen, t.Prijs, t.Versie, t.Thuis, t.Competitie, t.Ploeg, k.Id AS KlantId, k.Naam, k.Adres FROM [dbo].[Bestellingen] b " +
-                "INNER JOIN[dbo].[BestellingTruitje] bt ON b.Id = bt.BestellingID " +
-                "INNER JOIN[dbo].[Truitje] t ON bt.TruitjeID = t.Id " +
+            string sql = "SELECT b.*, k.Id AS KlantId, k.Naam, k.Adres FROM [dbo].[Bestellingen] b " +
                 "INNER JOIN [dbo].[Klant] k ON b.KlantID = k.Id";
-            string sql2 = "SELECT BestellingID AS BestellingId, TruitjeID AS TruitjeId, Aantal FROM [dbo].[BestellingTruitje]";
             if (id != 0)
             {
                 if (isWhere)
@@ -185,11 +200,10 @@ namespace VerkoopVoetbalTruitjes.Data.ADO.NET
                 {
                     isAnd = true;
                 }
-                sql += "b.KlantID <= @KlantId";
+                sql += "b.KlantID = @KlantId";
             }
             SqlConnection connection = GetConnection();
             SqlCommand command = new(sql, connection);
-            SqlCommand command2 = new(sql2, connection);
             try
             {
                 connection.Open();
@@ -214,25 +228,49 @@ namespace VerkoopVoetbalTruitjes.Data.ADO.NET
                 {
                     Klant klant = new((int)reader["KlantId"], (string)reader["Naam"], (string)reader["Adres"]);
                     int bestellingId = (int)reader["Id"];
-                    IDataReader reader2 = command2.ExecuteReader();
-                    while (reader2.Read())
-                    {
-                        Club club = new((string)reader["Competitie"], (string)reader["Ploeg"]);
-                        ClubSet clubSet = new((bool)reader["Thuis"], (int)reader["Versie"]);
-                        Kledingmaat kledingmaat = (Kledingmaat)Enum.Parse(typeof(Kledingmaat), (string)reader["Maat"]);
-                        Voetbaltruitje voetbaltruitje = new((int)reader["VoetbaltruitjeId"], club, (string)reader["Seizoen"], (double)reader["Prijs"], kledingmaat, clubSet);
-                        int aantal = (int)reader["Aantal"];
-                        producten.Add(voetbaltruitje, aantal);
-                    }
-                    Bestelling bestelling = new((int)reader["Id"], klant, (DateTime)reader["Datum"], (double)reader["Verkoopprijs"], (bool)reader["Betaald"], producten);
+                    Bestelling bestelling = new(bestellingId, klant, (DateTime)reader["Datum"], (double)reader["Verkoopprijs"], (bool)reader["Betaald"], BestellingProductenWeergeven(bestellingId));
                     bestellingen.Add(bestelling);
-                    producten.Clear();
                 }
                 return bestellingen;
             }
             catch (Exception ex)
             {
                 throw new BestellingRepositoryADOException("BestellingWeergeven - error", ex);
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        private Dictionary<Voetbaltruitje, int> BestellingProductenWeergeven(int bestellingsId)
+        {
+            Dictionary<Voetbaltruitje, int> producten = new();
+            string sql2 = "SELECT bt.Id AS BTId, bt.BestellingID, bt.TruitjeID, bt.Aantal, t.* FROM [dbo].[BestellingTruitje] bt " +
+                "INNER JOIN [dbo].[Truitje] t ON bt.TruitjeID = t.Id;";
+            SqlConnection connection = GetConnection();
+            SqlCommand command2 = new(sql2, connection);
+            try
+            {
+                connection.Open();
+                IDataReader reader2 = command2.ExecuteReader();
+                while (reader2.Read())
+                {
+                    if (bestellingsId == (int)reader2["BestellingID"])
+                    {
+                        Club club = new((string)reader2["Competitie"], (string)reader2["Ploeg"]);
+                        ClubSet clubSet = new((bool)reader2["Thuis"], (int)reader2["Versie"]);
+                        Kledingmaat kledingmaat = (Kledingmaat)Enum.Parse(typeof(Kledingmaat), (string)reader2["Maat"]);
+                        Voetbaltruitje voetbaltruitje = new((int)reader2["Id"], club, (string)reader2["Seizoen"], (double)reader2["Prijs"], kledingmaat, clubSet);
+                        int aantal = (int)reader2["Aantal"];
+                        producten.Add(voetbaltruitje, aantal);
+                    }
+                }
+                return producten;
+            }
+            catch (Exception ex)
+            {
+                throw new BestellingRepositoryADOException("BestellingProductenWeergeven - error", ex);
             }
             finally
             {

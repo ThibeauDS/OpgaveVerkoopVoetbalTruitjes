@@ -48,6 +48,18 @@
         </Grid>
 
         <ListView Name="ListViewOrders" Grid.Row="1" Margin="10">
+            <ListView.Resources>
+                <ContextMenu x:Key="ItemContextMenu">
+                    <MenuItem Name="UpdateVoetbaltruitje" Header="Aanpassen" Click="UpdateVoetbaltruitje_Click" Command="{Binding Path=DataContext.MoreInfo, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListView}}"/>
+                    <MenuItem Name="DeleteVoetbaltruitje" Header="Verwijderen" Click="DeleteVoetbaltruitje_Click" Command="{Binding Path=DataContext.MoreInfo, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListView}}"/>
+                </ContextMenu>
+            </ListView.Resources>
+
+            <ListView.ItemContainerStyle>
+                <Style TargetType="{x:Type ListViewItem}" >
+                    <Setter Property="ContextMenu" Value="{StaticResource ItemContextMenu}" />
+                </Style>
+            </ListView.ItemContainerStyle>
             <!--<ListView.Resources>
                 <ContextMenu x:Key="ContextMenu" DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
                     <MenuItem Name="UpdateVoetbaltruitje" Header="Aanpassen" Click="UpdateVoetbaltruitje_Click"/>

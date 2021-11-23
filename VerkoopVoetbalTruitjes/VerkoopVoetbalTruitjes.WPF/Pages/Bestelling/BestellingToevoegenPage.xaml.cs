@@ -119,6 +119,7 @@ namespace VerkoopVoetbalTruitjes.WPF.Pages.Bestelling
 
         private void DataGridTruitjes_Loaded(object sender, RoutedEventArgs e)
         {
+            //TODO: Samen met de docent eens bekijken hoe dit valt correct op te lossen zonder de observableCollection te verliezen
             ObservableCollection<KeyValuePair<Domain.Klassen.Voetbaltruitje, int>> oc = new();
             if (_truitjes != null && _truitjes.Count != 0)
             {

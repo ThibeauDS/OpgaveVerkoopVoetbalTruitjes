@@ -128,10 +128,17 @@ namespace VerkoopVoetbalTruitjes.WPF.Pages.Voetbaltruitje
 
         private void DeleteVoetbaltruitje_Click(object sender, RoutedEventArgs e)
         {
-            Domain.Klassen.Voetbaltruitje voetbaltruitje = (Domain.Klassen.Voetbaltruitje)DataGridTruitjes.CurrentItem;
-            MainWindow.voetbaltruitjeBeheerder.VoetbaltruitjeVerwijderen(voetbaltruitje);
-            MessageBox.Show("Voetbaltruitje is verwijderd", Title, MessageBoxButton.OK, MessageBoxImage.Information);
-            SearchBtn_Click(sender, e);
+            try
+            {
+                Domain.Klassen.Voetbaltruitje voetbaltruitje = (Domain.Klassen.Voetbaltruitje)DataGridTruitjes.CurrentItem;
+                MainWindow.voetbaltruitjeBeheerder.VoetbaltruitjeVerwijderen(voetbaltruitje);
+                MessageBox.Show("Voetbaltruitje is verwijderd", Title, MessageBoxButton.OK, MessageBoxImage.Information);
+                SearchBtn_Click(sender, e);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, Title, MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

@@ -71,12 +71,23 @@ namespace VerkoopVoetbalTruitjes.WPF.Pages.Bestelling
 
         private void UpdateVoetbaltruitje_Click(object sender, RoutedEventArgs e)
         {
-
+            Application.Current.Properties["GeselecteerdeBestellingenUpdate"] = (Domain.Klassen.Bestelling)ListViewOrders.SelectedItem;
+            NavigationService.Navigate(new Uri("/Pages/Bestelling/BestellingUpdatenPage.xaml", UriKind.Relative));
         }
 
         private void DeleteVoetbaltruitje_Click(object sender, RoutedEventArgs e)
         {
-
+            try
+            {
+                Domain.Klassen.Bestelling bestelling = (Domain.Klassen.Bestelling)ListViewOrders.SelectedItem;
+                MainWindow.bestellingBeheerder.BestellingVerwijderen(bestelling);
+                MessageBox.Show("Bestelling is verwijderd", Title, MessageBoxButton.OK, MessageBoxImage.Information);
+                SearchBtn_Click(sender, e);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, Title, MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void Customer_Loaded(object sender, RoutedEventArgs e)
