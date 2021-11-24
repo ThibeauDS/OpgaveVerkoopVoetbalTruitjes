@@ -80,7 +80,7 @@ namespace VerkoopVoetbalTruitjes.WPF.Pages.Bestelling
             Application.Current.Properties["Klant"] = null;
             if (_klant != null)
             {
-                Customer.Text = _klant.ToString();
+                Customer.Text = _klant.ToText(true);
                 Application.Current.Properties["SavedKlant"] = _klant;
                 _klantSave = _klant;
             }
@@ -95,7 +95,7 @@ namespace VerkoopVoetbalTruitjes.WPF.Pages.Bestelling
                 {
                     price += item.Prijs * _truitjes[item];
                 }
-                Price.Text = price.ToString();
+                Price.Text = price.ToString("F2");
             }
         }
 

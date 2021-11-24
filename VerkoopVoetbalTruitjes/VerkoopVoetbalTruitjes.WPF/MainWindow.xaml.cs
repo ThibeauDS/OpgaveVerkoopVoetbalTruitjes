@@ -59,6 +59,7 @@ namespace VerkoopVoetbalTruitjes.WPF
 
         private void BestellingenBtn_Click(object sender, RoutedEventArgs e)
         {
+            Application.Current.Properties["GeselecteerdeBestellingenUpdate"] = null;
             MainView.Navigate(_bestellingenPage);
         }
 

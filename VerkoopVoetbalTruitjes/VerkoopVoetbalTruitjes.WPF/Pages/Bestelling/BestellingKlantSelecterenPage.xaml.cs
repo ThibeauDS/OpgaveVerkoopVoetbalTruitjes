@@ -21,6 +21,10 @@ namespace VerkoopVoetbalTruitjes.WPF.Pages.Bestelling
     /// </summary>
     public partial class BestellingKlantSelecterenPage : Page
     {
+        #region Properties
+        private Domain.Klassen.Bestelling _geselecteerdeBestellingUpdate = (Domain.Klassen.Bestelling)Application.Current.Properties["GeselecteerdeBestellingenUpdate"];
+        #endregion
+
         public BestellingKlantSelecterenPage()
         {
             InitializeComponent();
@@ -64,8 +68,13 @@ namespace VerkoopVoetbalTruitjes.WPF.Pages.Bestelling
             {
                 if (ListViewCustomers.SelectedItem != null)
                 {
-                    var x = ListViewCustomers.SelectedItem.ToString();
-                    Application.Current.Properties["Klant"] = (Domain.Klassen.Klant)ListViewCustomers.SelectedItem;
+                    Domain.Klassen.Klant klant = (Domain.Klassen.Klant)ListViewCustomers.SelectedItem;
+                    Application.Current.Properties["Klant"] = klant;
+                    if (_geselecteerdeBestellingUpdate != null)
+                    {
+                        _geselecteerdeBestellingUpdate.ZetKlant(klant);
+                        Application.Current.Properties["GeselecteerdeBestellingenUpdate"] = _geselecteerdeBestellingUpdate;
+                    }
                     NavigationService.GoBack();
                 }
                 else

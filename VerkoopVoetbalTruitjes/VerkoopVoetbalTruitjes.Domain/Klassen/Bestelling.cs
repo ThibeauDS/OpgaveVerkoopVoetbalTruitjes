@@ -92,6 +92,10 @@ namespace VerkoopVoetbalTruitjes.Domain.Klassen
         {
             return _producten;
         }
+        public void VoegProductenToe(Dictionary<Voetbaltruitje, int> producten)
+        {
+            _producten = producten;
+        }
         public double Kostprijs() //procent
         {
             double prijs = 0.0;

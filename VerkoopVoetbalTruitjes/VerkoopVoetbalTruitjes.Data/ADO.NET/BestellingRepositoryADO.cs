@@ -61,7 +61,6 @@ namespace VerkoopVoetbalTruitjes.Data.ADO.NET
             var producten = bestelling.GeefProducten();
 
             string sql = "INSERT INTO [dbo].[Bestellingen] (Datum, Verkoopprijs, Betaald, KlantID) VALUES (@Datum, @Verkoopprijs, @Betaald, @KlantID) SELECT SCOPE_IDENTITY()";
-            //SqlTransaction sqlTransaction = null;
             SqlConnection connection = GetConnection();
             SqlCommand command = new(sql, connection);
             try
@@ -72,7 +71,6 @@ namespace VerkoopVoetbalTruitjes.Data.ADO.NET
                 command.Parameters.AddWithValue("@Verkoopprijs", bestelling.Prijs);
                 command.Parameters.AddWithValue("@Betaald", bestelling.Betaald);
                 command.Parameters.AddWithValue("@KlantID", bestelling.Klant.KlantId);
-                //command.Parameters.AddWithValue("@TruitjeID", voetbaltruitje.Key.Id);
                 bestellingsId = Decimal.ToInt32((decimal)command.ExecuteScalar());
                 foreach (var voetbaltruitje in producten)
                 {
@@ -86,12 +84,10 @@ namespace VerkoopVoetbalTruitjes.Data.ADO.NET
             }
             catch (Exception ex)
             {
-                //sqlTransaction.Rollback();
                 throw new BestellingRepositoryADOException("BestellingToevoegen - error", ex);
             }
             finally
             {
-                //sqlTransaction.Commit();
                 connection.Close();
             }
         }
@@ -99,7 +95,34 @@ namespace VerkoopVoetbalTruitjes.Data.ADO.NET
         public void BestellingUpdaten(Bestelling bestelling)
         {
             //TODO: Update van een bestelling
-            throw new NotImplementedException();
+            string sql = "UPDATE [dbo].[Bestellingen] Verkoopprijs = @Verkoopprijs, Betaald = @Betaald, KlantID = @KlantID WHERE Id = @Id";
+            SqlConnection connection = GetConnection();
+            SqlCommand command = new(sql, connection);
+            try
+            {
+                connection.Open();
+                command.Parameters.AddWithValue("@Verkoopprijs", bestelling.Prijs);
+                command.Parameters.AddWithValue("@Betaald", bestelling.Betaald);
+                command.Parameters.AddWithValue("@KlantID", bestelling.Klant.KlantId);
+                //TODO: Navragen wat er moet geupdate worden.
+                //foreach (var voetbaltruitje in producten)
+                //{
+                //    string sql2 = "INSERT INTO [dbo].[BestellingTruitje] (BestellingID, TruitjeID, Aantal) VALUES (@BestellingID, @TruitjeID, @Aantal)";
+                //    SqlCommand command2 = new(sql2, connection);
+                //    command2.Parameters.AddWithValue("@BestellingID", bestellingsId);
+                //    command2.Parameters.AddWithValue("@TruitjeID", voetbaltruitje.Key.Id);
+                //    command2.Parameters.AddWithValue("@Aantal", voetbaltruitje.Value);
+                //    command2.ExecuteNonQuery();
+                //}
+            }
+            catch (Exception ex)
+            {
+                throw new BestellingRepositoryADOException("BestellingToevoegen - error", ex);
+            }
+            finally
+            {
+                connection.Close();
+            }
         }
 
         public void BestellingVerwijderen(Bestelling bestelling)

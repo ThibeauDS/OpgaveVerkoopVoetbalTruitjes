@@ -22,7 +22,8 @@ namespace VerkoopVoetbalTruitjes.WPF.Pages.Bestelling
     public partial class BestellingTruitjeSelecterenPage : Page
     {
         #region Properties
-        Dictionary<Domain.Klassen.Voetbaltruitje, int> _truitjes = new();
+        private Dictionary<Domain.Klassen.Voetbaltruitje, int> _truitjes = new();
+        private Domain.Klassen.Bestelling _geselecteerdeBestellingUpdate = (Domain.Klassen.Bestelling)Application.Current.Properties["GeselecteerdeBestellingenUpdate"];
         #endregion
 
         public BestellingTruitjeSelecterenPage()
@@ -133,27 +134,60 @@ namespace VerkoopVoetbalTruitjes.WPF.Pages.Bestelling
         {
             try
             {
-                if (ListViewTruitjes.SelectedItem != null)
+                if (_geselecteerdeBestellingUpdate == null)
                 {
-                    Domain.Klassen.Voetbaltruitje voetbaltruitje = (Domain.Klassen.Voetbaltruitje)ListViewTruitjes.SelectedItem;
-                    if (!_truitjes.ContainsKey(voetbaltruitje))
+                    if (ListViewTruitjes.SelectedItem != null)
                     {
-                        _truitjes.Add(voetbaltruitje, 1);
-                        Application.Current.Properties["Truitjes"] = _truitjes;
-                        NavigationService.GoBack();
+                        Domain.Klassen.Voetbaltruitje voetbaltruitje = (Domain.Klassen.Voetbaltruitje)ListViewTruitjes.SelectedItem;
+                        if (!_truitjes.ContainsKey(voetbaltruitje))
+                        {
+                            _truitjes.Add(voetbaltruitje, 1);
+                            Application.Current.Properties["Truitjes"] = _truitjes;
+                            Application.Current.Properties["GeselecteerdeBestellingenUpdate"] = _geselecteerdeBestellingUpdate;
+                            NavigationService.GoBack();
+                        }
+                        else
+                        {
+                            _truitjes.TryGetValue(voetbaltruitje, out int value);
+                            _truitjes[voetbaltruitje] = value + 1;
+                            Application.Current.Properties["Truitjes"] = _truitjes;
+                            Application.Current.Properties["GeselecteerdeBestellingenUpdate"] = _geselecteerdeBestellingUpdate;
+                            NavigationService.GoBack();
+                        }
                     }
                     else
                     {
-                        _truitjes.TryGetValue(voetbaltruitje, out int value);
-                        _truitjes[voetbaltruitje] = value + 1;
-                        Application.Current.Properties["Truitjes"] = _truitjes;
-                        NavigationService.GoBack();
+                        MessageBox.Show("Er is geen truitje geselecteerd", Title, MessageBoxButton.OK, MessageBoxImage.Warning);
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Er is geen truitje geselecteerd", Title, MessageBoxButton.OK, MessageBoxImage.Warning);
+                    Dictionary<Domain.Klassen.Voetbaltruitje, int> truitjes = (Dictionary<Domain.Klassen.Voetbaltruitje, int>)_geselecteerdeBestellingUpdate.GeefProducten();
+                    if (ListViewTruitjes.SelectedItem != null)
+                    {
+                        Domain.Klassen.Voetbaltruitje voetbaltruitje = (Domain.Klassen.Voetbaltruitje)ListViewTruitjes.SelectedItem;
+                        if (!truitjes.ContainsKey(voetbaltruitje))
+                        {
+                            truitjes.Add(voetbaltruitje, 1);
+                            _geselecteerdeBestellingUpdate.VoegProductenToe(truitjes);
+                            Application.Current.Properties["GeselecteerdeBestellingenUpdate"] = _geselecteerdeBestellingUpdate;
+                            NavigationService.GoBack();
+                        }
+                        else
+                        {
+                            truitjes.TryGetValue(voetbaltruitje, out int value);
+                            truitjes[voetbaltruitje] = value + 1;
+                            _geselecteerdeBestellingUpdate.VoegProductenToe(truitjes);
+                            Application.Current.Properties["GeselecteerdeBestellingenUpdate"] = _geselecteerdeBestellingUpdate;
+                            NavigationService.GoBack();
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Er is geen truitje geselecteerd", Title, MessageBoxButton.OK, MessageBoxImage.Warning);
+                    }
                 }
+
             }
             catch (Exception ex)
             {
