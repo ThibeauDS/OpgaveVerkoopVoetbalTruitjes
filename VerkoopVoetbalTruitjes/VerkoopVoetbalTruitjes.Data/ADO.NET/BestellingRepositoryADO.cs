@@ -62,11 +62,12 @@ namespace VerkoopVoetbalTruitjes.Data.ADO.NET
 
             string sql = "INSERT INTO [dbo].[Bestellingen] (Datum, Verkoopprijs, Betaald, KlantID) VALUES (@Datum, @Verkoopprijs, @Betaald, @KlantID) SELECT SCOPE_IDENTITY()";
             SqlConnection connection = GetConnection();
-            SqlCommand command = new(sql, connection);
+            using SqlCommand command = new(sql, connection);
+            connection.Open();
             SqlTransaction transaction = connection.BeginTransaction();
+            command.Transaction = transaction;
             try
             {
-                connection.Open();
                 command.Parameters.AddWithValue("@Datum", bestelling.Tijdstip);
                 command.Parameters.AddWithValue("@Verkoopprijs", bestelling.Prijs);
                 command.Parameters.AddWithValue("@Betaald", bestelling.Betaald);
@@ -77,6 +78,7 @@ namespace VerkoopVoetbalTruitjes.Data.ADO.NET
                 {
                     string sql2 = "INSERT INTO [dbo].[BestellingTruitje] (BestellingID, TruitjeID, Aantal) VALUES (@BestellingID, @TruitjeID, @Aantal)";
                     SqlCommand command2 = new(sql2, connection);
+                    command2.Transaction = transaction;
                     command2.Parameters.AddWithValue("@BestellingID", bestellingsId);
                     command2.Parameters.AddWithValue("@TruitjeID", voetbaltruitje.Key.Id);
                     command2.Parameters.AddWithValue("@Aantal", voetbaltruitje.Value);
@@ -93,33 +95,37 @@ namespace VerkoopVoetbalTruitjes.Data.ADO.NET
             {
                 connection.Close();
             }
+
         }
 
         public void BestellingUpdaten(Bestelling bestelling)
         {
             //TODO: Update van een bestelling
             var producten = bestelling.GeefProducten();
-            string sql = "UPDATE [dbo].[Bestellingen] Verkoopprijs = @Verkoopprijs, Betaald = @Betaald, KlantID = @KlantID WHERE Id = @Id";
+            string sql = "UPDATE [dbo].[Bestellingen] SET Verkoopprijs = @Verkoopprijs, Betaald = @Betaald, KlantID = @KlantID WHERE Id = @Id";
             string sql2 = "INSERT INTO [dbo].[BestellingTruitje] (BestellingID, TruitjeID, Aantal) VALUES (@BestellingID, @TruitjeID, @Aantal)";
             string sql3 = "DELETE FROM [dbo].[BestellingTruitje] WHERE BestellingID = @BestellingID";
             SqlConnection connection = GetConnection();
+            SqlCommand command = new(sql, connection);
+            SqlCommand command3 = new(sql3, connection);
+            connection.Open();
             SqlTransaction transaction = connection.BeginTransaction();
+            command.Transaction = transaction;
+            command3.Transaction = transaction;
             try
             {
-                connection.Open();
-                SqlCommand command = new(sql, connection);
                 command.Parameters.AddWithValue("@Verkoopprijs", bestelling.Prijs);
                 command.Parameters.AddWithValue("@Betaald", bestelling.Betaald);
                 command.Parameters.AddWithValue("@KlantID", bestelling.Klant.KlantId);
+                command.Parameters.AddWithValue("@Id", bestelling.BestellingId);
                 command.ExecuteNonQuery();
-
-                SqlCommand command3 = new(sql3, connection);
                 command3.Parameters.AddWithValue("@BestellingID", bestelling.BestellingId);
                 command3.ExecuteNonQuery();
 
                 foreach (var voetbaltruitje in producten)
                 {
                     SqlCommand command2 = new(sql2, connection);
+                    command2.Transaction = transaction;
                     command2.Parameters.AddWithValue("@BestellingID", bestelling.BestellingId);
                     command2.Parameters.AddWithValue("@TruitjeID", voetbaltruitje.Key.Id);
                     command2.Parameters.AddWithValue("@Aantal", voetbaltruitje.Value);
@@ -146,6 +152,8 @@ namespace VerkoopVoetbalTruitjes.Data.ADO.NET
             using SqlCommand command = new(sql, connection);
             using SqlCommand command2 = new(sql2, connection);
             SqlTransaction transaction = connection.BeginTransaction();
+            command.Transaction = transaction;
+            command2.Transaction = transaction;
             try
             {
                 connection.Open();

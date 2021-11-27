@@ -92,6 +92,7 @@ namespace VerkoopVoetbalTruitjes.WPF.Pages.Bestelling
             {
                 MainWindow.bestellingBeheerder.BestellingUpdaten(_geselecteerdeBestellingUpdate);
                 Application.Current.Properties["GeselecteerdeBestellingenUpdate"] = null;
+                Application.Current.Properties["Klant"] = null;
                 NavigationService.GoBack();
             }
             catch (Exception ex)
@@ -118,6 +119,7 @@ namespace VerkoopVoetbalTruitjes.WPF.Pages.Bestelling
         private void BackBtn_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Properties["GeselecteerdeBestellingenUpdate"] = null;
+            Application.Current.Properties["Klant"] = null;
             NavigationService.GoBack();
         }
     }
