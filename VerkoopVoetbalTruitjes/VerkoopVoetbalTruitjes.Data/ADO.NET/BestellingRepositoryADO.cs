@@ -63,15 +63,16 @@ namespace VerkoopVoetbalTruitjes.Data.ADO.NET
             string sql = "INSERT INTO [dbo].[Bestellingen] (Datum, Verkoopprijs, Betaald, KlantID) VALUES (@Datum, @Verkoopprijs, @Betaald, @KlantID) SELECT SCOPE_IDENTITY()";
             SqlConnection connection = GetConnection();
             SqlCommand command = new(sql, connection);
+            SqlTransaction transaction = connection.BeginTransaction();
             try
             {
                 connection.Open();
-                //sqlTransaction = connection.BeginTransaction();
                 command.Parameters.AddWithValue("@Datum", bestelling.Tijdstip);
                 command.Parameters.AddWithValue("@Verkoopprijs", bestelling.Prijs);
                 command.Parameters.AddWithValue("@Betaald", bestelling.Betaald);
                 command.Parameters.AddWithValue("@KlantID", bestelling.Klant.KlantId);
                 bestellingsId = Decimal.ToInt32((decimal)command.ExecuteScalar());
+
                 foreach (var voetbaltruitje in producten)
                 {
                     string sql2 = "INSERT INTO [dbo].[BestellingTruitje] (BestellingID, TruitjeID, Aantal) VALUES (@BestellingID, @TruitjeID, @Aantal)";
@@ -81,9 +82,11 @@ namespace VerkoopVoetbalTruitjes.Data.ADO.NET
                     command2.Parameters.AddWithValue("@Aantal", voetbaltruitje.Value);
                     command2.ExecuteNonQuery();
                 }
+                transaction.Commit();
             }
             catch (Exception ex)
             {
+                transaction.Rollback();
                 throw new BestellingRepositoryADOException("BestellingToevoegen - error", ex);
             }
             finally
@@ -95,28 +98,38 @@ namespace VerkoopVoetbalTruitjes.Data.ADO.NET
         public void BestellingUpdaten(Bestelling bestelling)
         {
             //TODO: Update van een bestelling
+            var producten = bestelling.GeefProducten();
             string sql = "UPDATE [dbo].[Bestellingen] Verkoopprijs = @Verkoopprijs, Betaald = @Betaald, KlantID = @KlantID WHERE Id = @Id";
+            string sql2 = "INSERT INTO [dbo].[BestellingTruitje] (BestellingID, TruitjeID, Aantal) VALUES (@BestellingID, @TruitjeID, @Aantal)";
+            string sql3 = "DELETE FROM [dbo].[BestellingTruitje] WHERE BestellingID = @BestellingID";
             SqlConnection connection = GetConnection();
-            SqlCommand command = new(sql, connection);
+            SqlTransaction transaction = connection.BeginTransaction();
             try
             {
                 connection.Open();
+                SqlCommand command = new(sql, connection);
                 command.Parameters.AddWithValue("@Verkoopprijs", bestelling.Prijs);
                 command.Parameters.AddWithValue("@Betaald", bestelling.Betaald);
                 command.Parameters.AddWithValue("@KlantID", bestelling.Klant.KlantId);
-                //TODO: Navragen wat er moet geupdate worden.
-                //foreach (var voetbaltruitje in producten)
-                //{
-                //    string sql2 = "INSERT INTO [dbo].[BestellingTruitje] (BestellingID, TruitjeID, Aantal) VALUES (@BestellingID, @TruitjeID, @Aantal)";
-                //    SqlCommand command2 = new(sql2, connection);
-                //    command2.Parameters.AddWithValue("@BestellingID", bestellingsId);
-                //    command2.Parameters.AddWithValue("@TruitjeID", voetbaltruitje.Key.Id);
-                //    command2.Parameters.AddWithValue("@Aantal", voetbaltruitje.Value);
-                //    command2.ExecuteNonQuery();
-                //}
+                command.ExecuteNonQuery();
+
+                SqlCommand command3 = new(sql3, connection);
+                command3.Parameters.AddWithValue("@BestellingID", bestelling.BestellingId);
+                command3.ExecuteNonQuery();
+
+                foreach (var voetbaltruitje in producten)
+                {
+                    SqlCommand command2 = new(sql2, connection);
+                    command2.Parameters.AddWithValue("@BestellingID", bestelling.BestellingId);
+                    command2.Parameters.AddWithValue("@TruitjeID", voetbaltruitje.Key.Id);
+                    command2.Parameters.AddWithValue("@Aantal", voetbaltruitje.Value);
+                    command2.ExecuteNonQuery();
+                }
+                transaction.Commit();
             }
             catch (Exception ex)
             {
+                transaction.Rollback();
                 throw new BestellingRepositoryADOException("BestellingToevoegen - error", ex);
             }
             finally
@@ -132,16 +145,20 @@ namespace VerkoopVoetbalTruitjes.Data.ADO.NET
             SqlConnection connection = GetConnection();
             using SqlCommand command = new(sql, connection);
             using SqlCommand command2 = new(sql2, connection);
+            SqlTransaction transaction = connection.BeginTransaction();
             try
             {
                 connection.Open();
                 command.Parameters.AddWithValue("@BestellingID", bestelling.BestellingId);
                 command.ExecuteNonQuery();
+
                 command2.Parameters.AddWithValue("@BestellingID", bestelling.BestellingId);
                 command2.ExecuteNonQuery();
+                transaction.Commit();
             }
             catch (Exception ex)
             {
+                transaction.Rollback();
                 throw new BestellingRepositoryADOException("BestellingVerwijderen - error", ex);
             }
             finally
