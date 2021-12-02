@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using VerkoopVoetbalTruitjes.Domain.Klassen;
 
 namespace VerkoopVoetbalTruitjes.WPF.Pages.Bestelling
 {
@@ -24,7 +25,7 @@ namespace VerkoopVoetbalTruitjes.WPF.Pages.Bestelling
         #region Properties
         private Domain.Klassen.Klant _klant = (Domain.Klassen.Klant)Application.Current.Properties["Klant"];
         private Domain.Klassen.Klant _klantSave = (Domain.Klassen.Klant)Application.Current.Properties["SavedKlant"];
-        private Dictionary<Domain.Klassen.Voetbaltruitje, int> _truitjes = (Dictionary<Domain.Klassen.Voetbaltruitje, int>)Application.Current.Properties["Truitjes"];
+        private List<VoetbaltruitjesAantal> _truitjes = (List<VoetbaltruitjesAantal>)Application.Current.Properties["Truitjes"];
         #endregion
 
         public BestellingToevoegenPage()
@@ -46,15 +47,21 @@ namespace VerkoopVoetbalTruitjes.WPF.Pages.Bestelling
         {
             try
             {
+                List<VoetbaltruitjesAantal> voetbaltruitjes = DataGridTruitjes.Items.OfType<VoetbaltruitjesAantal>().ToList();
                 bool betaald = false;
                 if (IsPayed.IsChecked != false)
                 {
                     betaald = true;
                 }
-                double.TryParse(Price.Text, out double prijs);
+                _ = double.TryParse(Price.Text, out double prijs);
                 if (Customer.Text != null && _truitjes != null && _truitjes.Count != 0 && _klantSave != null)
                 {
-                    Domain.Klassen.Bestelling bestelling = new(_klantSave, DateTime.Now, prijs, betaald, _truitjes);
+                    Dictionary<Domain.Klassen.Voetbaltruitje, int> truitjes = new();
+                    foreach (var item in voetbaltruitjes)
+                    {
+                        truitjes.Add(item.Voetbaltruitje, item.Aantal);
+                    }
+                    Domain.Klassen.Bestelling bestelling = new(_klantSave, DateTime.Now, prijs, betaald, truitjes);
                     MainWindow.bestellingBeheerder.BestellingToevoegen(bestelling);
                     Application.Current.Properties["Truitjes"] = null;
                     Customer.Text = null;
@@ -88,24 +95,22 @@ namespace VerkoopVoetbalTruitjes.WPF.Pages.Bestelling
 
         private void Price_Loaded(object sender, RoutedEventArgs e)
         {
-            if (_truitjes != null)
-            {
-                double price = 0;
-                foreach (var item in _truitjes.Keys)
-                {
-                    price += item.Prijs * _truitjes[item];
-                }
-                Price.Text = price.ToString("F2");
-            }
+            PrijsLaden();
         }
 
         private void DeleteVoetbaltruitje_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                var x = (KeyValuePair<Domain.Klassen.Voetbaltruitje, int>)DataGridTruitjes.CurrentItem;
-                Domain.Klassen.Voetbaltruitje voetbaltruitje = x.Key;
-                _truitjes.Remove(voetbaltruitje);
+                VoetbaltruitjesAantal x = (VoetbaltruitjesAantal)DataGridTruitjes.CurrentItem;
+                foreach (var item in _truitjes)
+                {
+                    if (item.Voetbaltruitje.Equals(x.Voetbaltruitje) && item.Aantal.Equals(x.Aantal))
+                    {
+                        _truitjes.Remove(item);
+                        break;
+                    }
+                }
                 Application.Current.Properties["Truitjes"] = _truitjes;
                 MessageBox.Show("Truitje is verwijderd uit de bestelling", Title, MessageBoxButton.OK, MessageBoxImage.Information);
                 DataGridTruitjes_Loaded(sender, e);
@@ -119,13 +124,13 @@ namespace VerkoopVoetbalTruitjes.WPF.Pages.Bestelling
 
         private void DataGridTruitjes_Loaded(object sender, RoutedEventArgs e)
         {
-            //TODO: Samen met de docent eens bekijken hoe dit valt correct op te lossen zonder de observableCollection te verliezen
-            ObservableCollection<KeyValuePair<Domain.Klassen.Voetbaltruitje, int>> oc = new();
+            ObservableCollection<VoetbaltruitjesAantal> oc = new();
             if (_truitjes != null && _truitjes.Count != 0)
             {
                 foreach (var truitje in _truitjes)
                 {
-                    oc.Add(truitje);
+                    VoetbaltruitjesAantal voetbaltruitjesAantal = new(truitje.Voetbaltruitje, truitje.Aantal);
+                    oc.Add(voetbaltruitjesAantal);
                 }
                 DataGridTruitjes.ItemsSource = oc;
                 Price_Loaded(sender, e);
@@ -134,6 +139,28 @@ namespace VerkoopVoetbalTruitjes.WPF.Pages.Bestelling
             {
                 oc.Clear();
                 DataGridTruitjes.ItemsSource = oc;
+            }
+        }
+
+        private void DataGridTruitjes_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
+        {
+            VoetbaltruitjesAantal v = (VoetbaltruitjesAantal)DataGridTruitjes.SelectedItem;
+            var truitje = _truitjes.Where(y => y.Voetbaltruitje == v.Voetbaltruitje).ToList()[0];
+            var element = (TextBox)e.EditingElement;
+            truitje.Aantal = int.Parse(element.Text);
+            PrijsLaden();
+        }
+
+        private void PrijsLaden()
+        {
+            if (_truitjes != null)
+            {
+                double price = 0;
+                foreach (var item in _truitjes)
+                {
+                    price += item.Voetbaltruitje.Prijs * item.Aantal;
+                }
+                Price.Text = price.ToString("F2");
             }
         }
     }

@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using VerkoopVoetbalTruitjes.Domain.Klassen;
 
 namespace VerkoopVoetbalTruitjes.WPF.Pages.Bestelling
 {
@@ -49,12 +50,12 @@ namespace VerkoopVoetbalTruitjes.WPF.Pages.Bestelling
 
         private void DataGridTruitjes_Loaded(object sender, RoutedEventArgs e)
         {
-            ObservableCollection<KeyValuePair<Domain.Klassen.Voetbaltruitje, int>> oc = new();
+            ObservableCollection<VoetbaltruitjesAantal> oc = new();
             if (_geselecteerdeBestellingUpdate.GeefProducten() != null && _geselecteerdeBestellingUpdate.GeefProducten().Count != 0)
             {
                 foreach (var truitje in _geselecteerdeBestellingUpdate.GeefProducten())
                 {
-                    oc.Add(truitje);
+                    oc.Add(new VoetbaltruitjesAantal(truitje.Key, truitje.Value));
                 }
                 DataGridTruitjes.ItemsSource = oc;
                 Price_Loaded(sender, e);
@@ -70,12 +71,22 @@ namespace VerkoopVoetbalTruitjes.WPF.Pages.Bestelling
         {
             try
             {
-                Dictionary<Domain.Klassen.Voetbaltruitje, int> truitjes = new();
-                truitjes = (Dictionary<Domain.Klassen.Voetbaltruitje, int>)_geselecteerdeBestellingUpdate.GeefProducten();
-                var x = (KeyValuePair<Domain.Klassen.Voetbaltruitje, int>)DataGridTruitjes.CurrentItem;
-                Domain.Klassen.Voetbaltruitje voetbaltruitje = x.Key;
-                truitjes.Remove(voetbaltruitje);
-                Application.Current.Properties["GeselecteerdeBestellingenUpdate"] = truitjes;
+                List<VoetbaltruitjesAantal> truitjes = new();
+                foreach (var item in _geselecteerdeBestellingUpdate.GeefProducten())
+                {
+                    truitjes.Add(new VoetbaltruitjesAantal(item.Key, item.Value));
+                }
+                VoetbaltruitjesAantal x = (VoetbaltruitjesAantal)DataGridTruitjes.CurrentItem;
+                foreach (var item in truitjes)
+                {
+                    if (item.Voetbaltruitje.Equals(x.Voetbaltruitje) && item.Aantal.Equals(x.Aantal))
+                    {
+                        truitjes.Remove(item);
+                        _geselecteerdeBestellingUpdate.VerwijderProduct(item.Voetbaltruitje, item.Aantal);
+                        break;
+                    }
+                }
+                Application.Current.Properties["GeselecteerdeBestellingenUpdate"] = _geselecteerdeBestellingUpdate;
                 MessageBox.Show("Truitje is verwijderd uit de bestelling", Title, MessageBoxButton.OK, MessageBoxImage.Information);
                 DataGridTruitjes_Loaded(sender, e);
                 Price_Loaded(sender, e);
@@ -93,6 +104,7 @@ namespace VerkoopVoetbalTruitjes.WPF.Pages.Bestelling
                 MainWindow.bestellingBeheerder.BestellingUpdaten(_geselecteerdeBestellingUpdate);
                 Application.Current.Properties["GeselecteerdeBestellingenUpdate"] = null;
                 Application.Current.Properties["Klant"] = null;
+                MessageBox.Show("Bestelling is geüpdate.", Title, MessageBoxButton.OK, MessageBoxImage.Information);
                 NavigationService.GoBack();
             }
             catch (Exception ex)
@@ -103,17 +115,19 @@ namespace VerkoopVoetbalTruitjes.WPF.Pages.Bestelling
 
         private void Price_Loaded(object sender, RoutedEventArgs e)
         {
+            PrijsLaden(DictionaryNaarListTruitjes());
+        }
+
+        private List<VoetbaltruitjesAantal> DictionaryNaarListTruitjes()
+        {
             Dictionary<Domain.Klassen.Voetbaltruitje, int> truitjes = new();
             truitjes = (Dictionary<Domain.Klassen.Voetbaltruitje, int>)_geselecteerdeBestellingUpdate.GeefProducten();
-            if (truitjes != null)
+            List<VoetbaltruitjesAantal> voetbaltruitjesAantals = new();
+            foreach (var truitje in truitjes)
             {
-                double price = 0;
-                foreach (var item in truitjes.Keys)
-                {
-                    price += item.Prijs * truitjes[item];
-                }
-                Price.Text = price.ToString("F2");
+                voetbaltruitjesAantals.Add(new VoetbaltruitjesAantal(truitje.Key, truitje.Value));
             }
+            return voetbaltruitjesAantals;
         }
 
         private void BackBtn_Click(object sender, RoutedEventArgs e)
@@ -121,6 +135,41 @@ namespace VerkoopVoetbalTruitjes.WPF.Pages.Bestelling
             Application.Current.Properties["GeselecteerdeBestellingenUpdate"] = null;
             Application.Current.Properties["Klant"] = null;
             NavigationService.GoBack();
+        }
+
+        private void DataGridTruitjes_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
+        {
+            VoetbaltruitjesAantal v = (VoetbaltruitjesAantal)DataGridTruitjes.SelectedItem;
+            List<VoetbaltruitjesAantal> truitjes = DictionaryNaarListTruitjes();
+            var truitje = truitjes.Where(y => y.Voetbaltruitje == v.Voetbaltruitje).ToList()[0];
+            var element = (TextBox)e.EditingElement;
+            truitje.Aantal = int.Parse(element.Text);
+            UpdateBestellingTruitjes(truitjes);
+            PrijsLaden(DictionaryNaarListTruitjes());
+        }
+
+        private void UpdateBestellingTruitjes(List<VoetbaltruitjesAantal> truitjes)
+        {
+            Dictionary<Domain.Klassen.Voetbaltruitje, int> keyValuePairs = new();
+            foreach (var item in truitjes)
+            {
+                keyValuePairs.Add(item.Voetbaltruitje, item.Aantal);
+            }
+            _geselecteerdeBestellingUpdate.VoegProductenToe(keyValuePairs);
+            Application.Current.Properties["GeselecteerdeBestellingenUpdate"] = _geselecteerdeBestellingUpdate;
+        }
+
+        private void PrijsLaden(List<VoetbaltruitjesAantal> truitjes)
+        {
+            if (truitjes != null)
+            {
+                double price = 0;
+                foreach (var item in truitjes)
+                {
+                    price += item.Voetbaltruitje.Prijs * item.Aantal;
+                }
+                Price.Text = price.ToString("F2");
+            }
         }
     }
 }

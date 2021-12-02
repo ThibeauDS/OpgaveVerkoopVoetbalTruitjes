@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using VerkoopVoetbalTruitjes.Domain.Klassen;
 
 namespace VerkoopVoetbalTruitjes.WPF.Pages.Bestelling
 {
@@ -22,7 +23,7 @@ namespace VerkoopVoetbalTruitjes.WPF.Pages.Bestelling
     public partial class BestellingTruitjeSelecterenPage : Page
     {
         #region Properties
-        private Dictionary<Domain.Klassen.Voetbaltruitje, int> _truitjes = new();
+        private List<VoetbaltruitjesAantal> _voetbaltruitjesAantals = new();
         private Domain.Klassen.Bestelling _geselecteerdeBestellingUpdate = (Domain.Klassen.Bestelling)Application.Current.Properties["GeselecteerdeBestellingenUpdate"];
         #endregion
 
@@ -139,18 +140,31 @@ namespace VerkoopVoetbalTruitjes.WPF.Pages.Bestelling
                     if (ListViewTruitjes.SelectedItem != null)
                     {
                         Domain.Klassen.Voetbaltruitje voetbaltruitje = (Domain.Klassen.Voetbaltruitje)ListViewTruitjes.SelectedItem;
-                        if (!_truitjes.ContainsKey(voetbaltruitje))
+                        bool zitItemAlInLijst = false;
+                        foreach (var item in _voetbaltruitjesAantals)
                         {
-                            _truitjes.Add(voetbaltruitje, 1);
-                            Application.Current.Properties["Truitjes"] = _truitjes;
+                            if (item.Voetbaltruitje.Equals(voetbaltruitje))
+                            {
+                                zitItemAlInLijst = true;
+                            }
+                        }
+                        if (!zitItemAlInLijst)
+                        {
+                            _voetbaltruitjesAantals.Add(new VoetbaltruitjesAantal(voetbaltruitje, 1));
+                            Application.Current.Properties["Truitjes"] = _voetbaltruitjesAantals;
                             Application.Current.Properties["GeselecteerdeBestellingenUpdate"] = _geselecteerdeBestellingUpdate;
                             NavigationService.GoBack();
                         }
                         else
                         {
-                            _truitjes.TryGetValue(voetbaltruitje, out int value);
-                            _truitjes[voetbaltruitje] = value + 1;
-                            Application.Current.Properties["Truitjes"] = _truitjes;
+                            foreach (var item in _voetbaltruitjesAantals)
+                            {
+                                if (item.Voetbaltruitje.Equals(voetbaltruitje))
+                                {
+                                    item.Aantal++;
+                                }
+                            }
+                            Application.Current.Properties["Truitjes"] = _voetbaltruitjesAantals;
                             Application.Current.Properties["GeselecteerdeBestellingenUpdate"] = _geselecteerdeBestellingUpdate;
                             NavigationService.GoBack();
                         }
@@ -199,7 +213,7 @@ namespace VerkoopVoetbalTruitjes.WPF.Pages.Bestelling
         {
             if (Application.Current.Properties["Truitjes"] != null)
             {
-                _truitjes = (Dictionary<Domain.Klassen.Voetbaltruitje, int>)Application.Current.Properties["Truitjes"];
+                _voetbaltruitjesAantals = (List<VoetbaltruitjesAantal>)Application.Current.Properties["Truitjes"];
             }
         }
     }

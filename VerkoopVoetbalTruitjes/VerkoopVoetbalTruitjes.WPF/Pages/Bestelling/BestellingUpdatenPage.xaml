@@ -42,10 +42,10 @@
             <Button Name="SelectTruitjeBtn" Content="Selecteer truitje" Click="SelectTruitjeBtn_Click" Grid.Row="1" Grid.Column="3"/>
         </Grid>
 
-        <DataGrid Name="DataGridTruitjes" Grid.Row="2" Margin="10" AutoGenerateColumns="False" Loaded="DataGridTruitjes_Loaded">
+        <DataGrid Name="DataGridTruitjes" Grid.Row="2" Margin="10" AutoGenerateColumns="False" Loaded="DataGridTruitjes_Loaded" CellEditEnding="DataGridTruitjes_CellEditEnding">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Truitje" Binding="{Binding Key, Mode=OneWay}"/>
-                <DataGridTextColumn Header="Aantal" Binding="{Binding Value, Mode=OneWay}"/>
+                <DataGridTextColumn Header="Truitje" Binding="{Binding Voetbaltruitje, Mode=OneWay}"/>
+                <DataGridTextColumn Header="Aantal" Binding="{Binding Aantal, Mode=TwoWay}"/>
             </DataGrid.Columns>
             <DataGrid.Resources>
                 <ContextMenu x:Key="ContextMenu" DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
